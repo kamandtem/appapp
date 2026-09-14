@@ -1,0 +1,7 @@
+--- a/src/components/AddPoseSheet.tsx
++++ b/src/components/AddPoseSheet.tsx
+@@ -27,6 +27,7 @@
+ const TYPES: PoseType[] = [
++const LENSES = ['واید (24-35mm)', 'معمولی (50mm)', 'تله (70-85mm)'];
+ 
+ const CATEGORIES: CategoryType[] = [

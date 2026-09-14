@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2732 2732" width="2732" height="2732">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBF8F0"/>
+      <stop offset="1" stop-color="#F1EAD7"/>
+    </linearGradient>
+  </defs>
+  <rect width="2732" height="2732" fill="url(#bg)"/>
+  <circle cx="2690" cy="130" r="470" fill="none" stroke="#53672F" stroke-width="120" opacity=".05"/>
+  <circle cx="90" cy="2480" r="390" fill="none" stroke="#E5520D" stroke-width="105" opacity=".04"/>
+  <rect x="941" y="690" width="850" height="850" rx="230" fill="#FFFFFF" opacity=".72"/>
+  <image href="icon.png" x="991" y="740" width="750" height="750" preserveAspectRatio="xMidYMid meet"/>
+  <text x="1366" y="1745" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="164" font-weight="800" letter-spacing="-7" fill="#53672F">Atelito</text>
+  <text x="1366" y="1870" text-anchor="middle" direction="rtl" font-family="Vazirmatn, DejaVu Sans, sans-serif" font-size="64" font-weight="700" fill="#53672F">آتلیه‌ی تو</text>
+  <text x="1366" y="2500" text-anchor="middle" direction="rtl" font-family="Vazirmatn, DejaVu Sans, sans-serif" font-size="42" font-weight="600" fill="#8A897E">طراحی و توسعه: محمدرضا ارجمند</text>
+</svg>

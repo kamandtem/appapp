@@ -1,0 +1,79 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Cache Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Check TypeScript
+        run: npm run typecheck
+
+      - name: Fetch Persian font (offline typography)
+        continue-on-error: true
+        run: |
+          BASE="https://cdn.jsdelivr.net/npm/vazirmatn@33.003/fonts/webfonts"
+          for W in Regular Medium Bold ExtraBold; do
+            curl -fsSL "$BASE/Vazirmatn-$W.woff2" -o "public/fonts/Vazirmatn-$W.woff2" || true
+          done
+          ls -la public/fonts
+
+      - name: Build web bundle
+        run: npm run build
+
+      - name: Create Android project
+        run: npx cap add android
+
+      - name: Inject location permissions into AndroidManifest
+        run: node scripts/android-permissions.mjs
+
+      - name: Generate launcher icon and splash screen
+        run: npx capacitor-assets generate --android
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build debug APK
+        run: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Rename APK
+        run: |
+          mkdir -p out
+          cp android/app/build/outputs/apk/debug/app-debug.apk out/pose-director.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: pose-director-apk
+          path: out/pose-director.apk
+          if-no-files-found: error

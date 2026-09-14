@@ -1,0 +1,37 @@
+/* Vazirmatn (Persian). فایل‌های woff2 محلی در زمان ساخت (CI) دانلود می‌شوند تا
+   نسخه اندروید کاملاً آفلاین باشد. اگر فایل‌های محلی موجود نباشند (مثلاً در
+   حالت توسعه وب)، مرورگر به نسخه CDN (jsDelivr) برمی‌گردد تا فونت درست همیشه
+   نمایش داده شود؛ برای بیلد نهایی آفلاین حتماً فایل‌های woff2 را کنار همین
+   فایل قرار دهید. */
+@font-face {
+  font-family: 'Vazirmatn';
+  src:
+    url('./Vazirmatn-Regular.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/fontsource/fonts/vazirmatn@latest/arabic-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  src:
+    url('./Vazirmatn-Medium.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/fontsource/fonts/vazirmatn@latest/arabic-500-normal.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  src:
+    url('./Vazirmatn-Bold.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/fontsource/fonts/vazirmatn@latest/arabic-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  src:
+    url('./Vazirmatn-ExtraBold.woff2') format('woff2'),
+    url('https://cdn.jsdelivr.net/fontsource/fonts/vazirmatn@latest/arabic-800-normal.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}

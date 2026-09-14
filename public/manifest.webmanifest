@@ -1,0 +1,17 @@
+{
+  "name": "Atelito | آتلیه‌ی تو",
+  "short_name": "Atelito",
+  "short_name": "ژست",
+  "description": "دستیار حرفه‌ای عکاسی و مدیریت آتلیه",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0B0A12",
+  "theme_color": "#0B0A12",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
