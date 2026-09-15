@@ -81,7 +81,7 @@ export const LibraryView: React.FC<Props> = ({
                     <span className="truncate">{g.scenario.key}</span>
                     <span className="text-[10px] text-faint font-bold shrink-0">{g.poses.length}</span>
                   </h2>
-                  <p className="text-[10.5px] text-faint mt-0.5 line-clamp-1">{g.scenario.en}</p>
+                  <p className="text-[10.5px] text-faint mt-0.5 line-clamp-1">{g.scenario.key === 'دیتیل صحنه' ? 'جزئیات' : g.scenario.key}</p>
                 </div>
                 <button
                   onClick={() => onFilters({ ...filters, scenario: g.scenario.key })}

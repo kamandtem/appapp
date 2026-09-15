@@ -51,7 +51,7 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
   };
 
   const Row = <T extends string>({ label, options, value, onPick }: { label: string; options: T[]; value: T; onPick: (value: T) => void }) => (
-    <div className="filter-group"><span>{label}</span><div className="filter-options no-scrollbar">{options.map(option => <button type="button" key={option} onClick={() => onPick(option)} className={value === option ? 'selected' : ''}>{value === option && <Check className="w-3 h-3" />}{option}</button>)}</div></div>
+    <div className="filter-group filter-row-options"><span>{label}</span><div className="filter-options no-scrollbar">{options.map(option => <button type="button" key={option} onClick={() => onPick(option)} className={value === option ? 'selected' : ''}>{value === option && <Check className="w-3 h-3" />}{option}</button>)}</div></div>
   );
 
   const summary = active.length > 0 ? <div className="filter-summary">
@@ -82,7 +82,6 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
         <button type="button" onClick={() => onChange({ ...filters, customOnly: !filters.customOnly })} className={`mine-toggle ${filters.customOnly ? 'selected' : ''}`}>{filters.customOnly && <Check className="w-4 h-4" />} ژست‌های شخصی</button>
       </div>}
       {summary}
-      <button type="button" onClick={() => setMoreOpen(false)} className="filter-done">{total.toLocaleString('fa-IR')} نتیجه، نمایش بده <ChevronDown className="w-4 h-4 rotate-180" /></button>
     </div>}
     {!moreOpen && summary}
   </section>;

@@ -798,3 +798,173 @@
     padding-left:13px;
   }
 }
+
+/* Filter scrolling: the page owns vertical scroll; only chip rails scroll sideways. */
+.filter-console,
+.filter-panel,
+.advanced-filter-body,
+.stage-step,
+.filter-group,
+.filter-row-options { min-width:0; max-width:100%; }
+.filter-panel {
+  max-height:none;
+  overflow:visible;
+  overscroll-behavior:auto;
+}
+.stage-step .scenario-stage-options {
+  display:flex;
+  flex-wrap:nowrap;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  touch-action:pan-x;
+  -webkit-overflow-scrolling:touch;
+  padding:2px 1px 6px;
+}
+.stage-step .scenario-stage-options .pill { flex:0 0 auto; }
+.advanced-filter-body .filter-options {
+  flex-wrap:nowrap;
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  touch-action:pan-x;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:5px;
+}
+.advanced-filter-body .filter-options button { flex:0 0 auto; }
+
+/* Pose tips stays inside the viewport on narrow phones. */
+.pose-tips-view,
+.pose-tips-view * { min-width:0; }
+.pose-tips-view { width:100%; max-width:100%; overflow-x:hidden; }
+.pose-tips-view .pose-tips-categories {
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  touch-action:pan-x;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* Pose cards: rounded silhouette continues through the media and actions. */
+.pose-grid-card {
+  border-radius:24px;
+  clip-path:inset(0 round 24px);
+}
+.pose-grid-card > div:first-child { border-radius:24px 24px 0 0; }
+.pose-grid-card .pose-icon-action,
+.pose-grid-card .pose-delete { border-radius:14px; }
+
+/* Project-day video controls: visual movement cards instead of a flat native select. */
+.camera-movement-field { min-width:0; margin:0; padding:0; border:0; }
+.camera-movement-field legend { width:100%; }
+.camera-movement-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+.camera-movement-option {
+  min-width:0;
+  min-height:54px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:7px;
+  border:1px solid var(--color-line);
+  border-radius:15px;
+  background:color-mix(in oklch,var(--color-surface2) 76%,var(--color-surface));
+  color:var(--color-muted);
+  text-align:right;
+  transition:transform .14s cubic-bezier(.22,1,.36,1),border-color .18s,background .18s,box-shadow .18s;
+}
+.camera-movement-option:active { transform:scale(.97); }
+.camera-movement-option.selected { border-color:var(--color-orange); background:color-mix(in oklch,var(--color-orange) 12%,var(--color-surface)); color:var(--color-ink); box-shadow:0 8px 18px color-mix(in oklch,var(--color-orange) 11%,transparent); }
+.camera-movement-glyph { width:30px; height:30px; display:grid; place-items:center; flex:0 0 30px; border-radius:10px; background:color-mix(in oklch,var(--color-olive) 12%,var(--color-surface)); color:var(--color-olive); font-size:1.05rem; font-weight:900; line-height:1; }
+.camera-movement-option.selected .camera-movement-glyph { background:var(--color-orange); color:var(--color-paper); }
+.camera-movement-copy { min-width:0; display:grid; gap:2px; }
+.camera-movement-copy b { overflow:hidden; font-size:.68rem; font-weight:900; text-overflow:ellipsis; white-space:nowrap; }
+.camera-movement-copy small { overflow:hidden; color:var(--color-faint); font-size:.53rem; text-overflow:ellipsis; white-space:nowrap; }
+@media (max-width:380px) {
+  .camera-movement-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; }
+  .camera-movement-option { min-height:50px; padding:6px; }
+  .camera-movement-glyph { width:26px; height:26px; flex-basis:26px; font-size:.92rem; }
+  .camera-movement-copy b { font-size:.62rem; }
+  .camera-movement-copy small { font-size:.48rem; }
+}
+
+/* Menu polish: tools share the profile baseline, social icons use an open mark, and the drawer is flat. */
+.atelito-menu {
+  background:oklch(89% .035 84);
+  border-color:color-mix(in oklch,var(--color-ink) 12%,transparent);
+  box-shadow:0 22px 54px oklch(22% .02 84 / .20);
+  will-change:transform;
+  contain:layout paint;
+}
+.atelito-menu::before { display:none; }
+.atelito-menu .menu-profile-section { background:oklch(89% .035 84); }
+.atelito-menu .menu-profile-section .menu-profile-row {
+  display:flex;
+  align-items:center;
+  min-height:92px;
+  padding:12px 0 8px;
+  gap:12px;
+}
+.atelito-menu .menu-profile-section .menu-profile-tools {
+  position:static;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex:0 0 auto;
+  order:3;
+}
+.atelito-menu .menu-profile-copy {
+  order:2;
+  align-items:flex-start;
+  justify-items:start;
+}
+.atelito-menu .menu-profile-row > button { order:1; }
+.atelito-menu .menu-round-button {
+  width:36px;
+  height:36px;
+  border:1px solid color-mix(in oklch,var(--color-ink) 14%,transparent);
+  border-radius:12px;
+  background:color-mix(in oklch,var(--color-paper) 48%,transparent);
+  color:var(--color-ink);
+  box-shadow:none;
+}
+.atelito-menu .menu-round-button:hover { background:var(--color-paper); transform:translateY(-1px); }
+.atelito-menu .menu-profile-section .menu-profile-row > button[title] {
+  border-color:color-mix(in oklch,var(--color-ink) 16%,transparent) !important;
+  background:color-mix(in oklch,var(--color-paper) 38%,transparent) !important;
+}
+.atelito-menu .menu-profile-copy>b,
+.atelito-menu .menu-edit-profile { color:var(--color-ink) !important; }
+.atelito-menu .menu-edit-profile {
+  border-color:color-mix(in oklch,var(--color-ink) 24%,transparent);
+  background:color-mix(in oklch,var(--color-paper) 30%,transparent);
+}
+.atelito-menu nav,
+.atelito-menu .menu-social-footer { border-color:color-mix(in oklch,var(--color-ink) 15%,transparent); }
+.atelito-menu .menu-nav-item { color:var(--color-ink); }
+.atelito-menu .menu-nav-item span.flex-1 { color:var(--color-ink); }
+.atelito-menu .menu-nav-icon { color:var(--color-olive); background:color-mix(in oklch,var(--color-olive) 9%,transparent); }
+.atelito-menu .menu-social-button {
+  width:44px;
+  height:40px;
+  border:0;
+  border-radius:12px;
+  background:transparent;
+  color:var(--color-olive);
+  box-shadow:none;
+}
+.atelito-menu .menu-social-button:hover { background:color-mix(in oklch,var(--color-olive) 10%,transparent); transform:translateY(-2px); }
+.atelito-menu .menu-social-button svg { width:24px; height:24px; stroke-width:1.9; }
+.atelito-menu .menu-social-footer p { color:color-mix(in oklch,var(--color-ink) 54%,transparent); }
+.atelito-menu.a-slide-right { animation:menu-slide-smooth .24s cubic-bezier(.22,1,.36,1) both; }
+@keyframes menu-slide-smooth { from { opacity:.92; transform:translate3d(100%,0,0); } to { opacity:1; transform:translate3d(0,0,0); } }
+@media (prefers-reduced-motion: reduce) { .atelito-menu.a-slide-right { animation:none; } }
+
+/* The filtered count is already visible in the summary, so the sticky action is intentionally gone. */
+.filter-done { display:none !important; }
+.office-contract-notes-lower { margin-top:40px; padding-top:24px; }

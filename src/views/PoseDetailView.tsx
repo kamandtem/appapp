@@ -169,7 +169,7 @@ export const PoseDetailView: React.FC<Props> = ({
             <div className="pose-flip-face pose-flip-back" aria-hidden={!cardFlipped} onClick={(e) => { if (e.target === e.currentTarget) setCardFlipped(false); }}>
               <div className="pose-film-head">
                 <div><small>پشت کارت ژست</small><h2>اطلاعات فیلم‌برداری</h2></div>
-                <button type="button" onClick={() => { setCardFlipped(false); setOpenPicker(null); }} aria-label="بازگشت به عکس"><Repeat className="w-5 h-5" /></button>
+                <button type="button" onClick={(e) => { e.stopPropagation(); setCardFlipped(false); setOpenPicker(null); }} aria-label="بازگشت به عکس"><Repeat className="w-5 h-5" /></button>
               </div>
               <label className="pose-subject-note">
                 <span className="pose-inline-label">توضیح حرکت سوژه</span>

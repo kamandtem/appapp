@@ -134,12 +134,12 @@ export const SideMenu: React.FC<Props> = ({
       >
         {/* Profile Section */}
         <div className="menu-profile-section">
-          <div className="menu-profile-tools">
-            <button onClick={() => go('settings')} className="menu-round-button" title="تنظیمات"><Settings className="w-5 h-5" /></button>
-            <button onClick={onToggleTheme} className="menu-round-button" title={theme === 'dark' ? 'حالت روز' : 'حالت شب'}>{theme === 'dark' ? <Sun className="w-5 h-5 text-gold" /> : <Moon className="w-5 h-5 text-gold" />}</button>
-            <button onClick={onClose} className="menu-round-button menu-close" aria-label="بستن منو"><X className="w-5 h-5" /></button>
-          </div>
           <div className="menu-profile-row">
+            <div className="menu-profile-tools">
+              <button onClick={() => go('settings')} className="menu-round-button" title="تنظیمات"><Settings className="w-5 h-5" /></button>
+              <button onClick={onToggleTheme} className="menu-round-button" title={theme === 'dark' ? 'حالت روز' : 'حالت شب'}>{theme === 'dark' ? <Sun className="w-5 h-5 text-gold" /> : <Moon className="w-5 h-5 text-gold" />}</button>
+              <button onClick={onClose} className="menu-round-button menu-close" aria-label="بستن منو"><X className="w-5 h-5" /></button>
+            </div>
             <button
               type="button"
               onClick={() => profile ? document.getElementById('profile-image-input')?.click() : onOpenStudioProfile()}
