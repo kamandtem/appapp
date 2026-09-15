@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BriefcaseBusiness, Clapperboard, Home, MapPin, Heart, Plus, ListChecks, X } from 'lucide-react';
+import { BriefcaseBusiness, Clapperboard, House, MapPinned, Heart, Plus, ListChecks, X } from 'lucide-react';
 import { ViewTab } from '../types/pose';
 
 interface Props {
@@ -11,10 +11,10 @@ interface Props {
 }
 
 const ITEMS: { tab: ViewTab; icon: React.ElementType; label: string }[] = [
-  { tab: 'home', icon: Home, label: 'خانه' },
+  { tab: 'home', icon: House, label: 'خانه' },
   { tab: 'library', icon: Clapperboard, label: 'ژست‌ها' },
   { tab: 'favorites', icon: Heart, label: 'شات‌لیست' },
-  { tab: 'locations', icon: MapPin, label: 'لوکیشن' },
+  { tab: 'locations', icon: MapPinned, label: 'لوکیشن' },
 ];
 
 export const BottomNav: React.FC<Props> = ({ activeTab, onTabChange, favoritesCount, onNewOfficeProject, onNewShotlist }) => {

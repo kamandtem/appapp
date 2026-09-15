@@ -484,6 +484,7 @@ export type ViewTab =
   | 'myposes'
   | 'office'
   | 'office-project-detail'
+  | 'pose-tips'
   | 'principles'
   | 'settings'
   | 'checklist'

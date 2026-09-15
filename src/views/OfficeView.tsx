@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, FileText, Receipt, ChevronDown, Edit2, Trash2, Loader2, Eye } from 'lucide-react';
+import { Plus, FileText, Receipt, Edit2, Trash2, Loader2, Eye } from 'lucide-react';
 import { OfficeProject, StudioProfile } from '../types/pose';
 import { EmptyState } from '../components/EmptyState';
 import { InvoicesPanel } from '../components/InvoicesPanel';
@@ -26,7 +26,6 @@ const formatDateShort = (iso?: string) => {
 
 export const OfficeView: React.FC<Props> = ({ projects, profile, onAddProject, onSelectProject, onEditProject, onDeleteProject }) => {
   const [activeTab, setActiveTab] = useState<'projects' | 'invoices'>('projects');
-  const [openProjectId, setOpenProjectId] = useState<string | null>(null);
   const [pdfLoading, setPdfLoading] = useState<string | null>(null);
   const [pdf, setPdf] = useState<PdfDocument | null>(null);
   const [pdfError, setPdfError] = useState('');
@@ -65,11 +64,13 @@ export const OfficeView: React.FC<Props> = ({ projects, profile, onAddProject, o
       {projects.length === 0 ? <EmptyState icon={FileText} title="هنوز پروژه‌ای ثبت نشده" text="اولین پروژه‌ات را با مراسم، فرمالیته یا هردو شروع کن." action={{ label: 'ساخت پروژه', onClick: onAddProject }} /> :
         <div className="space-y-4">{projects.map(p => {
           const total = (p.ceremonyInvoice?.total || 0) + (p.formalityInvoice?.total || 0);
-          const expanded = openProjectId === p.id;
           return <article key={p.id} className="card p-5 rounded-3xl overflow-hidden">
             <div className="w-full flex items-start justify-between gap-3 mb-4 text-right">
               <button type="button" onClick={() => onSelectProject(p)} className="flex-1 text-right"><h3 className="font-extrabold text-[15px]">{p.name}</h3><p className="text-[10px] text-muted mt-1">برای دیدن جزئیات بزن</p></button>
-              <button type="button" onClick={() => onEditProject(p)} className="w-10 h-10 rounded-full grid place-items-center bg-[oklch(91%_.045_112)] text-[var(--color-olive)]" aria-label="ویرایش پروژه"><Edit2 className="w-4 h-4" /></button>
+              <div className="flex items-center gap-2 shrink-0">
+                <button type="button" onClick={() => onEditProject(p)} className="w-10 h-10 rounded-full grid place-items-center bg-[oklch(91%_.045_112)] text-[var(--color-olive)]" aria-label="ویرایش پروژه"><Edit2 className="w-4 h-4" /></button>
+                <button type="button" onClick={() => onDeleteProject(p)} className="w-10 h-10 rounded-full grid place-items-center bg-[color-mix(in_srgb,var(--color-rose)_10%,transparent)] text-rose" aria-label="حذف پروژه"><Trash2 className="w-4 h-4" /></button>
+              </div>
             </div>
 
             <div className="flex flex-wrap gap-2 mb-4">
@@ -82,15 +83,6 @@ export const OfficeView: React.FC<Props> = ({ projects, profile, onAddProject, o
 
             {total > 0 && <div className="pt-4 border-t border-line flex items-center justify-between"><p className="text-[11px] text-muted flex items-center gap-1"><Receipt className="w-3.5 h-3.5" /> جمع فاکتور</p><p className="text-[14px] font-extrabold text-gold">{fa(total)} تومن</p></div>}
 
-            <button type="button" onClick={() => setOpenProjectId(expanded ? null : p.id)} className="mt-4 w-full min-h-11 flex items-center justify-between px-4 rounded-2xl bg-[var(--color-olive)] text-[var(--color-paper)] text-[12px] font-extrabold" aria-expanded={expanded}>
-              گزینه‌های پروژه <ChevronDown className={`w-4 h-4 transition-transform ${expanded ? 'rotate-180' : ''}`} />
-            </button>
-            {expanded && <div className="grid grid-cols-2 gap-2 mt-2 a-fade-up">
-              <button type="button" onClick={() => openPdf(p, 'contract')} className="btn btn-ghost">{pdfLoading === `${p.id}-contract` ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />} نمایش قرارداد</button>
-              <button type="button" onClick={() => openPdf(p, 'invoice')} className="btn btn-ghost">{pdfLoading === `${p.id}-invoice` ? <Loader2 className="w-4 h-4 animate-spin" /> : <Receipt className="w-4 h-4" />} نمایش فاکتور</button>
-              <button type="button" onClick={() => onEditProject(p)} className="btn btn-ghost"><Edit2 className="w-4 h-4" />ویرایش پروژه</button>
-              <button type="button" onClick={() => onDeleteProject(p)} className="btn btn-ghost text-rose"><Trash2 className="w-4 h-4" />حذف پروژه</button>
-            </div>}
           </article>;
         })}</div>}
     </>}

@@ -54,6 +54,12 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
     <div className="filter-group"><span>{label}</span><div className="filter-options no-scrollbar">{options.map(option => <button type="button" key={option} onClick={() => onPick(option)} className={value === option ? 'selected' : ''}>{value === option && <Check className="w-3 h-3" />}{option}</button>)}</div></div>
   );
 
+  const summary = active.length > 0 ? <div className="filter-summary">
+    <b>{total.toLocaleString('fa-IR')} ژست</b>
+    <div className="active-filters">{active.map(item => <button type="button" key={item.key} onClick={() => clearOne(item.key)}>{item.label}<X className="w-3 h-3" /></button>)}</div>
+    <button type="button" onClick={() => { onChange({ ...EMPTY_FILTERS }); setMoreOpen(false); setAdvancedOpen(false); }} className="clear-filter"><RotateCcw className="w-3.5 h-3.5" />پاک کردن</button>
+  </div> : null;
+
   return <section className="filter-console filter-console-compact">
     <div className="filter-search">
       <Search className="w-4 h-4" />
@@ -61,12 +67,6 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
       {filters.search && <button type="button" onClick={() => onChange({ ...filters, search: '' })} aria-label="پاک کردن جستجو"><X className="w-4 h-4" /></button>}
       <button type="button" onClick={() => { setMoreOpen(v => !v); setAdvancedOpen(false); }} className="filter-trigger" aria-expanded={moreOpen}><SlidersHorizontal className="w-4 h-4" /><span>فیلترها</span>{active.length > 0 && <b>{active.length.toLocaleString('fa-IR')}</b>}</button>
     </div>
-
-    {active.length > 0 && <div className="filter-summary">
-      <b>{total.toLocaleString('fa-IR')} ژست</b>
-      <div className="active-filters no-scrollbar">{active.map(item => <button type="button" key={item.key} onClick={() => clearOne(item.key)}>{item.label}<X className="w-3 h-3" /></button>)}</div>
-      <button type="button" onClick={() => { onChange({ ...EMPTY_FILTERS }); setMoreOpen(false); setAdvancedOpen(false); }} className="clear-filter"><RotateCcw className="w-3.5 h-3.5" />پاک کردن</button>
-    </div>}
 
     {moreOpen && <div className="filter-panel a-fade">
       <div className="filter-group location-first"><span>کجا هستی؟</span><div className="filter-options location-options no-scrollbar">{LOCATIONS.map(location => <button type="button" key={location} onClick={() => pickLocation(location)} className={selectedLocation === location ? 'selected' : ''}>{selectedLocation === location && <Check className="w-3 h-3" />}{location}</button>)}</div></div>
@@ -81,7 +81,9 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
         <Row label="کادر" options={FRAMES} value={filters.framing} onPick={framing => onChange({ ...filters, framing })} />
         <button type="button" onClick={() => onChange({ ...filters, customOnly: !filters.customOnly })} className={`mine-toggle ${filters.customOnly ? 'selected' : ''}`}>{filters.customOnly && <Check className="w-4 h-4" />} ژست‌های شخصی</button>
       </div>}
+      {summary}
       <button type="button" onClick={() => setMoreOpen(false)} className="filter-done">{total.toLocaleString('fa-IR')} نتیجه، نمایش بده <ChevronDown className="w-4 h-4 rotate-180" /></button>
     </div>}
+    {!moreOpen && summary}
   </section>;
 };

@@ -1,0 +1,4112 @@
+{
+  "version": 1,
+  "locale": "fa",
+  "count": 120,
+  "translationStatus": "first-pass",
+  "poses": [
+    {
+      "id": "female_solo_01",
+      "name": "Classic 45° Slim بایستید",
+      "description": "بدن rotated forty-five درجه از frontal. All وزن روی عقب پا; جلو زانو خم با toe جلو, creating an S-curve through لگن و rib cage. یک دست روی لگن یا outer thigh, آرنج out; دیگر بازو hangs دور از تنه. سر tilted به سمت بیننده; چانه کمی جلو و down.",
+      "tags": [
+        "Slimming",
+        "Longer-looking پاها",
+        "Full بدن",
+        "کنار View",
+        "ایستادن",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بچرخانید 45°—do not صورت صاف روی",
+        "وزن روی عقب پا",
+        "جلو پا به‌آرامی down, زانو soft",
+        "لگن pushed کمی پشت",
+        "شانه‌ها آرام, کمی جلو",
+        "سر tilted, چانه کمی در"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle for longer-looking پاها",
+        "framing": "Full یا half بدن",
+        "lens": "~50mm for یک طبیعی نگاه کنید",
+        "lighting": "کنار نور for dimension"
+      },
+      "common_mistakes": [
+        "Facing دوربین صاف روی makes بدن appear wider",
+        "بازوها pressed against بدن appear wider",
+        "Even وزن—no curve"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_01.webp"
+    },
+    {
+      "id": "female_solo_02",
+      "name": "S-Curve Twist Pose",
+      "description": "نیم‌رخ لگن aimed sideways; chest و شانه‌ها counter-twisted به سمت بیننده, و ایجاد یک clear S-line. عقب پا loaded; جلو زانو خم جلو. یک دست روی waist با آرنج flared; دیگر بازو down یا نزدیک فک. سر inclined; گردن long.",
+      "tags": [
+        "Slimming",
+        "S-Curve",
+        "Full بدن",
+        "کنار View",
+        "ایستادن",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "لگن angled برای یک کنار",
+        "Twist chest و شانه‌ها به سمت دوربین",
+        "ایجاد کنید یک clear S-curve",
+        "یک دست روی لگن, آرنج out",
+        "دیگر دست آرام یا touching مو",
+        "وزن روی عقب پا, جلو پا جلو"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50-85mm",
+        "lighting": "کنار نور برای emphasize waistline"
+      },
+      "common_mistakes": [
+        "Upper و پایین بیاورید بدن same direction—no S-curve",
+        "آرنج tucked در روی لگن",
+        "بدن too صاف"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_02.webp"
+    },
+    {
+      "id": "female_solo_03",
+      "name": "Walking جلو Dynamic",
+      "description": "Mid-stride جلو با جلو پا crossing کمی inward. تنه twisted به سمت بیننده; بازوها swing naturally یا یک دست rests در outer thigh. Chest باز; شانه‌ها down; سر turned روی گردن به سمت جلو.",
+      "tags": [
+        "Longer-looking پاها",
+        "Full بدن",
+        "ایستادن",
+        "کنار View",
+        "Lively",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Walk slowly جلو",
+        "جلو پا steps به‌آرامی یا crosses",
+        "Twist کمی به سمت دوربین",
+        "یک دست به‌آرامی lifts skirt hem",
+        "چانه up, chest باز, شانه‌ها down",
+        "Burst برای capture stride"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle, follow action",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-70mm",
+        "lighting": "Outdoor طبیعی نور"
+      },
+      "common_mistakes": [
+        "Steps too large—not graceful",
+        "Looking down در پاها",
+        "Passersby distract"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_03.webp"
+    },
+    {
+      "id": "female_solo_04",
+      "name": "نشسته Crossed پاها",
+      "description": "نشسته با پاها crossed, top مچ پا over پایین بیاورید shin, top زانو جلو. Trunk leaned جلو یا twisted sideways. دست‌ها روی upper زانو یا یک آرنج propping فک. Spine tall; شانه‌ها آرام; سر tilted.",
+      "tags": [
+        "Slimming",
+        "Longer-looking پاها",
+        "Sitting",
+        "کنار View",
+        "Female",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "ضربدری کنید پاها elegantly, top پا جلو",
+        "Upper بدن کمی جلو یا twisted",
+        "دست‌ها روی زانوها یا supporting چانه",
+        "پشت صاف, شانه‌ها down",
+        "سر tilted, smiling",
+        "Slimmer-looking پاها و waist"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح یا کمی low",
+        "framing": "نمای تمام‌قد یا three-quarter",
+        "lens": "50mm",
+        "lighting": "Soft window نور"
+      },
+      "common_mistakes": [
+        "پاها crossed too tightly appear wider",
+        "Slouched پشت",
+        "Skirt wrinkles not smoothed"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_04.webp"
+    },
+    {
+      "id": "female_solo_05",
+      "name": "بازوها Overhead Stretch",
+      "description": "ایستادن با both بازوها overhead, wrists loose, elbows beside ears. وزن روی یک خم پا; دیگر پا soft با toe down. تنه در three-quarter twist; rib cage lifted; سر پشت یا turned روی گردن.",
+      "tags": [
+        "Longer-looking پاها",
+        "Full بدن",
+        "ایستادن",
+        "کنار View",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Both بازوها overhead در یک نور stretch",
+        "Wrists آرام",
+        "یک خم پا bears وزن, دیگر toe down",
+        "Twist بدن 45°",
+        "Chest naturally باز",
+        "سر کمی پشت یا turned"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "Bright even نور"
+      },
+      "common_mistakes": [
+        "Shrugging شانه‌ها",
+        "بازوها not fully extended",
+        "حالت چهره too forced"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_05.webp"
+    },
+    {
+      "id": "female_solo_06",
+      "name": "Over-the-Shoulder نگاه کنید",
+      "description": "پشت یا strong نیم‌رخ برای بیننده; سر rotated over شانه به سمت جلو. یک دست روی مقابل شانه یا در مو; دیگر روی لگن یا outer thigh. Waist twisted; وزن روی جلو یا عقب پا; شانه خط dropped.",
+      "tags": [
+        "Slimming",
+        "پشت View",
+        "کنار View",
+        "Half بدن",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "پشت یا نیم‌رخ برای دوربین",
+        "نگاه کنید over شانه در دوربین",
+        "یک دست روی شانه یا در مو",
+        "دیگر دست روی waist یا لگن",
+        "بدن به‌آرامی twisted",
+        "Mysterious یا smiling eyes"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن یا three-quarter",
+        "lens": "85mm",
+        "lighting": "Rim نور یا کنار نور"
+      },
+      "common_mistakes": [
+        "Turning سر too far makes گردن نگاه کنید thicker",
+        "No curve در پشت",
+        "مو covering صورت"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_06.webp"
+    },
+    {
+      "id": "female_solo_07",
+      "name": "Elegant Squat",
+      "description": "Low squat یا crouch با یک زانو جلو, heel down یا lifted. دست‌ها روی زانوها یا یک palm نزدیک ground; مقابل آرنج خم supporting فک. Spine angled جلو از لگن; سر raised; گردن extended.",
+      "tags": [
+        "Longer-looking پاها",
+        "Squat",
+        "Full بدن",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Half squat یا graceful full squat",
+        "یک پا extended جلو",
+        "دست‌ها روی زانوها یا supporting صورت",
+        "پشت صاف, slight جلو lean",
+        "سر lifted به سمت دوربین",
+        "Avoid flattening پاها به سمت دوربین"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "Even نور"
+      },
+      "common_mistakes": [
+        "Squat too low—looks short",
+        "زانوها pointed در دوربین appear wider",
+        "Wardrobe not checked before shooting"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_07.webp"
+    },
+    {
+      "id": "female_solo_08",
+      "name": "Arched پشت Lying Pose",
+      "description": "Supine با upper پشت arched off surface, pelvis grounded. زانوها خم و stacked یا پاها extended. یک forearm روی abdomen یا در مو; دیگر بازو آرام. سر lifted کمی روی گردن.",
+      "tags": [
+        "Slimming",
+        "Lying",
+        "Full بدن",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Arch پشت کمی for curves",
+        "پاها خم و stacked یا extended",
+        "یک دست روی abdomen یا در مو",
+        "چانه up, eyes روی دوربین",
+        "آرام, sweet حالت چهره",
+        "Ensure flat ground"
+      ],
+      "camera_tips": {
+        "angle": "High angle یا کنار angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "Soft diffused نور"
+      },
+      "common_mistakes": [
+        "Flat روی پشت—no curves",
+        "Angle creates double چانه",
+        "Cluttered background"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_08.webp"
+    },
+    {
+      "id": "female_solo_09",
+      "name": "Single-Leg Balance",
+      "description": "Single-leg balance روی یک صاف مچ پا; مقابل پا خم با toe touching floor یا calf lifted. تنه در three-quarter twist; بازوها در sides یا یک raised. سر tipped; spine vertical over ایستادن پا.",
+      "tags": [
+        "Longer-looking پاها",
+        "ایستادن",
+        "کنار View",
+        "Female"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "یک پا planted, دیگر خم با toe down",
+        "بدن به‌آرامی twisted 45°",
+        "بازوها طبیعی یا کمی raised",
+        "Maintain balance",
+        "خم کنید سر کمی",
+        "Elegant, elongated نگاه کنید"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Unsteady balance",
+        "Supporting پا not صاف",
+        "پا raised too high—unnatural"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_09.webp"
+    },
+    {
+      "id": "female_solo_10",
+      "name": "Elegant Kneeling",
+      "description": "یک یا both زانوها روی ground; تنه upright یا leaning جلو. یک palm روی thigh; دیگر دست نزدیک فک یا flat روی floor. سر lifted; شانه‌ها پشت; لگن over زانوها.",
+      "tags": [
+        "Longer-looking پاها",
+        "Kneeling",
+        "Full بدن",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "یک یا both زانوها down",
+        "تنه upright یا کمی جلو",
+        "یک دست روی زانو, دیگر supports صورت",
+        "سر up, smiling",
+        "Protect زانوها",
+        "Longer-looking پاها و an elegant خط"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Kneeling too low",
+        "Slouched پشت",
+        "حرفه‌ای ground uncomfortable"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_10.webp"
+    },
+    {
+      "id": "female_solo_11",
+      "name": "نشسته پاها Extended",
+      "description": "نشسته روی ground با پاها extended جلو یا crossed در ankles. یک palm flat behind لگن; مقابل دست under چانه. Spine صاف; شانه‌ها low; سر aligned over chest.",
+      "tags": [
+        "Longer-looking پاها",
+        "Sitting",
+        "Full بدن",
+        "Female",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Sit روی ground, پاها extended یا crossed",
+        "یک دست روی ground",
+        "دیگر دست supports چانه یا rests روی زانو",
+        "پشت صاف",
+        "خم کنید سر کمی",
+        "Longer-looking پاها"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "پاها not extended, making them appear shorter",
+        "Slumped نشسته posture",
+        "Dirty ground surface"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_11.webp"
+    },
+    {
+      "id": "female_solo_12",
+      "name": "Arched پشت روی Ground",
+      "description": "Supine با lumbar arch lifted, شانه blades نور روی surface. زانوها خم و stacked; یک دست روی abdomen. سر raised یک few inches; چانه به سمت sternum.",
+      "tags": [
+        "Slimming",
+        "Lying",
+        "Full بدن",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Lie با پشت کمی arched",
+        "زانوها خم و stacked",
+        "قرار دهید یک دست روی abdomen",
+        "چانه کمی up",
+        "آرام حالت چهره",
+        "Show curves"
+      ],
+      "camera_tips": {
+        "angle": "کنار angle یا کمی بالا",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Completely flat روی پشت",
+        "Clothes bunched up",
+        "Background messy"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_12.webp"
+    },
+    {
+      "id": "female_solo_13",
+      "name": "دست‌ها در Chest بایستید",
+      "description": "دست‌ها overlapped در upper chest با elbows باز, یا forearms crossed loosely. Three-quarter stance; وزن روی عقب پا; جلو زانو خم. لگن shifted پشت; سر tilted به سمت جلو شانه.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Half بدن",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "دست‌ها به‌آرامی روی chest یا crossed",
+        "بازوها باز دور از بدن",
+        "Angle بدن 45°",
+        "وزن روی عقب پا",
+        "Relax شانه‌ها",
+        "Elegant لبخند بزنید"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "بازوها چسبیده برای chest نگاه کنید bulky",
+        "Facing صاف در دوربین",
+        "دست blocks too much صورت"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_13.webp"
+    },
+    {
+      "id": "female_solo_14",
+      "name": "مو Flip",
+      "description": "سر rotated quickly so مو sweeps برای یک کنار; شانه‌ها follow twist. یک دست در nape یا temple; دیگر بازو mid-swing. لگن counter-turned; وزن روی balls از پاها.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Lively",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "به‌آرامی toss مو با سر",
+        "Twist بدن 45°",
+        "یک دست در مو یا swinging naturally",
+        "Burst برای capture motion",
+        "نگه دارید حالت چهره طبیعی",
+        "Works best با long مو"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "Half یا full بدن",
+        "lens": "50-85mm, shutter 1/250+",
+        "lighting": "Backlight یا side-back نور"
+      },
+      "common_mistakes": [
+        "مو whip covers eyes",
+        "Grimacing حالت چهره",
+        "Background too busy"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_14.webp"
+    },
+    {
+      "id": "female_solo_15",
+      "name": "یک دست روی لگن",
+      "description": "یک دست روی لگن, آرنج pointed بیرون. تنه twisted forty-five درجه; جلو پا خم, عقب پا صاف. مقابل بازو آرام; pelvis pushed کمی پشت; سر over جلو پا.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Female",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "یک دست روی لگن, آرنج out",
+        "Twist بدن 45°",
+        "جلو زانو خم",
+        "نگه دارید دیگر بازو آرام",
+        "Confident حالت چهره",
+        "Slimmer-looking waist"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "Full یا half بدن",
+        "lens": "50mm",
+        "lighting": "کنار نور"
+      },
+      "common_mistakes": [
+        "آرنج tucked در",
+        "بدن too صاف",
+        "دست روی لگن too high"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_15.webp"
+    },
+    {
+      "id": "female_solo_16",
+      "name": "انگشت Heart",
+      "description": "دست‌ها curved beside فک در یک heart شکل, elbows wide. Three-quarter بدن angle; شانه‌ها آرام; وزن روی پشت پا با جلو toe جلو.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "کنار View",
+        "Lively",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Heart gesture beside cheek",
+        "Twist بدن و لبخند بزنید",
+        "انگشت‌ها آرام, not خشک",
+        "Eyes روی دوربین",
+        "Cute حالت چهره",
+        "Optional wink"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half-body close-up",
+        "lens": "85mm",
+        "lighting": "Bright soft نور"
+      },
+      "common_mistakes": [
+        "Heart gesture too big, blocks صورت",
+        "Over-acted حالت چهره",
+        "دست shake causes blur"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_16.webp"
+    },
+    {
+      "id": "female_solo_17",
+      "name": "بازوها Wrapped Around Self",
+      "description": "بازوها wrapped loosely around ribs بدون squeezing, forearms parallel برای ground. Gentle twist در waist; یک زانو خم. سر lowered به سمت crossed بازوها یا هم‌سطح.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Female",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بازوها loosely wrapped around self",
+        "بازوها not چسبیده—leave فضا",
+        "بدن کمی twisted",
+        "یک پا خم",
+        "Gentle حالت چهره",
+        "Slimming و soft"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Soft warm نور"
+      },
+      "common_mistakes": [
+        "Hug too چسبیده looks bulky",
+        "Shrugging شانه‌ها",
+        "Empty gaze"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_17.webp"
+    },
+    {
+      "id": "female_solo_18",
+      "name": "Rain Umbrella Pose",
+      "description": "Three-quarter stance با یک بازو raised overhead, آرنج خم, دست gripping an imaginary vertical shaft در شانه height outside بدن. تنه twisted; free دست در مو; وزن روی عقب پا.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "نگه دارید an umbrella در یک کنار stance",
+        "Twist بدن 45°",
+        "یک دست روی umbrella handle یا در مو",
+        "نگه دارید canopy از hiding صورت",
+        "Romantic حالت چهره",
+        "Match umbrella color برای scene"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Full یا half بدن",
+        "lens": "50mm",
+        "lighting": "Overcast یا soft نور works best"
+      },
+      "common_mistakes": [
+        "Umbrella covers صورت",
+        "Umbrella handle blocks لنز",
+        "Wind/rain too strong"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_18.webp"
+    },
+    {
+      "id": "female_solo_19",
+      "name": "Glasses Pulled Down",
+      "description": "Three-quarter بچرخانید; یک دست lifts frames در upper cheeks مثل اگر lowering eyewear. انگشت‌ها spread along brow; دیگر بازو در لگن. چانه کمی down; گردن long.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "کنار View",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "به‌آرامی pull glasses down, eyes روی دوربین",
+        "Angle بدن 45°",
+        "یک دست روی glasses",
+        "Playful eyes",
+        "Slight لبخند بزنید",
+        "Cute و slimming"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half-body close-up",
+        "lens": "85mm",
+        "lighting": "Avoid لنز glare"
+      },
+      "common_mistakes": [
+        "لنز glare",
+        "Pulled too low, blocks eyes",
+        "Too serious"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_19.webp"
+    },
+    {
+      "id": "female_solo_20",
+      "name": "Peek Through انگشت‌ها",
+      "description": "یک palm horizontal across eyes, انگشت‌ها parted; تنه twisted sideways. دیگر بازو along waist; وزن روی پشت پا; جلو زانو soft. سر turned به سمت gaps between انگشت‌ها.",
+      "tags": [
+        "Slimmer-looking صورت",
+        "Half بدن",
+        "کنار View",
+        "Lively",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "یک دست به‌آرامی covers eyes",
+        "Peek through انگشت‌ها در دوربین",
+        "Twist بدن و لبخند بزنید",
+        "نگه دارید دیگر بازو آرام",
+        "Playful و cute",
+        "Slimmer-looking صورت"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Fully covered—eyes not visible",
+        "Too many انگشت‌ها block صورت",
+        "بدن facing صاف روی"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_20.webp"
+    },
+    {
+      "id": "female_solo_21",
+      "name": "Flower Frame",
+      "description": "Both بازوها curved در جلو از تنه مثل اگر encircling یک bouquet در waist height, elbows out. لگن rotated forty-five درجه; یک پا جلو; سر inclined over دست‌ها.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "نگه دارید bouquet یا flower wreath",
+        "Do not let flowers fully hide صورت",
+        "نور twist, smiling",
+        "یک بازو around flowers, دیگر طبیعی",
+        "Soft, graceful mood",
+        "Use fresh flowers"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half یا full بدن",
+        "lens": "50-85mm",
+        "lighting": "طبیعی نور یا soft نور"
+      },
+      "common_mistakes": [
+        "Flowers cover صورت",
+        "Bouquet too large, dominates frame",
+        "حالت چهره mismatches flowers"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_21.webp"
+    },
+    {
+      "id": "female_solo_22",
+      "name": "Blowing یک Kiss",
+      "description": "یک دست در mouth, انگشت‌ها gathered مثل اگر blowing بیرون. Upper بدن leaned جلو از لگن; مقابل بازو behind پشت یا روی لگن. وزن روی جلو پا.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "Lively",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "دست در mouth, blowing kiss",
+        "Lean جلو, smiling",
+        "Eyes روی دوربین",
+        "نگه دارید دیگر بازو آرام",
+        "Lively و cute",
+        "Lips کمی pursed"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Pout is too exaggerated",
+        "دست covers too much از mouth",
+        "Lean پشت"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_22.webp"
+    },
+    {
+      "id": "female_solo_23",
+      "name": "Side-Lying, دست Props سر",
+      "description": "Side-lying با سر propped روی یک خم بازو, آرنج روی ground. پاها stacked و خم در زانوها, top لگن کمی پشت. Free دست روی upper thigh; spine در یک gentle C-curve.",
+      "tags": [
+        "Slimming",
+        "Lying",
+        "کنار View",
+        "Full بدن",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Side-lying, یک دست props سر",
+        "پاها خم و stacked elegantly",
+        "بدن forms یک curve",
+        "Eyes روی دوربین",
+        "آرام حالت چهره",
+        "Smooth bedding"
+      ],
+      "camera_tips": {
+        "angle": "هم‌سطح با سر یا کمی بالا",
+        "framing": "نمای تمام‌قد",
+        "lens": "50mm",
+        "lighting": "Soft کنار نور"
+      },
+      "common_mistakes": [
+        "Full side-lying looks flat",
+        "Propping سر compresses صورت",
+        "Cluttered background"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_23.webp"
+    },
+    {
+      "id": "female_solo_24",
+      "name": "Hem Lift",
+      "description": "Both دست‌ها pinch پایین بیاورید hem روی یک کنار, elbows خم بیرون. Waist exposed by lift; تنه twisted forty-five درجه. پاها staggered; وزن روی عقب مچ پا.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "به‌آرامی lift hem برای show waistline",
+        "Twist بدن 45°",
+        "یک دست lifts hem, دیگر طبیعی",
+        "Do not lift too high",
+        "Slimmer waistline, fashion-forward",
+        "Avoid wardrobe exposure"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "Half یا full بدن",
+        "lens": "50mm",
+        "lighting": "کنار نور برای emphasize waistline"
+      },
+      "common_mistakes": [
+        "Lifted too high—inappropriate",
+        "بدن facing صاف روی",
+        "دست wrinkling clothes"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_24.webp"
+    },
+    {
+      "id": "female_solo_25",
+      "name": "کنار Glance لبخند بزنید",
+      "description": "سر turned so gaze angles off-center while nose stays جلو. تنه frontal یا three-quarter; شانه‌ها even; بازوها در sides. وزن balanced; چانه neutral.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "کنار View",
+        "Female",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Eyes angled کمی به سمت دوربین",
+        "صورت جلو یا slight twist",
+        "طبیعی لبخند بزنید",
+        "خم کنید سر کمی",
+        "Magnetic gaze",
+        "Relax facial muscles"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half-body close-up",
+        "lens": "85-105mm",
+        "lighting": "Catchlight در eyes"
+      },
+      "common_mistakes": [
+        "Sideways نگاه کنید too extreme",
+        "No catchlight—flat eyes",
+        "لبخند بزنید looks fake"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_25.webp"
+    },
+    {
+      "id": "female_solo_26",
+      "name": "Book یا Prop نگه دارید",
+      "description": "یک forearm horizontal در mid-torso مثل اگر holding یک flat object; دیگر دست نزدیک مقابل آرنج. تنه leaned ten درجه; three-quarter stance; سر bowed به سمت دست‌ها.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "نگه دارید book یا coffee cup",
+        "Lean برای کنار",
+        "Pose مثل اگر reading یا tasting",
+        "Eyes روی دوربین یا prop",
+        "Intellectual elegance",
+        "Prop matches setting"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن یا three-quarter",
+        "lens": "50-85mm",
+        "lighting": "Window نور یا warm café نور"
+      },
+      "common_mistakes": [
+        "Prop blocks صورت",
+        "Posed movement looks fake",
+        "Background does not fit"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_26.webp"
+    },
+    {
+      "id": "female_solo_27",
+      "name": "V for Victory",
+      "description": "انگشت‌ها در یک V شکل beside temple, آرنج high. تنه twisted; سر faces جلو با یک slight خم کنید. Free دست روی لگن; پاها crossed در مچ پا.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "Lively",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "V beside صورت یا eye",
+        "Wink یک eye",
+        "بدن twisted sideways",
+        "نگه دارید دیگر بازو آرام",
+        "Lively و cute",
+        "نگه دارید V gesture small"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "V blocks eye",
+        "Wink too exaggerated",
+        "Unnatural حالت چهره"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_27.webp"
+    },
+    {
+      "id": "female_solo_28",
+      "name": "دست‌ها Cupping صورت",
+      "description": "Both palms cupping cheeks, elbows wide و جلو. Trunk leaned به سمت بیننده; زانوها soft. سر centered between دست‌ها; گردن صاف.",
+      "tags": [
+        "Slimmer-looking صورت",
+        "Half بدن",
+        "کنار View",
+        "Female",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "به‌آرامی cup both cheeks",
+        "Do not press انگشت‌ها حرفه‌ای",
+        "Eyes روی دوربین",
+        "Lean جلو",
+        "Soft و cute",
+        "Slimmer-looking صورت"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح, کمی بالا",
+        "framing": "Half-body close-up",
+        "lens": "85mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Cupping صورت too حرفه‌ای distorts features",
+        "Angle creates double چانه",
+        "Too many انگشت‌ها در frame"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_28.webp"
+    },
+    {
+      "id": "female_solo_29",
+      "name": "Skirt Spin",
+      "description": "Mid-spin با بازوها lifted برای sides یا دست‌ها wide در لگن height pulling silhouette بیرون روی spin. یک پا pivots; تنه twisted; مو arcs روی centrifugal path. وزن روی ball از turning پا.",
+      "tags": [
+        "Slimming",
+        "Full بدن",
+        "ایستادن",
+        "Lively",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "نور spin so skirt flares",
+        "نگه دارید skirt یا بازوها spread",
+        "Burst; pick best",
+        "Joyful حالت چهره",
+        "Watch شما footing",
+        "Elegant motion"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm, shutter 1/500+",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Spin too fast—motion blur",
+        "Skirt covers صورت",
+        "Dizzy حالت چهره"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_29.webp"
+    },
+    {
+      "id": "female_solo_30",
+      "name": "انگشت Gun Pose",
+      "description": "Index و thumb extended در یک pointing gesture به سمت بیننده یا sideways. Three-quarter stance; مقابل دست روی لگن; سر tilted با یک ear dropped.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "Lively",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "انگشت gun به سمت دوربین",
+        "Wink",
+        "بدن twisted sideways",
+        "Playful حالت چهره",
+        "نگه دارید دیگر بازو آرام",
+        "Lively و slimming"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "انگشت gun too بسته",
+        "No wink—loses playfulness",
+        "حالت چهره too fierce"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_30.webp"
+    },
+    {
+      "id": "female_solo_31",
+      "name": "نشسته زانو Hug",
+      "description": "نشسته با زانوها drawn برای chest, بازوها wrapped around shins. سر resting روی زانوها یا turned sideways along thigh. Spine curled; پاها flat یا toes pointed.",
+      "tags": [
+        "Slimming",
+        "Sitting",
+        "Full بدن",
+        "Female",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "نشسته زانو Hug",
+        "تکیه سر روی زانوها یا نگاه کنید sideways",
+        "پشت can curve کمی",
+        "Soft و آرام",
+        "Smooth skirt",
+        "نگه دارید حالت چهره طبیعی"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح یا کمی بالا",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Hug too چسبیده looks small",
+        "زانوها به سمت دوربین",
+        "Ground not clean"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_31.webp"
+    },
+    {
+      "id": "female_solo_32",
+      "name": "کنار Stance, دست Behind سر",
+      "description": "نیم‌رخ stance با یک دست behind سر, آرنج pointing up و پشت. دیگر بازو hangs صاف; لگن under شانه‌ها; وزن روی عقب پا; جلو پا جلو.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Full بدن",
+        "Female"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بایستید در نیم‌رخ",
+        "یک دست به‌آرامی در پشت از سر",
+        "دیگر بازو hangs naturally",
+        "Angle بدن 45°",
+        "Classic model pose",
+        "Relax شانه‌ها"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50-85mm",
+        "lighting": "کنار نور"
+      },
+      "common_mistakes": [
+        "دست flattening مو",
+        "بدن too صاف",
+        "دیگر دست has nowhere برای go"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_32.webp"
+    },
+    {
+      "id": "female_solo_33",
+      "name": "روی Toes, Reaching",
+      "description": "روی tiptoe با both heels raised; یک یا both بازوها reaching upward یا جلو, انگشت‌ها extended. Spine fully stretched; pelvis neutral; سر aligned با reaching بازو.",
+      "tags": [
+        "Taller نگاه کنید",
+        "Slimming",
+        "Full بدن",
+        "ایستادن",
+        "Female"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Rise onto toes",
+        "Reach up یا جلو",
+        "Fully lengthen بدن",
+        "Use دیگر دست for balance",
+        "Elegant حالت چهره",
+        "نگاه کنید taller و slimmer"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "Even نور"
+      },
+      "common_mistakes": [
+        "Unsteady روی toes",
+        "بازوها reaching different directions",
+        "بدن not extended"
+      ],
+      "category": "تک‌نفره خانم",
+      "categoryId": "female_solo",
+      "image": "images/female_solo_33.webp"
+    },
+    {
+      "id": "couple_01",
+      "name": "Foreheads Touching",
+      "description": "ایستادن با fronts opposed, foreheads nearly touching, noses aligned. بازوها looped around each other's waists یا دست‌ها clasped در لگن هم‌سطح. یک تنه rotated کمی forty-five درجه; دیگر leans پشت یک few درجه. پاها parallel, وزن even.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "صورت each دیگر ایستادن یا leaning بسته",
+        "Foreheads gently لمس کنید",
+        "بازوها around waists یا holding دست‌ها",
+        "She can twist ~45°",
+        "Eyes closed یا tender gaze",
+        "ایجاد کنید romantic mood"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "متوسط shot یا close-up",
+        "lens": "85mm",
+        "lighting": "Soft نور یا backlight"
+      },
+      "common_mistakes": [
+        "Foreheads too far apart",
+        "خشک حالت چهره",
+        "Cluttered background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_01.webp"
+    },
+    {
+      "id": "couple_02",
+      "name": "پشت Hug از Him",
+      "description": "یک partner behind دیگر, بازوها wrapped around جلو waist, دست‌ها flat روی abdomen یا crossed. جلو partner's دست‌ها تکیه روی encircling forearms یا rise برای فک. جلو لگن twisted forty-five درجه; عقب پا loaded, جلو زانو خم.",
+      "tags": [
+        "Couple",
+        "Slimming",
+        "Full بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "He stands behind her",
+        "His بازوها wrap her waist از behind",
+        "Her دست‌ها روی his بازوها یا touching صورت",
+        "Her بدن کمی twisted 45°",
+        "She can نگاه کنید پشت در him",
+        "Both smiling naturally"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Hugging too tightly distorts بدن lines",
+        "She faces صاف روی, making بدن appear wider",
+        "His صورت blocked"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_02.webp"
+    },
+    {
+      "id": "couple_03",
+      "name": "Princess Carry Spin",
+      "description": "یک partner cradled horizontally در other's بازوها, زانوها خم و calves lifted. cradled partner wraps بازوها around supporting partner's گردن; supporting partner's پاها braced wide. Bodies rotated کمی مثل اگر mid-turn; heads بسته.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively",
+        "Romantic"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "Stable princess carry",
+        "Her بازوها around his گردن",
+        "Her پاها نرم خم",
+        "Eye contact یا kiss",
+        "Gentle spin for motion",
+        "Stay safe; نگه دارید expressions طبیعی"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Unstable نگه دارید",
+        "Her بدن خشک",
+        "No room در background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_03.webp"
+    },
+    {
+      "id": "couple_04",
+      "name": "Hand-in-Hand Walk",
+      "description": "Walking کنار by کنار با interlaced دست‌ها در لگن height. Inner شانه‌ها closer; outer پاها stride جلو alternately. عقب partner half یک step ahead; جلو partner سر turned پشت over شانه.",
+      "tags": [
+        "Couple",
+        "Longer-looking پاها",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "نگه دارید دست‌ها walking جلو یا sideways",
+        "She can glance پشت",
+        "She keeps 45° twist",
+        "طبیعی, matched stride",
+        "آسان, sweet حالت چهره",
+        "Use burst shooting"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle, follow action",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "Outdoor طبیعی نور"
+      },
+      "common_mistakes": [
+        "Steps not matched",
+        "Not looking در each دیگر—no connection",
+        "She faces دوربین صاف—looks wide"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_04.webp"
+    },
+    {
+      "id": "couple_05",
+      "name": "Piggyback",
+      "description": "supporting partner bends جلو; rider روی پشت با بازوها around supporting partner's گردن و پاها wrapped در supporting partner's لگن. supporting partner's دست‌ها تکیه دهید rider's thighs under زانوها; both torsos leaned کمی جلو.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "She jumps روی his پشت",
+        "بازوها around his گردن",
+        "پاها wrapped around his waist",
+        "He supports her پاها",
+        "Both laughing",
+        "Stay safe"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "She is not holding روی securely",
+        "He bends too much",
+        "Pained حالت چهره"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_05.webp"
+    },
+    {
+      "id": "couple_06",
+      "name": "Jumping Embrace",
+      "description": "ایستادن صورت برای صورت با both پاها off ground در یک small jump. Inner بازوها around necks یا شانه‌ها; rider's زانوها خم و پاها behind partner's calves. Chests pressed; heads بسته.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively",
+        "Romantic"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "صورت each دیگر, small jump together",
+        "Her پاها کمی lifted",
+        "بازوها around his شانه‌ها یا گردن",
+        "Use burst shooting برای catch moment",
+        "Joyful laughing حالت چهره",
+        "Use 1/500 s یا faster"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Plenty از نور"
+      },
+      "common_mistakes": [
+        "Capturing landing instead از peak moment",
+        "Jump not high enough",
+        "Expressions out از sync"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_06.webp"
+    },
+    {
+      "id": "couple_07",
+      "name": "چانه Lift Kiss",
+      "description": "ایستادن صورت برای صورت ایستادن بسته. یک دست cups under other's فک, lifting چانه. lifted partner's تنه three-quarter turned; free دست روی partner's chest یا waist. Toes nearly touching.",
+      "tags": [
+        "Couple",
+        "Slimming",
+        "Half بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "He به‌آرامی lifts her چانه",
+        "Kiss یا حدود برای kiss",
+        "Her بدن twisted 45°",
+        "Her دست روی his chest",
+        "چانه جلو",
+        "Romantic close-up"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half-body close-up",
+        "lens": "85-105mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Lifting چانه too حرفه‌ای",
+        "Her صورت distorted از pressure",
+        "Angle shows double چانه"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_07.webp"
+    },
+    {
+      "id": "couple_08",
+      "name": "شانه Lean, Heads Together",
+      "description": "شانه برای شانه با heads inclined so یک temple rests روی other's شانه. یک بازو draped over partner's upper پشت; outer دست‌ها joined در thigh هم‌سطح. پاها parallel; وزن آرام.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بایستید شانه برای شانه, leaning بسته",
+        "Her سر روی his شانه",
+        "نگه دارید دست‌ها یا his بازو around her شانه",
+        "لبخند بزنید در دوربین یا distance",
+        "Her بدن کمی twisted",
+        "Naturally sweet"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Full یا half بدن",
+        "lens": "50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Height difference makes شانه lean awkward",
+        "ایستادن too far apart",
+        "Expressions not matched"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_08.webp"
+    },
+    {
+      "id": "couple_09",
+      "name": "Spin Dance Pose",
+      "description": "Joined دست‌ها در chest height; یک partner pivots روی ball از پا while دیگر anchors. spinning partner's تنه twisted forty-five درجه; free بازو out for balance; hemlines flare روی بچرخانید.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively",
+        "Romantic"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "He gently spins her while holding دست‌ها",
+        "Her skirt flares",
+        "Twist بدن 45°",
+        "Joyful حالت چهره",
+        "Burst; pick best",
+        "Watch شما footing"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm, shutter 1/250+",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Spin too fast—motion blur",
+        "Stepped روی skirt",
+        "He does not lead spin"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_09.webp"
+    },
+    {
+      "id": "couple_10",
+      "name": "نشسته, She Leans روی Him",
+      "description": "نشسته together روی یک step یا bench. یک partner leans sideways into other's chest; other's بازو around waist یا شانه‌ها. پاها crossed یا extended روی پایین بیاورید tread; heads stacked vertically.",
+      "tags": [
+        "Couple",
+        "Sitting",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Both sit روی steps یا ground",
+        "She leans روی his chest یا lap",
+        "His بازوها around her waist یا شانه‌ها",
+        "Her پاها crossed",
+        "بدن کمی twisted",
+        "آرام و warm"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد یا three-quarter",
+        "lens": "35-50mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Leaning too بسته appears cramped",
+        "نشسته poses uneven",
+        "Cluttered background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_10.webp"
+    },
+    {
+      "id": "couple_11",
+      "name": "She Sits روی His Lap",
+      "description": "یک نشسته با thighs horizontal; دیگر perched sideways across lap, بازوها around گردن. perched partner's پاها crossed در مچ پا; torsos twisted به سمت each دیگر; پاها off ground روی نشسته کنار.",
+      "tags": [
+        "Couple",
+        "Sitting",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "He sits; she side-sits روی his lap",
+        "Her بازوها around his گردن یا شانه‌ها",
+        "Her پاها crossed",
+        "Twist for slimming effect",
+        "Intimate eye contact",
+        "Watch balance"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Full یا half بدن",
+        "lens": "50mm",
+        "lighting": "Warm indoor نور"
+      },
+      "common_mistakes": [
+        "She looks unsteady while نشسته",
+        "He appears strained",
+        "Angle makes her نگاه کنید heavier"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_11.webp"
+    },
+    {
+      "id": "couple_12",
+      "name": "صورت برای صورت Embrace",
+      "description": "ایستادن صورت برای صورت با mutual waist embraces, elbows خم بیرون. Bodies inclined until noses nearly meet; پاها staggered for balance. یک spine کمی rotated; لگن touching.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "صورت each دیگر, بازوها around waists",
+        "Bodies بسته",
+        "Noses almost touching",
+        "Eye contact یا eyes closed",
+        "She twists کمی",
+        "Romantic intimacy"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half-body close-up",
+        "lens": "85mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Too far—no intimacy",
+        "Serious حالت چهره",
+        "دست placement awkward"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_12.webp"
+    },
+    {
+      "id": "couple_13",
+      "name": "شانه Carry",
+      "description": "یک partner hoisted across other's شانه‌ها یا high روی لگن, تنه diagonal. lifted partner's دست‌ها روی supporting partner's شانه‌ها یا سر; supporting partner grips thigh یا waist. Both people نگه دارید their cores engaged, پاها split.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "He carries her carefully روی his شانه",
+        "She laughs, دست‌ها روی his شانه‌ها",
+        "Dynamic و fun",
+        "Stay safe",
+        "Playful حالت چهره",
+        "Use burst mode"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Unstable carry",
+        "She looks scared",
+        "Unflattering angle"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_13.webp"
+    },
+    {
+      "id": "couple_14",
+      "name": "پشت Hug Walk",
+      "description": "پشت hug while walking جلو. عقب partner's بازوها around جلو waist; جلو partner's سر turned over شانه. Matching stride length; جلو پا leads.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "He hugs her waist از behind",
+        "Walk slowly together",
+        "She looks پشت smiling",
+        "Steps synchronized",
+        "طبیعی motion",
+        "Warm و slimming"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Hug too چسبیده برای walk",
+        "She does not نگاه کنید پشت—no interaction",
+        "Pedestrians در background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_14.webp"
+    },
+    {
+      "id": "couple_15",
+      "name": "Lift High Pose",
+      "description": "یک partner elevated overhead با بازوها extended up یا out. lifted partner's پاها خم یا صاف; supporting partner's بازوها locked overhead; supporting partner's stance wide. Vertical alignment between دو centers از mass.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "He lifts her high",
+        "Her پاها خم یا صاف",
+        "بازوها spread یا around his سر",
+        "Cheerful حالت چهره",
+        "Stay safe",
+        "Use burst mode"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Lift not high enough",
+        "She looks scared",
+        "He appears strained"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_15.webp"
+    },
+    {
+      "id": "couple_16",
+      "name": "Kiss Jump",
+      "description": "Both airborne در یک shallow jump, mouths meeting در center height. بازوها locked around waists; زانوها خم; toes pointed down. Torsos pressed; heads tilted برای align.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively",
+        "Romantic"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "Small jump together while kissing",
+        "بازوها around each other's waists",
+        "Use burst shooting",
+        "Emotionally engaged",
+        "Fast shutter speed",
+        "Full از energy"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Ample نور"
+      },
+      "common_mistakes": [
+        "Missed kiss mid-jump",
+        "Capturing landing instead از peak moment",
+        "Unnatural حالت چهره"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_16.webp"
+    },
+    {
+      "id": "couple_17",
+      "name": "Windmill بازوها",
+      "description": "ایستادن صورت برای صورت holding both دست‌ها, بازوها crossed overhead در یک windmill arc. پاها planted shoulder-width; torsos leaned پشت از joined دست‌ها; elbows صاف روی upswing.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "صورت each دیگر holding دست‌ها",
+        "Swing بازوها like یک windmill",
+        "Both laughing",
+        "بدن آرام",
+        "Dynamic interaction",
+        "Use burst mode"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "بازوها not spread",
+        "Expressions out از sync",
+        "Background too بسته"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_17.webp"
+    },
+    {
+      "id": "couple_18",
+      "name": "شانه Sit Kiss",
+      "description": "یک نشسته روی other's شانه‌ها, thighs along گردن, ankles crossed در جلو از chest. نشسته تنه folded down; دست‌ها روی supporting partner's سر; supporting partner grips calves.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "She sits روی his شانه‌ها",
+        "Lean down برای kiss his سر یا cheek",
+        "He stands steady",
+        "Stay safe",
+        "Unique و fun",
+        "Use burst mode"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Unsteady balance",
+        "He appears strained",
+        "Angle blocks صورت"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_18.webp"
+    },
+    {
+      "id": "couple_19",
+      "name": "Side-by-Side Kick",
+      "description": "کنار by کنار با نزدیک پاها kicked جلو در unison, زانوها خم. Inner دست‌ها clasped یا outer بازوها around waists. Upright torsos; heads turned به سمت each دیگر.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "بایستید شانه برای شانه",
+        "Kick یک پا جلو together",
+        "نگه دارید دست‌ها یا embrace",
+        "Lively حالت چهره",
+        "Use burst mode",
+        "Watch synchronization"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Kicks not synchronized",
+        "Kick too high—losing balance",
+        "Too serious"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_19.webp"
+    },
+    {
+      "id": "couple_20",
+      "name": "Lying Embrace",
+      "description": "Both supine روی ground, parallel یا facing, heads به سمت each دیگر. دست‌ها interlaced در chest هم‌سطح یا بازوها around شانه‌ها. زانوها خم یا پاها extended; شانه‌ها روی surface.",
+      "tags": [
+        "Couple",
+        "Lying",
+        "Full بدن",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Lie کنار by کنار یا صورت برای صورت",
+        "نگه دارید دست‌ها یا embrace",
+        "Heads together",
+        "آرام حالت چهره",
+        "Watch شما footing",
+        "Romantic"
+      ],
+      "camera_tips": {
+        "angle": "High angle یا کنار angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Dirty ground",
+        "Double چانه",
+        "Wrinkled clothes"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_20.webp"
+    },
+    {
+      "id": "couple_21",
+      "name": "Spin into Kiss",
+      "description": "End از یک spin با bodies در embrace, یک still holding other's دست در arm's length. Torsos pressed; یک پا روی toe for balance; skirts یا hems flared بیرون.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively",
+        "Romantic"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "He spins her",
+        "Spin into embrace و kiss",
+        "Skirt در motion",
+        "Use burst mode",
+        "Dynamic romance",
+        "Allow enough فضا"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Spin blur",
+        "Missed kiss",
+        "No room در background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_21.webp"
+    },
+    {
+      "id": "couple_22",
+      "name": "Forehead Push Play",
+      "description": "ایستادن صورت برای صورت در بسته range. یک palm flat روی other's forehead, gentle push. Foreheads nearly touching; torsos upright; پاها staggered.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "He به‌آرامی pushes her forehead یا nose",
+        "صورت each دیگر laughing",
+        "بایستید صورت برای صورت",
+        "Intimate و playful",
+        "نگه دارید حالت چهره طبیعی",
+        "Use یک متوسط shot"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Push too حرفه‌ای",
+        "Unnatural حالت چهره",
+        "Too far apart"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_22.webp"
+    },
+    {
+      "id": "couple_23",
+      "name": "پشت Embrace, Soft Kiss",
+      "description": "عقب partner's سر در جلو partner's گردن کنار; جلو سر tilted exposing گردن خط. جلو partner's دست rises برای عقب partner's سر; عقب بازوها around waist.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "He kisses her گردن از behind",
+        "She smiles, سر tilted",
+        "Her دست به‌آرامی روی his سر",
+        "Warm romance",
+        "Her بدن آرام",
+        "کنار نور"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن یا close-up",
+        "lens": "85mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "بازوها too چسبیده—appears خشک",
+        "His صورت blocked",
+        "Kiss placement awkward"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_23.webp"
+    },
+    {
+      "id": "couple_24",
+      "name": "Toast و Eye Contact",
+      "description": "Facing each دیگر با forearms raised, دست‌ها meeting در chest height مثل اگر clinking invisible cups. Elbows خم; trunks leaned inward; پاها parallel.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Both بالا ببرید glasses یا یک small prop",
+        "Eye contact یا نور لمس کنید",
+        "Bodies بسته",
+        "Party vibe",
+        "Prop fits scene",
+        "طبیعی لبخند بزنید"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "50mm",
+        "lighting": "Warm نور"
+      },
+      "common_mistakes": [
+        "Glass blocks صورت",
+        "Prop does not match scene",
+        "Too posed"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_24.webp"
+    },
+    {
+      "id": "couple_25",
+      "name": "Chase Run",
+      "description": "Running chase با یک partner ahead, تنه turned پشت. عقب partner reaches جلو; دست‌ها may almost لمس کنید. Stride elongated; بازوها pumping.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "He به‌آرامی chases یا runs holding دست‌ها",
+        "She looks پشت laughing",
+        "Use burst shooting for motion",
+        "طبیعی stride",
+        "Full از energy",
+        "Choose باز background"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Outdoor نور"
+      },
+      "common_mistakes": [
+        "Running too fast—blur",
+        "She does not نگاه کنید پشت",
+        "Cluttered background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_25.webp"
+    },
+    {
+      "id": "couple_26",
+      "name": "Stacked Heart دست‌ها",
+      "description": "ایستادن frontally با stacked دست‌ها در sternum و ایجاد یک heart outline. Elbows wide; شانه‌ها touching; وزن even روی both پاها.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "دست‌ها stacked در chest",
+        "فرم complete heart شکل",
+        "صورت دوربین و لبخند بزنید",
+        "انگشت‌ها آرام",
+        "Sweet و cute",
+        "Heart centered در frame"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Bright soft نور"
+      },
+      "common_mistakes": [
+        "Heart شکل incomplete",
+        "دست blocks صورت",
+        "یک person's حالت چهره off"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_26.webp"
+    },
+    {
+      "id": "couple_27",
+      "name": "Air Kiss",
+      "description": "یک دست در mouth blowing به سمت دیگر; receiver's palms cupped نزدیک chest مثل اگر catching. Bodies angled forty-five درجه; زانوها soft.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "She blows یک kiss برای him",
+        "He pretends برای catch it",
+        "Playful interaction",
+        "Lively حالت چهره",
+        "Use یک متوسط shot",
+        "نگه دارید it طبیعی"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "No interactive response",
+        "Air kiss looks fake",
+        "Background distraction"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_27.webp"
+    },
+    {
+      "id": "couple_28",
+      "name": "شانه پا Carry",
+      "description": "یک partner balances روی یک پا while دیگر supports under raised thigh یا در waist. Raised پا horizontal; بازوها out for balance; torsos leaned into each دیگر.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "He lifts یک از her پاها",
+        "یا تکیه دهید waist",
+        "She balances while laughing",
+        "Stay safe",
+        "Distinctly lively",
+        "Use burst mode"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "She loses balance",
+        "Scared حالت چهره",
+        "Unflattering angle"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_28.webp"
+    },
+    {
+      "id": "couple_29",
+      "name": "Shared Coat",
+      "description": "Frontal embrace با شانه‌ها wrapped چسبیده, بازوها crossed behind partner's پشت. Chests compressed; heads کنار by کنار; پاها interleaved for stability.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "نگه دارید each دیگر tightly",
+        "Share یک coat",
+        "Warm intimacy",
+        "Autumn/winter mood",
+        "Heads may تکیه together",
+        "نگه دارید حالت چهره طبیعی"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Full یا half بدن",
+        "lens": "50mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Coat blocks صورت",
+        "Hug too چسبیده appears cramped",
+        "Season mood wrong"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_29.webp"
+    },
+    {
+      "id": "couple_30",
+      "name": "Cheek برای Cheek Laugh",
+      "description": "Temples parallel با heads کنار by کنار, both inclined به سمت بیننده. بازوها در sides یا waists linked; لگن touching; پاها جلو.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "Lively",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Cheeks touching",
+        "Both laughing در دوربین",
+        "خم کنید سر کمی",
+        "Joyful و lively",
+        "نگه دارید حالت چهره طبیعی",
+        "Half بدن یا close-up"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half-body close-up",
+        "lens": "85mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Too بسته برای دوربین distorts features",
+        "یک person not smiling",
+        "Angle enlarges صورت"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_30.webp"
+    },
+    {
+      "id": "couple_31",
+      "name": "پا Lift Kiss",
+      "description": "یک پا از lifted figure hooked در partner's لگن; partner's دست روی thigh یا waist. Mouths aligned در بسته range; ایستادن پا صاف روی supporting partner.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "She lifts یک پا",
+        "He supports پا یا waist",
+        "Kiss moment",
+        "Classic romantic mood",
+        "Her بدن twisted",
+        "Use burst mode"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50mm",
+        "lighting": "کنار نور"
+      },
+      "common_mistakes": [
+        "Raised پا too low",
+        "He does not تکیه دهید her securely",
+        "Angle makes پاها appear wider"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_31.webp"
+    },
+    {
+      "id": "couple_32",
+      "name": "Back-to-Back بایستید",
+      "description": "پشت برای پشت, spines aligned. Both heads rotated over مقابل شانه‌ها برای نگاه کنید در each دیگر. دست‌ها may reach behind برای clasp در لگن هم‌سطح.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "کنار View"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بایستید پشت برای پشت",
+        "Heads turned برای نگاه کنید یا laugh در each دیگر",
+        "دست‌ها may link",
+        "Cool intimacy",
+        "Relax شانه‌ها",
+        "نمای تمام‌قد"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "نمای تمام‌قد",
+        "lens": "50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Backs not touching firmly",
+        "Heads not turned—no interaction",
+        "Height difference looks awkward"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_32.webp"
+    },
+    {
+      "id": "couple_33",
+      "name": "بسته Dance نگه دارید",
+      "description": "Closed dance frame با دست‌ها روی each other's waists و upper backs. Chests nearly touching; یک پا between partner's پاها; slight rotation در لگن.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "نگه دارید یک بسته slow-dance frame",
+        "بازوها around each other's waists",
+        "Eyes meet",
+        "Optional gentle spin",
+        "نگه دارید mood romantic و elegant",
+        "Watch footwork"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "Warm نور یا کنار نور"
+      },
+      "common_mistakes": [
+        "Too far apart",
+        "No eye contact",
+        "Spin blur"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_33.webp"
+    },
+    {
+      "id": "couple_34",
+      "name": "Waist-Guided Spin",
+      "description": "یک دست روی partner's waist guiding یک full بچرخانید. Partner pivots روی ball از یک پا; free بازو extended; turning پا trails روی outside از circle.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively",
+        "Romantic"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "His دست روی her waist",
+        "Gentle یک بچرخانید",
+        "Her skirt flares",
+        "Elegant و lively",
+        "Use burst mode",
+        "Allow enough فضا"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Spin too fast",
+        "Skirt covers صورت",
+        "His دست placement looks wrong"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_34.webp"
+    },
+    {
+      "id": "couple_35",
+      "name": "Lying در His بازو",
+      "description": "یک partner supine با سر در other's crooked بازو; دیگر نشسته یا reclined beside. چانه lifted به سمت partner; free دست‌ها روی chest یا interlaced.",
+      "tags": [
+        "Couple",
+        "Lying",
+        "Half بدن",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "She lies در his بازو",
+        "نگاه کنید up با tender eye contact",
+        "He supports steadily",
+        "Cinematic romance",
+        "Mind بازو angles",
+        "Soft نور"
+      ],
+      "camera_tips": {
+        "angle": "کمی بالا",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Soft warm نور"
+      },
+      "common_mistakes": [
+        "His بازو looks منقبض یا tired",
+        "Her گردن unsupported",
+        "Angle shows double چانه"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_35.webp"
+    },
+    {
+      "id": "couple_36",
+      "name": "Confetti Toss",
+      "description": "Both بازوها raised overhead scattering downward arcs با wrists flicking. Torsos leaned پشت کمی; پاها apart; heads tilted up following دست paths.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Toss confetti یا petals together",
+        "Laughing در celebration",
+        "Use burst mode",
+        "Toss upward به سمت دوربین",
+        "Festive و lively",
+        "Clean up afterward"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Toss too low",
+        "Eyes closed",
+        "Confetti blocks صورت"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_36.webp"
+    },
+    {
+      "id": "couple_37",
+      "name": "Heart دست‌ها Together",
+      "description": "Each forms half از یک heart با curved دست‌ها در chest هم‌سطح; fingertips meet در center خط. ایستادن بسته; elbows out; شانه‌ها parallel برای بیننده.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Each makes half یک heart",
+        "دست‌ها join into full heart",
+        "صورت دوربین و لبخند بزنید",
+        "انگشت‌ها آرام",
+        "Sweet و cute",
+        "Heart centered در frame"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Bright soft نور"
+      },
+      "common_mistakes": [
+        "Heart halves misaligned",
+        "دست blocks صورت",
+        "Too far apart"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_37.webp"
+    },
+    {
+      "id": "couple_38",
+      "name": "نشسته Back-to-Back",
+      "description": "نشسته روی ground پشت برای پشت, زانوها خم یا پاها extended. Both heads rotated over شانه‌ها به سمت each دیگر یا جلو. دست‌ها روی زانوها یا floor.",
+      "tags": [
+        "Couple",
+        "Sitting",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "نشسته Back-to-Back",
+        "بچرخانید heads برای each دیگر یا دوربین",
+        "آرام و طبیعی",
+        "Watch شما footing",
+        "Intimate",
+        "Full یا half بدن"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Backs not touching",
+        "نشسته poses uneven",
+        "Messy ground"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_38.webp"
+    },
+    {
+      "id": "couple_39",
+      "name": "پا Wrap Embrace",
+      "description": "Frontal cling با یک پا wrapped around partner's waist, calf behind thigh. بازوها locked around گردن یا ribs; supporting partner leans پشت برای counterbalance.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Lively",
+        "Romantic"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "She wraps یک پا around his waist",
+        "نگه دارید چسبیده",
+        "Passionate motion",
+        "He stands steady",
+        "Use burst mode",
+        "Stay safe"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "She is not holding روی securely",
+        "پا angle wrong",
+        "He steps پشت"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_39.webp"
+    },
+    {
+      "id": "couple_40",
+      "name": "Cart Play Pose",
+      "description": "یک partner نشسته low با زانوها خم; دیگر behind با دست‌ها روی نشسته شانه‌ها pushing جلو. نشسته تنه reclined; pushing partner's پاها braced wide.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Use cart یا similar prop",
+        "She sits در cart, he pushes",
+        "یا playful interaction",
+        "Fun و lively",
+        "نگه دارید حالت چهره طبیعی",
+        "Stay safe"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Bright indoor نور"
+      },
+      "common_mistakes": [
+        "Prop blocks صورت",
+        "حالت چهره looks fake",
+        "Filming where carts are prohibited"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_40.webp"
+    },
+    {
+      "id": "couple_41",
+      "name": "Rain Kiss",
+      "description": "Bodies pressed together under یک shared overhead بازو arch, elbows خم, دست‌ها joined بالا. شانه‌ها tucked inside dome; پاها staggered; heads inclined به سمت each دیگر.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Romantic"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Umbrella یا simulated rain",
+        "Bodies بسته for kiss",
+        "Classic romantic mood",
+        "نگه دارید umbrella از blocking صورت",
+        "Watch شما footing",
+        "Stay emotionally engaged"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Full یا half بدن",
+        "lens": "50mm",
+        "lighting": "Overcast یا soft نور"
+      },
+      "common_mistakes": [
+        "Umbrella covers صورت",
+        "Fake rain looks unconvincing",
+        "Ground too slippery"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_41.webp"
+    },
+    {
+      "id": "couple_42",
+      "name": "شانه Sit",
+      "description": "Rider نشسته روی supporting partner's شانه‌ها, thighs along گردن, دست‌ها روی supporting partner's forehead for balance. supporting partner grips rider's calves; پاها wide.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "She sits روی his شانه‌ها",
+        "بازوها spread یا around his سر",
+        "Laughing, adventurous mood",
+        "He stands steady",
+        "Stay safe",
+        "Use burst mode"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Unsteady balance",
+        "She looks scared",
+        "No room در background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_42.webp"
+    },
+    {
+      "id": "couple_43",
+      "name": "Whisper بسته",
+      "description": "یک partner's mouth نزدیک other's ear; listener's سر tipped دور, شانه raised. نزدیک بازوها around waist یا upper بازو; پاها parallel.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "He whispers در her ear",
+        "She smiles یا shyly turns سر",
+        "طبیعی intimacy",
+        "Bodies بسته",
+        "Use یک متوسط shot",
+        "Capture reaction"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Too far apart",
+        "She shows no reaction",
+        "Mouth شکل looks fake"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_43.webp"
+    },
+    {
+      "id": "couple_44",
+      "name": "High-Five",
+      "description": "ایستادن صورت برای صورت با یک یا both palms raised در سر height for یک high contact. Elbows خم; optional small hop با زانوها خم; torsos upright.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "صورت each دیگر for یک high-five",
+        "یا jump high-five",
+        "Use burst mode",
+        "Joyful حالت چهره",
+        "Dynamic",
+        "در sync"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Missed high-five",
+        "Expressions out از sync",
+        "Background too بسته"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_44.webp"
+    },
+    {
+      "id": "couple_45",
+      "name": "پاها Lift Carry",
+      "description": "supporting partner holds both از partner's پاها off ground, partner's تنه folded جلو over grip. Partner's بازوها روی supporting partner's شانه‌ها; supporting partner's پشت arched.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "He lifts both her پاها",
+        "She leans جلو laughing",
+        "Fun pose",
+        "Stay safe",
+        "Use burst mode",
+        "He stays steady"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Unstable نگه دارید",
+        "She looks scared",
+        "Unflattering angle"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_45.webp"
+    },
+    {
+      "id": "couple_46",
+      "name": "Shared Horizon Gaze",
+      "description": "کنار by کنار facing same direction, دست‌ها joined در لگن هم‌سطح. Heads turned together به سمت horizon; شانه‌ها هم‌سطح; پاها parallel.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "ایستادن",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بایستید شانه برای شانه",
+        "Holding دست‌ها",
+        "نگاه کنید into distance together",
+        "Quiet romance",
+        "آرام حالت چهره",
+        "نمای تمام‌قد"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "نمای تمام‌قد",
+        "lens": "50mm",
+        "lighting": "طبیعی نور یا backlight"
+      },
+      "common_mistakes": [
+        "Looking different directions",
+        "دست‌ها not linked",
+        "No depth در background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_46.webp"
+    },
+    {
+      "id": "couple_47",
+      "name": "Swap Hats",
+      "description": "Facing each دیگر با both دست‌ها adjusting headwear روی partner در ear height. Elbows خم; torsos leaned در; وزن روی جلو پا.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Swap each other's hats",
+        "یا adjust each other's hats",
+        "Laughing playfully",
+        "Add یک playful moment",
+        "Use یک متوسط shot",
+        "نگه دارید it طبیعی"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "85mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Hat too large",
+        "Hat blocks صورت",
+        "Unnatural حالت چهره"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_47.webp"
+    },
+    {
+      "id": "couple_48",
+      "name": "Spinning Embrace",
+      "description": "چسبیده waist embrace while rotating slowly. Inner پاها pivot together; outer بازوها locked; یک partner's پاها dragged کمی روی بچرخانید.",
+      "tags": [
+        "Couple",
+        "Full بدن",
+        "Lively",
+        "Romantic"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "چسبیده hug با gentle spin",
+        "He gently spins her",
+        "Warm motion",
+        "Use burst mode",
+        "Allow enough فضا",
+        "نگه دارید حالت چهره طبیعی"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Spin too fast—dizzy",
+        "Stepped روی پا",
+        "No room در background"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_48.webp"
+    },
+    {
+      "id": "couple_49",
+      "name": "Farewell Kiss",
+      "description": "ایستادن صورت برای صورت در بسته range. یک سر inclines until brow meets other's temple; bodies touching از لگن برای شانه. دست‌ها روی upper بازوها یا waist.",
+      "tags": [
+        "Couple",
+        "Half بدن",
+        "ایستادن",
+        "Romantic",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "She به‌آرامی kisses his cheek یا lips",
+        "Bodies بسته",
+        "Sweet حالت چهره",
+        "Warm closing moment",
+        "متوسط close-up",
+        "نگه دارید it طبیعی"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half-body close-up",
+        "lens": "85mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Kiss placement looks awkward",
+        "Expressions not sweet",
+        "Too far apart"
+      ],
+      "category": "دونفره",
+      "categoryId": "couple",
+      "image": "images/couple_49.webp"
+    },
+    {
+      "id": "solo_01",
+      "name": "تکیه چانه در نمای نیم‌رخ",
+      "description": "ایستادن در تقریباً forty-five درجه برای بیننده, تنه turned sideways. یک آرنج خم بیرون و ایجاد باز triangle فضا; palm و انگشت‌ها به‌آرامی تکیه دهید underside از فک. مقابل دست rests روی لگن با آرنج دور از trunk. وزن centered روی عقب پا; جلو زانو نرم خم. سر dips کمی به سمت raised دست; گردن angled یک few درجه.",
+      "tags": [
+        "Slimming",
+        "Slimmer-looking صورت",
+        "Half بدن",
+        "کنار View",
+        "ایستادن",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بدن را ۴۵ درجه نسبت به دوربین بچرخانید",
+        "آرنج را از بدن فاصله دهید برای فرم یک triangle",
+        "چانه را به‌آرامی نگه دارید با شما palm; do not press into صورت",
+        "قرار دهید دیگر دست در شما waist یا به‌آرامی لمس کنید شما لگن",
+        "وزن را روی پای عقب بیندازید و نرم خم کنید جلو زانو",
+        "خم کنید شما سر کمی و به دوربین نگاه کنید یا just بالا it"
+      ],
+      "camera_tips": {
+        "angle": "هم‌سطح چشم یا کمی بالاتر",
+        "framing": "نمای نیم‌تنه یا متوسط",
+        "lens": "50-85mm",
+        "lighting": "کنار نور outlines jawline"
+      },
+      "common_mistakes": [
+        "فشار دادن صورت until features distort",
+        "Keeping آرنج چسبیده برای بدن, making بازو appear wider",
+        "Facing دوربین صاف روی, making صورت appear wider"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_01.webp"
+    },
+    {
+      "id": "solo_02",
+      "name": "تکیه باریک‌کننده به دیوار",
+      "description": "تنه inclined حدود twenty برای thirty درجه off vertical, شانه خط dropped مثل اگر braced against invisible تکیه دهید. یک زانو خم با toe جلو; دیگر پا صاف bearing وزن. بازوها crossed به‌آرامی over upper chest با elbows held دور از ribs, یا یک دست در لگن while دیگر rises نزدیک سر. شانه‌ها rolled جلو; سر projects کمی ahead از chest.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Full بدن",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Lean شما پشت یا شانه به‌آرامی against wall در 20-30 درجه",
+        "خم کنید یک پا, point toe, یا ضربدری کنید ankles",
+        "نگه دارید دیگر پا صاف برای carry شما وزن",
+        "ضربدری کنید دست‌ها به‌آرامی نزدیک chest, keeping بازوها دور از بدن",
+        "یا قرار دهید یک دست در یک pocket و دیگر نزدیک مو",
+        "Bring شانه‌ها کمی جلو و lean سر جلو یک little"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "نور طبیعی یا نور جانبی"
+      },
+      "common_mistakes": [
+        "ایستادن too صاف against wall با no curve",
+        "بازوها pressed too tightly against بدن",
+        "خم کنید angle is too large و unnatural"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_02.webp"
+    },
+    {
+      "id": "solo_03",
+      "name": "ایستادن سه‌ربع با دست در جیب",
+      "description": "Three-quarter stance با وزن روی عقب پا; leading پا زانو خم و پا advanced. یک دست tucked در لگن هم‌سطح با thumb hooked بیرون; مقابل forearm lifted نزدیک فک یا temple, آرنج باز. شانه‌ها lowered; spine elongated; گردن صاف با چانه هم‌سطح.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "قرار دهید یک دست در یک pocket با thumb left outside",
+        "بچرخانید بدن 45 درجه برای دوربین",
+        "منتقل کنید وزن برای عقب پا و کمی خم کنید جلو زانو",
+        "لمس کنید شما مو یا cheek با دیگر دست",
+        "شانه‌ها را پایین و آرام نگه دارید و chest باز",
+        "لبخند بزنید naturally و به دوربین نگاه کنید"
+      ],
+      "camera_tips": {
+        "angle": "در chest هم‌سطح یا کمی پایین",
+        "framing": "Half برای full بدن",
+        "lens": "50 mm",
+        "lighting": "Soft طبیعی نور"
+      },
+      "common_mistakes": [
+        "Pocket دست خشک",
+        "بدن facing too صاف, making silhouette appear wider",
+        "Shrugging یا looking منقبض"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_03.webp"
+    },
+    {
+      "id": "solo_04",
+      "name": "ژست موهای پریشان در باد",
+      "description": "ایستادن یا mid-step با تنه twisted حدود forty-five درجه. سر tilted پشت یک few درجه; یک بازو raised با دست threading through مو بالا ear. دیگر بازو hangs در کنار یا lifts کمی از لگن. لگن counter-rotate against شانه‌ها; وزن shifts through stride.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Twist بدن 45 درجه",
+        "خم کنید سر کمی",
+        "Run یک دست through مو یا toss it به‌آرامی",
+        "Let دیگر دست hang naturally یا به‌آرامی flick hem",
+        "Choose یک windy outdoor environment",
+        "حالت چهره را آرام و طبیعی نگه دارید"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle برای capture motion",
+        "framing": "نمای تمام‌قد یا three-quarter",
+        "lens": "35-70mm",
+        "lighting": "Backlight یا side-back نور adds atmosphere"
+      },
+      "common_mistakes": [
+        "movement is too forceful یا unnatural",
+        "Too much مو covering صورت",
+        "Cluttered background stealing attention"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_04.webp"
+    },
+    {
+      "id": "solo_05",
+      "name": "Crossed-Arms جلو Lean",
+      "description": "Forearms crossed over upper chest یا پایین بیاورید ribs با elbows spaced دور از تنه. Trunk leans جلو ten برای fifteen درجه. وزن روی یک پا; مقابل زانو خم. شانه‌ها آرام downward; سر هم‌سطح یا tipped کمی به سمت بیننده.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "ضربدری کنید بازوها به‌آرامی در جلو از chest یا waist",
+        "نگه دارید بازوها کمی دور از بدن",
+        "Lean جلو کمی",
+        "Put وزن روی یک پا و کمی خم کنید دیگر پا",
+        "Relax شما شانه‌ها",
+        "لبخند بزنید و به دوربین نگاه کنید"
+      ],
+      "camera_tips": {
+        "angle": "در eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "50-85mm",
+        "lighting": "Even soft نور"
+      },
+      "common_mistakes": [
+        "بازوها pressed too tightly against بدن",
+        "بازوها crossed too defensively",
+        "بدن too صاف, با no attitude"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_05.webp"
+    },
+    {
+      "id": "solo_06",
+      "name": "Hands-Up Cheer",
+      "description": "Both بازوها lifted overhead یا spread wide در شانه height. Spine stretched tall; optional نور bounce روی balls از پاها با زانوها soft. سر tipped پشت; rib cage باز; وزن even یا کمی روی عقب پا.",
+      "tags": [
+        "Longer-looking پاها",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "بالا ببرید شما دست‌ها overhead یا spread them out",
+        "Stretch بدن upward",
+        "Add یک small jump for more energy",
+        "Tip سر پشت و لبخند بزنید",
+        "Rise onto tiptoe برای lengthen بدن",
+        "Show an energetic حالت چهره"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle برای lengthen پاها",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Bright even نور"
+      },
+      "common_mistakes": [
+        "بازو not fully extended",
+        "خشک حالت چهره when jumping",
+        "Overexposed background یا harsh overhead نور"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_06.webp"
+    },
+    {
+      "id": "solo_07",
+      "name": "Sideways Mirror Selfie",
+      "description": "Three-quarter بچرخانید با یک بازو extended جلو در chest height, آرنج nearly صاف. دیگر دست planted روی لگن یا lifted برای hairline. پاها crossed در مچ پا یا جلو زانو خم; وزن روی پشت پا creating یک narrow silhouette.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "کنار View",
+        "ایستادن"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بایستید 45 درجه sideways برای mirror",
+        "Take یک selfie با شما phone در یک دست",
+        "Let دیگر دست drop naturally یا لمس کنید شما مو",
+        "پاها کمی crossed یا خم",
+        "نگه دارید شما gaze طبیعی در mirror",
+        "Do not let phone block شما صورت"
+      ],
+      "camera_tips": {
+        "angle": "Use mirror reflection angle",
+        "framing": "Half بدن",
+        "lens": "Mobile Wide Angle یا 50mm Equivalent",
+        "lighting": "جلو mirror نور یا window نور"
+      },
+      "common_mistakes": [
+        "Phone covering صورت",
+        "Dirty marks روی mirror",
+        "بدن facing too صاف, making بدن appear wider"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_07.webp"
+    },
+    {
+      "id": "solo_08",
+      "name": "Shoulder-Tilt لبخند بزنید",
+      "description": "Frontal یا near-frontal stance با یک شانه advanced به سمت بیننده, تنه twisted حدود forty-five درجه. Both بازوها hang naturally در sides با آرام elbows. لگن square یا کمی offset; وزن balanced; سر tilted به سمت dropped شانه.",
+      "tags": [
+        "Slimming",
+        "Slimmer-looking صورت",
+        "Half بدن",
+        "کنار View",
+        "ایستادن"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Bring یک شانه کمی به سمت دوربین",
+        "Twist بدن sideways 45 درجه",
+        "Let دست‌ها hang naturally",
+        "لبخند بزنید naturally",
+        "Tuck چانه کمی",
+        "نگاه کنید در دوربین با soft eyes"
+      ],
+      "camera_tips": {
+        "angle": "در یا کمی پایین eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "0 - 85mm)",
+        "lighting": "Soft کنار نور"
+      },
+      "common_mistakes": [
+        "شانه‌ها flat, با no curve",
+        "Shrugging یا looking منقبض",
+        "Facing دوربین صاف روی, making صورت appear larger"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_08.webp"
+    },
+    {
+      "id": "solo_09",
+      "name": "Window Lean",
+      "description": "بدن angled forty-five درجه با forearm resting روی یک horizontal bar در waist height, آرنج خم. تنه leans into تکیه دهید; outside پا صاف, inside زانو soft. Free دست نزدیک فک یا draped along rail; سر inclined به سمت خم آرنج.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Lean sideways در 45 درجه against یک window یا railing",
+        "تکیه یک دست روی تکیه دهید یا railing",
+        "Use طبیعی نور از window",
+        "منتقل کنید وزن برای عقب پا",
+        "خم کنید سر کمی",
+        "حالت چهره را آرام و طبیعی نگه دارید"
+      ],
+      "camera_tips": {
+        "angle": "Shoot در eye هم‌سطح using window نور",
+        "framing": "Half یا full بدن",
+        "lens": "50 mm",
+        "lighting": "کنار window نور works best"
+      },
+      "common_mistakes": [
+        "Backlighting بدون fill, making subject too dark",
+        "Leaning too حرفه‌ای و distorting بدن خط",
+        "Railing lines cutting through سر"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_09.webp"
+    },
+    {
+      "id": "solo_10",
+      "name": "Jumping Cheer",
+      "description": "Both پاها leave ground در یک small hop, زانوها خم یا پاها together. بازوها spread wide یا raised بالا سر; تنه elongated. سر aligned با spine یا thrown کمی پشت; شانه‌ها lifted با jump.",
+      "tags": [
+        "Longer-looking پاها",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "نگه دارید پاها together یا stagger them کمی while jumping",
+        "بازوها outstretched یا raised",
+        "Capture moment both پاها leave ground",
+        "Show یک joyful حالت چهره",
+        "بدن extends upwards",
+        "Shoot bursts و select best frame"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Plenty از نور; shutter 1/500 s یا faster"
+      },
+      "common_mistakes": [
+        "Capturing landing instead از airborne moment",
+        "Jump too low, weakening pose",
+        "Background lines cutting through بدن"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_10.webp"
+    },
+    {
+      "id": "solo_11",
+      "name": "Cross-Leg ایستادن Pose",
+      "description": "پاها crossed در ankles یا calves, جلو پا bearing partial وزن. تنه turned forty-five درجه; بازوها آرام در sides یا یک دست روی thigh. لگن narrow; spine vertical; سر over sternum.",
+      "tags": [
+        "Slimming",
+        "Longer-looking پاها",
+        "ایستادن",
+        "کنار View"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "ضربدری کنید پاها با یک پا جلو",
+        "Angle بدن 45 درجه برای کنار",
+        "Let دست‌ها تکیه naturally در sides یا روی thighs",
+        "منتقل کنید وزن برای عقب پا",
+        "خم کنید سر کمی",
+        "Classic slimming ایستادن pose"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50 mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "پاها crossed too tightly, making pose twisted",
+        "Facing دوربین صاف روی",
+        "جلو پا not extended, making پاها appear shorter"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_11.webp"
+    },
+    {
+      "id": "solo_12",
+      "name": "چانه جلو Extension",
+      "description": "ایستادن یا نشسته با چانه advanced جلو از گردن, فک خط extended. تنه rotated forty-five درجه; شانه‌ها هم‌سطح. بازوها neutral در sides یا یک forearm روی زانو; وزن settled روی یک لگن در sitting variants.",
+      "tags": [
+        "Slimmer-looking صورت",
+        "Half بدن",
+        "کنار View",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Bring چانه کمی جلو",
+        "Angle بدن 45 درجه برای کنار",
+        "Works ایستادن یا نشسته",
+        "نگاه کنید در دوربین",
+        "نگه دارید corners از mouth طبیعی",
+        "ایجاد کنید یک clear jawline"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح یا کمی higher",
+        "framing": "Half-body close-up",
+        "lens": "85-105mm",
+        "lighting": "کنار نور defines outline"
+      },
+      "common_mistakes": [
+        "چانه pushed too far جلو",
+        "Angle creating یک double چانه",
+        "Top نور flattening صورت"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_12.webp"
+    },
+    {
+      "id": "solo_13",
+      "name": "Sideways Step Sit",
+      "description": "نشسته روی یک step با یک پا extended along tread و دیگر خم, پا flat پایین. تنه leaned sideways; یک palm presses step behind لگن. مقابل آرنج خم با دست supporting فک; سر follows lean.",
+      "tags": [
+        "Slimming",
+        "Sitting",
+        "کنار View",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Sit روی steps, یک پا صاف, یک پا خم",
+        "بدن sideways",
+        "تکیه دهید yourself روی step یا تکیه یک دست نزدیک صورت",
+        "پشت صاف",
+        "خم کنید سر کمی و به دوربین نگاه کنید",
+        "Relax naturally"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح یا کمی پایین بیاورید",
+        "framing": "نمای تمام‌قد یا three-quarter",
+        "lens": "35-50mm",
+        "lighting": "نور طبیعی یا نور جانبی"
+      },
+      "common_mistakes": [
+        "Sitting too low با short پاها",
+        "Hunched پشت",
+        "Step lines cut شانه‌ها"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_13.webp"
+    },
+    {
+      "id": "solo_14",
+      "name": "Half-Hidden Hat Pose",
+      "description": "Three-quarter stance با یک دست در brow, انگشت‌ها spaced مثل اگر shading upper skull. سر lifted so چانه rises; مقابل بازو در کنار یا لگن. وزن روی عقب پا; جلو toe نور روی ground.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "کنار View",
+        "ایستادن"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Pull hat brim down کمی برای cover part از صورت",
+        "Lift شما eyes به سمت دوربین",
+        "بایستید در یک 45-degree کنار angle",
+        "Use یک دست برای نگه دارید hat brim",
+        "ایجاد کنید یک mysterious mood",
+        "Lift corners از mouth کمی"
+      ],
+      "camera_tips": {
+        "angle": "در eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "50-85mm",
+        "lighting": "Soft نور; avoid hat shadows over eyes"
+      },
+      "common_mistakes": [
+        "Hat brim covering eyes completely",
+        "صورت fully blocked, losing intended mystery",
+        "Hat shadow too heavy under top نور"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_14.webp"
+    },
+    {
+      "id": "solo_15",
+      "name": "Arm-Extended Selfie",
+      "description": "یک بازو fully extended جلو در شانه height, آرنج locked. تنه twisted forty-five درجه; free دست روی لگن یا در مو. پاها staggered با عقب پا صاف و جلو زانو خم.",
+      "tags": [
+        "Slimming",
+        "Half بدن",
+        "کنار View",
+        "ایستادن"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Take یک selfie با یک بازو extended",
+        "Twist بدن 45 درجه",
+        "Let دیگر دست drop naturally یا لمس کنید شما مو",
+        "نگه دارید phone کمی بالا eye هم‌سطح",
+        "نگاه کنید در دوربین",
+        "Classic slimming selfie angle"
+      ],
+      "camera_tips": {
+        "angle": "کمی higher selfie angle",
+        "framing": "Half بدن",
+        "lens": "Mobile Wide Angle",
+        "lighting": "صورت نور source"
+      },
+      "common_mistakes": [
+        "Phone too low, creating یک double چانه",
+        "بازو خم, shortening selfie angle",
+        "Background too بسته, making صورت appear larger"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_15.webp"
+    },
+    {
+      "id": "solo_16",
+      "name": "پاها Together روی Tiptoe",
+      "description": "Heels raised روی balls از پاها, ankles aligned. پاها together; spine stretched vertically. بازوها در sides یا lifted overhead; pelvis tucked کمی; سر high over cervical stack.",
+      "tags": [
+        "Taller نگاه کنید",
+        "Slimming",
+        "Full بدن",
+        "ایستادن"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "نگه دارید پاها together و rise onto tiptoe",
+        "Stretch بدن upward",
+        "نگه دارید دست‌ها طبیعی یا کمی raised",
+        "Engage core و tuck abdomen کمی",
+        "سر کمی raised",
+        "Creates یک taller, slimmer نگاه کنید"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "50 mm",
+        "lighting": "Even نور"
+      },
+      "common_mistakes": [
+        "Unstable tiptoe",
+        "بدن not elongated",
+        "Pose makes بدن appear shorter"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_16.webp"
+    },
+    {
+      "id": "solo_17",
+      "name": "Head-Back Laugh",
+      "description": "سر thrown پشت با throat باز; upper پشت arched به‌آرامی. تنه folded یک few درجه در waist. یک دست روی abdomen یا در مو; مقابل بازو loose. زانوها soft; وزن centered.",
+      "tags": [
+        "Slimming",
+        "Full بدن",
+        "Lively",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Laugh naturally با سر tipped پشت",
+        "خم کنید بدن کمی",
+        "قرار دهید یک دست روی stomach یا در مو",
+        "نگه دارید حالت چهره real, not acted",
+        "Relax شما شانه‌ها",
+        "Capture moment"
+      ],
+      "camera_tips": {
+        "angle": "در chest هم‌سطح",
+        "framing": "نمای تمام‌قد یا half بدن",
+        "lens": "35-50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Eyes closed too much while laughing",
+        "Leaning پشت excessively",
+        "یک حرفه‌ای لبخند بزنید is unnatural"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_17.webp"
+    },
+    {
+      "id": "solo_18",
+      "name": "یک پا Raised روی Wall",
+      "description": "یک پا raised با خم زانو, sole نزدیک یک vertical plane beside بدن. Three-quarter stance; same-side دست pressed برای that plane در شانه height یا lifted برای مو. ایستادن پا صاف; لگن stacked over supporting مچ پا.",
+      "tags": [
+        "Slimming",
+        "ایستادن",
+        "کنار View"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بالا ببرید یک پا against wall",
+        "بایستید در یک 45-degree کنار angle",
+        "قرار دهید یک دست روی wall یا در مو",
+        "Relax raised پا و نگه دارید تکیه دهید پا stable",
+        "نگه دارید یک cool حالت چهره",
+        "بکشید بدن خط"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "کنار نور adds depth"
+      },
+      "common_mistakes": [
+        "Raised پا too low, weakening pose",
+        "بدن facing صاف روی",
+        "Wall color blending into clothing"
+      ],
+      "category": "تک‌نفره",
+      "categoryId": "solo",
+      "image": "images/solo_18.webp"
+    },
+    {
+      "id": "group_01",
+      "name": "شانه برای شانه, Eyes روی دوربین",
+      "description": "Three people ایستادن در یک row, شانه‌ها به‌آرامی touching, torsos angled forty-five درجه به سمت لنز. People روی ends نگه دارید یک بازو down و دیگر across middle person's upper پشت. Heads upright و necks آرام; پاها parallel و hip-width apart.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "دو یا three در یک row",
+        "Bodies lean کمی inward",
+        "شانه‌ها به‌آرامی لمس کنید, not squeezed",
+        "Outer دست‌ها down یا روی neighbor's پشت",
+        "Bodies ~45° برای دوربین",
+        "صورت دوربین و لبخند بزنید"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "Even soft نور"
+      },
+      "common_mistakes": [
+        "Packed too چسبیده",
+        "Heights not aligned",
+        "Someone blinked"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_01.webp"
+    },
+    {
+      "id": "group_02",
+      "name": "Staggered Front-Back Layers",
+      "description": "دو people در staggered depth: یک جلو در three-quarter view, یک behind offset برای کنار. جلو person turns their تنه; عقب partner's سر peeking over شانه خط. پاها روی different planes; بازوها آرام.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "کنار View"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "یک در جلو, یک behind",
+        "Stagger جلو و پشت for depth",
+        "جلو person angled به سمت دوربین",
+        "عقب person peeks over شانه یا turns برای show their صورت",
+        "Eyes روی دوربین یا each دیگر",
+        "Sense از فضا"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Fully overlapping",
+        "عقب صورت blocked",
+        "Layers not visible"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_02.webp"
+    },
+    {
+      "id": "group_03",
+      "name": "صورت Each دیگر Laughing",
+      "description": "دو people facing each دیگر half یک step apart, heads inclined inward بدون contact. دست‌ها روی each other's upper بازوها یا شانه‌ها. وزن روی both پاها; spines vertical.",
+      "tags": [
+        "Group",
+        "Half بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "صورت each دیگر half یک step apart",
+        "Heads بسته but not touching",
+        "Eyes روی each دیگر",
+        "Corners از mouth lifted",
+        "دست به‌آرامی روی بازو یا شانه",
+        "آسان interaction"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "Half بدن",
+        "lens": "50-85mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Too far apart",
+        "Looking در دوربین instead از each دیگر",
+        "خشک حالت چهره"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_03.webp"
+    },
+    {
+      "id": "group_04",
+      "name": "Mixed Sit-Stand Heights",
+      "description": "دو people در height contrast: یک نشسته روی یک step, تنه twisted به سمت بیننده; یک ایستادن behind و beside, تنه leaning جلو. Heads در different elevations; زانوها خم روی نشسته person.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "Sitting",
+        "ایستادن"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "یک نشسته, یک ایستادن behind",
+        "نشسته person angled برای دوربین",
+        "ایستادن person leans در کمی",
+        "Heads در varied heights",
+        "ایجاد کنید layered depth",
+        "طبیعی interaction"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Not enough height difference",
+        "Slouched while نشسته",
+        "No connection between دو"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_04.webp"
+    },
+    {
+      "id": "group_05",
+      "name": "Casual Back-to-Back",
+      "description": "دو people پشت برای پشت, شانه blades touching, spines صاف. Heads rotated به سمت بیننده یا مقابل directions. بازوها در sides یا دست‌ها در pockets در لگن خط.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "کنار View"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "بایستید پشت برای پشت",
+        "بایستید naturally صاف یا آرام",
+        "صورت دوربین یا نگاه کنید different ways",
+        "دست‌ها در pockets یا در sides",
+        "Cool, casual vibe",
+        "Relax شانه‌ها"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "نور طبیعی یا نور جانبی"
+      },
+      "common_mistakes": [
+        "Backs not touching",
+        "All heads same direction",
+        "Posture too خشک"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_05.webp"
+    },
+    {
+      "id": "group_06",
+      "name": "Semicircle Formation",
+      "description": "Four people arranged در یک semicircle opening به سمت بیننده, bodies angled inward. Heads turned برای center یا جلو; پاها spaced evenly روی arc; بازوها در sides یا روی neighbors' backs.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Three برای five در یک semicircle",
+        "Leave فضا در middle",
+        "Bodies صورت center",
+        "نگاه کنید در دوربین یا center person",
+        "Balanced composition",
+        "Even spacing"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Even نور"
+      },
+      "common_mistakes": [
+        "Someone blocked",
+        "Spacing uneven",
+        "Edge person cropped out"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_06.webp"
+    },
+    {
+      "id": "group_07",
+      "name": "Walking Candid Group",
+      "description": "Four people walking abreast یا در یک loose خط, پاها در varied stride phases. بازوها swinging naturally; some heads جلو, some turned برای یک neighbor. شانه‌ها هم‌سطح با path.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Walk کنار by کنار یا front-back",
+        "طبیعی stride",
+        "نگاه کنید در دوربین یا each دیگر",
+        "بازوها swing naturally",
+        "Use burst shooting for motion",
+        "باز background"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "Outdoor طبیعی نور"
+      },
+      "common_mistakes": [
+        "Steps messy",
+        "Someone blurred",
+        "Pedestrians در background"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_07.webp"
+    },
+    {
+      "id": "group_08",
+      "name": "یک Lead, Others Supporting",
+      "description": "Four people با یک centered جلو, posture more باز. People روی sides set پشت و angled به سمت center, heads turned برای focal person. پاها فرم یک shallow V.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "یک در center, کمی جلو",
+        "Others روی sides یا behind",
+        "Lead pose more باز",
+        "Others angled یا looking در lead",
+        "ایجاد کنید visual تمرکز",
+        "Balanced framing"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Lead subject not prominent",
+        "Everyone same pose",
+        "People در پشت too small"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_08.webp"
+    },
+    {
+      "id": "group_09",
+      "name": "بازو Over شانه Bond",
+      "description": "Three people clustered با بازوها draped over شانه‌ها یا upper backs. Torsos leaned inward; heads بسته در same height; وزن روی inner پاها.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "دو یا three بسته together",
+        "دست روی neighbor's شانه یا پشت",
+        "Bodies lean کمی inward",
+        "Heads بسته",
+        "نگاه کنید در دوربین یا each دیگر",
+        "Sense از closeness"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "بازو روی شانه too heavy",
+        "Someone pushed out از frame",
+        "Expressions not matched"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_09.webp"
+    },
+    {
+      "id": "group_10",
+      "name": "Tiered Stagger بایستید",
+      "description": "Four people روی staggered elevations, lowest در جلو, tallest در عقب. Each بدن three-quarter turned; heads aligned روی یک horizon خط; پاها روی separate treads.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "بایستید روی different step heights",
+        "Arrange low برای high",
+        "Each person کمی angled برای دوربین",
+        "All نگاه کنید در دوربین",
+        "Ordered layers",
+        "Even spacing"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح یا کمی low",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Even نور"
+      },
+      "common_mistakes": [
+        "Height difference not visible",
+        "Someone blocked",
+        "خط too rigid"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_10.webp"
+    },
+    {
+      "id": "group_11",
+      "name": "Gesture Interaction",
+      "description": "Four people در یک چسبیده cluster با دست‌ها meeting overhead for یک slap یا و ایجاد shapes به سمت center. Bodies خم به سمت gesture; elbows high.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Gather در یک circle",
+        "High-five, heart gesture, یا point",
+        "Bodies صورت interaction",
+        "نگه دارید حالت چهره طبیعی",
+        "Make interaction playful",
+        "Synchronize movement"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "Full یا half بدن",
+        "lens": "35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Movements not synchronized",
+        "دست blocks صورت",
+        "Interaction feels خشک"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_11.webp"
+    },
+    {
+      "id": "group_12",
+      "name": "Center تمرکز Group",
+      "description": "Four people با یک نشسته یا ایستادن در hub; others ring center facing inward. Outer heads به سمت middle یا به سمت بیننده; زانوها خم روی نشسته hub.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "Sitting",
+        "ایستادن"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "یک نشسته یا ایستادن در center",
+        "Arrange others around center, در جلو یا behind",
+        "Outer people صورت center",
+        "Eyes روی دوربین یا center",
+        "Visual تمرکز",
+        "Reasonable spacing"
+      ],
+      "camera_tips": {
+        "angle": "کمی بالا یا eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Even نور"
+      },
+      "common_mistakes": [
+        "Center person not ایستادن out",
+        "Outer people block center",
+        "Composition too cramped"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_12.webp"
+    },
+    {
+      "id": "group_13",
+      "name": "Shared جلو Gaze",
+      "description": "Four people در یک خط sharing same gaze direction, bodies three-quarter برای بیننده. Heads turned together off-frame; بازوها در sides; پاها جلو.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "کنار View"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Everyone same direction",
+        "کمی angled برای دوربین",
+        "All نگاه کنید به سمت horizon",
+        "آرام یا smiling",
+        "Mood و atmosphere",
+        "Even spacing"
+      ],
+      "camera_tips": {
+        "angle": "Chest-height دوربین",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "طبیعی نور یا backlight"
+      },
+      "common_mistakes": [
+        "Someone looking در دوربین breaks mood",
+        "Directions not aligned",
+        "ایستادن too بسته"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_13.webp"
+    },
+    {
+      "id": "group_14",
+      "name": "Casual Mixed Seating",
+      "description": "Four people نشسته روی ground یا low furniture در varied poses: cross-legged, پاها برای یک کنار, یک زانو up. تنه angles differ; some heads به سمت بیننده, some به سمت یک neighbor.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "Sitting",
+        "Beginner"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "Group نشسته روی floor یا sofa",
+        "Varied poses: cross-legged, کنار sit",
+        "نگاه کنید در دوربین یا each دیگر",
+        "آسان و طبیعی",
+        "نگه دارید ground clean",
+        "Staggered depth"
+      ],
+      "camera_tips": {
+        "angle": "کمی بالا یا eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Soft نور"
+      },
+      "common_mistakes": [
+        "Everyone نشسته identically",
+        "Someone blocked",
+        "Messy ground"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_14.webp"
+    },
+    {
+      "id": "group_15",
+      "name": "Triangle Composition",
+      "description": "Three people در triangular placement: یک person در جلو apex, دو behind spaced wide. All bodies کمی rotated; پاها shoulder-width; heads aligned روی یک plane facing جلو.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "Three-person triangle formation",
+        "یک کمی جلو, دو behind spaced apart",
+        "کمی angled برای دوربین",
+        "All نگاه کنید در دوربین",
+        "Stable, designed composition",
+        "Even spacing"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Triangle not formed",
+        "Someone blocked",
+        "Spacing uneven"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_15.webp"
+    },
+    {
+      "id": "group_16",
+      "name": "Foreground-Background Depth",
+      "description": "Four people با یک large در foreground, تنه three-quarter, شانه nearest لنز. Additional figures smaller در عقب plane, ایستادن naturally; depth between rows.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "کنار View"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "یک بسته برای لنز مثل foreground",
+        "Others در پشت",
+        "Foreground subject کمی turned",
+        "طبیعی stance در عقب",
+        "ایجاد کنید spatial depth",
+        "Use aperture for depth از field"
+      ],
+      "camera_tips": {
+        "angle": "کمی low روی foreground subject",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm wide aperture",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Foreground too large, blocks عقب",
+        "People در پشت too small",
+        "Shallow depth از field blurs عقب"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_16.webp"
+    },
+    {
+      "id": "group_17",
+      "name": "Casual Chat Moment",
+      "description": "Four people در یک loose ring یا خط, bodies oriented به سمت each دیگر. Mixed سر directions; دست‌ها mid-gesture در chest height; وزن shifted روی یک لگن per person.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "فرم یک loose ring یا خط",
+        "Simulate conversation",
+        "Mix gazes between دوربین و friends",
+        "طبیعی gestures",
+        "Authentic interaction",
+        "Candid feel"
+      ],
+      "camera_tips": {
+        "angle": "Eye هم‌سطح",
+        "framing": "نمای تمام‌قد",
+        "lens": "35-50mm",
+        "lighting": "طبیعی نور"
+      },
+      "common_mistakes": [
+        "Everyone staring در دوربین looks fake",
+        "No gestures",
+        "خشک حالت چهره"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_17.webp"
+    },
+    {
+      "id": "group_18",
+      "name": "Pockets در, Cool Group نگاه کنید",
+      "description": "Four people ایستادن apart یا در یک row, some با thumbs hooked در لگن خط. Torsos angled; chins raised; پاها صاف یا یک زانو خم.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "کنار View"
+      ],
+      "difficulty": "easy",
+      "steps": [
+        "خط up یا spread out",
+        "Some با دست‌ها در pockets",
+        "بدن کمی turned",
+        "چانه کمی up یا eyes روی دوربین",
+        "Cool, fashion-forward",
+        "طبیعی spacing"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "35mm",
+        "lighting": "کنار نور یا حرفه‌ای نور"
+      },
+      "common_mistakes": [
+        "Everyone same pose",
+        "دست‌ها در pockets too posed",
+        "Too serious"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_18.webp"
+    },
+    {
+      "id": "group_19",
+      "name": "Arc Formation",
+      "description": "Four people along یک curved arc facing concave کنار, شانه‌ها turned inward. Spacing even روی curve; heads به سمت center point; پاها tangent برای arc.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن"
+      ],
+      "difficulty": "medium",
+      "steps": [
+        "بایستید along an arc",
+        "Curved composition",
+        "Bodies lean به سمت center",
+        "Eyes روی دوربین یا center",
+        "Flow در composition",
+        "Even spacing"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Even نور"
+      },
+      "common_mistakes": [
+        "صاف خط formation",
+        "Arc incomplete",
+        "Edge person cut off"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_19.webp"
+    },
+    {
+      "id": "group_20",
+      "name": "Group Jump Energy",
+      "description": "Four people simultaneously airborne در یک low jump, زانوها خم, بازوها raised یا out. Bodies stretched upward; پاها tucked یا split; heads aligned با spine روی ascent.",
+      "tags": [
+        "Group",
+        "Full بدن",
+        "ایستادن",
+        "Lively"
+      ],
+      "difficulty": "hard",
+      "steps": [
+        "Do یک small group jump together",
+        "یا بالا ببرید دست‌ها یا پاها for energy",
+        "Use burst mode",
+        "Show happy expressions",
+        "Use 1/500 s یا faster",
+        "Capture synchronized moment"
+      ],
+      "camera_tips": {
+        "angle": "کمی low angle",
+        "framing": "نمای تمام‌قد",
+        "lens": "24-35mm",
+        "lighting": "Bright نور"
+      },
+      "common_mistakes": [
+        "Out از sync",
+        "Someone did not jump",
+        "حالت چهره changes روی landing"
+      ],
+      "category": "گروهی",
+      "categoryId": "group",
+      "image": "images/group_20.webp"
+    }
+  ]
+}

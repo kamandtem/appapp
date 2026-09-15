@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, BriefcaseBusiness, CalendarDays, Camera, ChevronDown, FolderHeart, Heart, LayoutGrid, MapPin, Receipt, Settings2, Sparkles, UsersRound, WandSparkles } from 'lucide-react';
+import { BriefcaseBusiness, CalendarDays, Camera, ChevronDown, FolderHeart, Heart, LayoutGrid, MapPin, Receipt, Settings2, Sparkles, UsersRound, WandSparkles } from 'lucide-react';
 
 const GUIDE_ICONS: Record<string, React.ElementType> = {
   colleagues: UsersRound,
@@ -24,7 +24,10 @@ export const SectionGuide: React.FC<{ section: string; title: string; text: stri
           <span className="page-intro-kicker"><span className="page-intro-icon"><Icon className="w-5 h-5" /></span>{title}</span>
           <strong>{text}</strong>
         </span>
-        <ArrowDown className="page-intro-chevron w-5 h-5" />
+        <span className="page-intro-toggle" aria-hidden="true">
+          <span>توضیحات</span>
+          <ChevronDown className="page-intro-chevron w-5 h-5" />
+        </span>
       </summary>
       <div className="page-intro-details"><Heart className="w-4 h-4" /><p>{`در بخش «${title}» ${text.replace(/[.!؟]+$/, '')} می‌توانی جزئیات بیشتری را مرحله‌به‌مرحله مدیریت کنی.`}</p></div>
     </details>

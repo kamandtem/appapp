@@ -59,6 +59,7 @@ import { LocationsView } from './views/LocationsView';
 import { PoseDetailView } from './views/PoseDetailView';
 import { SettingsView } from './views/SettingsView';
 import { PrinciplesView } from './views/PrinciplesView';
+import { PoseTipsView } from './views/PoseTipsView';
 import { MyLocationsView } from './views/MyLocationsView';
 import { OfficeView } from './views/OfficeView';
 import { ProjectDetailView } from './views/ProjectDetailView';
@@ -679,6 +680,7 @@ export default function App() {
         )}
 
         {tab === 'principles' && <PrinciplesView />}
+        {tab === 'pose-tips' && <PoseTipsView />}
 
         {tab === 'detail' && selected && (
           <PoseDetailView

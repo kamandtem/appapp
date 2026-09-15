@@ -21,7 +21,7 @@ export const ScenarioRail: React.FC<Props> = ({ poses, value, onPick, compact })
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+      <div className="scenario-stage-options">
         <button onClick={() => onPick('همه')} className={`pill shrink-0 ${value === 'همه' ? 'pill-on' : ''}`}>
           همه مراحل
           <span className="opacity-60">{poses.length}</span>

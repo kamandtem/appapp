@@ -9,7 +9,7 @@ interface Props {
 }
 
 const PoseCardBase: React.FC<Props> = ({ pose, isFavorite, onToggleFavorite, onSelect, onDelete, onAddToProject, compact }) => (
-  <div onClick={() => onSelect(pose)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onSelect(pose); }} role="button" tabIndex={0} className="card card-hover text-right overflow-hidden flex flex-col w-full cursor-pointer">
+  <div onClick={() => onSelect(pose)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onSelect(pose); }} role="button" tabIndex={0} className="card card-hover pose-grid-card text-right overflow-hidden flex flex-col w-full cursor-pointer rounded-[24px]">
     <div className={`relative w-full overflow-hidden ${compact ? 'aspect-[16/9]' : 'aspect-[16/11]'}`}>
       <PoseVisual pose={pose} />
       <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
