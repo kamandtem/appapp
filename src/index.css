@@ -742,3 +742,59 @@
   .app-header { top:calc(env(safe-area-inset-top, 0px) + 5px); }
   .office-contract-notes { margin-top:24px; padding-top:18px; }
 }
+
+/* Round profile preview: portrait photos crop inside a stable square instead of stretching the control. */
+.profile-photo-button {
+  width:96px;
+  height:96px;
+  min-width:96px;
+  min-height:96px;
+  max-width:96px;
+  max-height:96px;
+  flex:0 0 96px;
+  aspect-ratio:1 / 1;
+  display:block;
+  box-sizing:border-box;
+  isolation:isolate;
+}
+.profile-photo-button > img {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  display:block;
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:0;
+  max-width:100%;
+  max-height:100%;
+  object-fit:cover;
+  object-position:center;
+  border-radius:inherit;
+}
+.profile-photo-button .profile-photo-placeholder {
+  position:absolute;
+  inset:50% auto auto 50%;
+  transform:translate(-50%,-50%);
+}
+.profile-photo-camera { z-index:1; }
+
+/* Wider floating header, with both actions optically inset from the rounded edge. */
+.app-header { padding-right:4px; padding-left:4px; }
+.floating-header {
+  width:100%;
+  max-width:52rem;
+  grid-template-columns:46px minmax(0,1fr) 46px;
+  gap:12px;
+  padding-right:16px;
+  padding-left:16px;
+}
+@media (max-width:380px) {
+  .app-header { padding-right:3px; padding-left:3px; }
+  .floating-header {
+    grid-template-columns:42px minmax(0,1fr) 42px;
+    gap:9px;
+    padding-right:13px;
+    padding-left:13px;
+  }
+}
