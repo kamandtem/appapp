@@ -5,7 +5,6 @@ import { PoseCard } from '../components/PoseCard';
 import { EmptyState } from '../components/EmptyState';
 import { ArrowLeft, SearchX } from 'lucide-react';
 import { groupByScenario } from '../data/taxonomy';
-import { SectionGuide } from '../components/SectionGuide';
 
 interface Props {
   poses: Pose[];
@@ -53,7 +52,6 @@ export const LibraryView: React.FC<Props> = ({
 
   return (
     <div className="library-flow">
-      <SectionGuide section="library" title="ژست‌ها" text="ژست مناسب را با سناریو، لوکیشن و حال‌وهوا پیدا کن." />
       <div className="flex items-center justify-between px-1"><b className="text-[13px]">{filters.scenario === 'همه' ? 'همه سناریوها' : filters.scenario}</b><span className="text-[10px] text-muted">{poses.length} نتیجه</span></div>
       <Filters filters={filters} onChange={onFilters} total={poses.length} allPoses={allPoses} />
 

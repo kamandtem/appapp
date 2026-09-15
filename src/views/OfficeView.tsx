@@ -62,11 +62,6 @@ export const OfficeView: React.FC<Props> = ({ projects, profile, onAddProject, o
 
     {pdfError && <p role="alert" className="rounded-xl bg-surface2 p-3 text-[11px] font-bold text-rose">{pdfError}</p>}
     {activeTab === 'projects' && <>
-      <div className="card p-4 flex items-center justify-between gap-3">
-        <div><h2 className="font-extrabold text-[15px]">پروژه‌ها</h2><p className="text-[11px] text-muted mt-1">{fa(projects.length)} پروژه، قرارداد و فاکتور همیشه در دسترس است</p></div>
-        <button onClick={onAddProject} className="btn btn-primary"><Plus className="w-4 h-4" />ثبت پروژه</button>
-      </div>
-
       {projects.length === 0 ? <EmptyState icon={FileText} title="هنوز پروژه‌ای ثبت نشده" text="اولین پروژه‌ات را با مراسم، فرمالیته یا هردو شروع کن." action={{ label: 'ساخت پروژه', onClick: onAddProject }} /> :
         <div className="space-y-4">{projects.map(p => {
           const total = (p.ceremonyInvoice?.total || 0) + (p.formalityInvoice?.total || 0);
@@ -100,5 +95,6 @@ export const OfficeView: React.FC<Props> = ({ projects, profile, onAddProject, o
         })}</div>}
     </>}
     {activeTab === 'invoices' && <InvoicesPanel />}
+    {activeTab === 'projects' && <button onClick={onAddProject} className="office-project-fab" aria-label="ثبت پروژه جدید"><Plus className="w-6 h-6" /><span>پروژه جدید</span></button>}
   </div>;
 };

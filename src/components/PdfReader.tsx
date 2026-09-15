@@ -17,7 +17,7 @@ export const PdfReader: React.FC<{ document: PdfDocument; onClose: () => void }>
   };
   const download = () => {
     downloadBlob(document.blob, document.fileName);
-    setFeedback('دانلود PDF شروع شد.');
+    setFeedback('فایل در پوشه Downloads دستگاه ذخیره می‌شود.');
   };
   return <section className="card overflow-hidden" aria-label="نمایش PDF">
     <header className="flex items-center gap-2 p-3 border-b border-line bg-surface sticky top-0 z-10">

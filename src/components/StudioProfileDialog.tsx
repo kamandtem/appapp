@@ -3,8 +3,10 @@ import { Building2, Phone, FileText, X, Check, ChevronDown, Camera, Sparkles, Wa
 import { StudioProfile, CameraType, ServiceType } from '../types/pose';
 import { formatMoney, parseMoney } from '../services/money';
 
-const SERVICES: ServiceType[] = ['عکاسی مراسم', 'میکس', 'آلبوم', 'عکس سر مجلسی', 'پخش کلیپ', 'TV اسلاید'];
-const CAMERAS: CameraType[] = ['دستی', 'کرین', 'لرزشگیر', 'عکاسی', 'هلی‌شات', 'FPV'];
+import { STUDIO_SERVICES, STUDIO_CAMERAS } from '../data/studioCatalog';
+
+const SERVICES = STUDIO_SERVICES;
+const CAMERAS = STUDIO_CAMERAS;
 
 interface Props {
   open: boolean;

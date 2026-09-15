@@ -116,9 +116,9 @@ export const SideMenu: React.FC<Props> = ({
         style={{
           top: 'calc(8px + env(safe-area-inset-top, 0px))',
           bottom: 'calc(8px + env(safe-area-inset-bottom, 0px))',
-          right: '8px',
-          width: 'min(88vw, 344px)',
-          borderRadius: '32px',
+          right: '0',
+          width: 'min(82vw, 310px)',
+          borderRadius: '28px 0 0 28px',
         }}
         role="dialog"
         aria-label="منوی برنامه"

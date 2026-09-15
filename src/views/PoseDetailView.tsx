@@ -20,7 +20,6 @@ import { ScriptPanel } from '../components/ScriptPanel';
 import { PoseChecklist } from '../components/PoseChecklist';
 import { Accordion } from '../components/Accordion';
 import { FilmPlan } from '../components/FilmPlan';
-import { scenarioOf, scopeLabel } from '../data/taxonomy';
 import { PhotoCropModal, CropRatio, CropPosition } from '../components/PhotoCropModal';
 import { AnimatedFileTooLargeError, MAX_ANIMATED_KB, isAnimatedFile, readFileAsDataUrl } from '../services/media';
 import { removePhotoCrop, saveCustomPose, savePoseEdit, setNote, setPhotoCrop, setPhotoRatio, setUserPhoto } from '../services/storage';
@@ -58,6 +57,8 @@ export const PoseDetailView: React.FC<Props> = ({
   const [subjectMovement, setSubjectMovement] = useState(pose.subjectMovement || '');
   const [cameraMovementType, setCameraMovementType] = useState(pose.cameraMovementType);
   const [movementTool, setMovementTool] = useState(pose.movementTool);
+  const [cardFlipped, setCardFlipped] = useState(false);
+  const [openPicker, setOpenPicker] = useState<'camera' | 'tool' | null>(null);
   const [filmPlanOpen, setFilmPlanOpen] = useState(false);
   const [cropSrc, setCropSrc] = useState<string | null>(null);
   const [cropAnimated, setCropAnimated] = useState(false);
@@ -75,6 +76,8 @@ export const PoseDetailView: React.FC<Props> = ({
     setCameraMovementType(pose.cameraMovementType);
     setMovementTool(pose.movementTool);
     setFilmPlanOpen(false);
+    setCardFlipped(false);
+    setOpenPicker(null);
   }, [pose.id, pose.note, pose.imageRatio]);
 
   const pickPhoto = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,79 +133,77 @@ export const PoseDetailView: React.FC<Props> = ({
     const next = cameraMovementType === value ? undefined : value;
     setCameraMovementType(next);
     saveInline({ cameraMovementType: next });
+    setOpenPicker(null);
   };
   const chooseMovementTool = (value: MovementTool) => {
     const next = movementTool === value ? undefined : value;
     setMovementTool(next);
     saveInline({ movementTool: next });
+    setOpenPicker(null);
   };
 
   return (
     <div className="space-y-4">
-      {/* تصویر و هدر */}
-      <div className="card overflow-hidden">
-        <>
+      {/* کارت سه‌بعدی تصویر و اطلاعات فیلم‌برداری */}
+      <div className="card overflow-visible pose-detail-shell">
+        <div className={`${ratio === '3/4' ? 'pose-flip-stage pose-flip-stage-portrait' : 'pose-flip-stage'}`}>
+          <div className={`pose-flip-card ${cardFlipped ? 'is-flipped' : ''}`}>
             <div
-              className={`${ratio === '3/4' ? 'relative mx-auto w-[min(80%,320px)] aspect-[3/4]' : 'relative w-full aspect-[4/3]'} cursor-pointer`}
-              aria-label="نمایش اطلاعات فیلم‌برداری ژست"
+              className="pose-flip-face pose-flip-front"
+              onClick={() => setCardFlipped(true)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setCardFlipped(true); }}
+              role="button"
+              tabIndex={0}
+              aria-label="برگرداندن کارت و نمایش اطلاعات فیلم‌برداری"
             >
               <PoseVisual pose={{ ...pose, imageRatio: ratio }} />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, color-mix(in srgb, var(--color-bg) 96%, transparent), transparent 52%)' }} />
-
-              <button onClick={(e) => { e.stopPropagation(); onBack(); }} className="absolute top-3 right-3 p-2 rounded-full" style={{ background: 'rgba(8,6,14,.55)', backdropFilter: 'blur(6px)' }} aria-label="بازگشت">
-                <ChevronRight className="w-5 h-5" style={{ color: '#F4F1EA' }} />
-              </button>
-              <button onClick={(e) => { e.stopPropagation(); onDelete(pose); }} className="absolute top-3 left-14 p-2 rounded-full" style={{ background: 'rgba(8,6,14,.55)', backdropFilter: 'blur(6px)' }} aria-label="حذف ژست">
-                <Trash2 className="w-5 h-5" style={{ color: 'var(--color-rose)' }} />
-              </button>
-              <button onClick={(e) => onToggleFavorite(pose.id, e)} className="absolute top-3 left-3 p-2 rounded-full" style={{ background: isFavorite ? 'var(--color-rose)' : 'rgba(8,6,14,.55)', backdropFilter: 'blur(6px)' }} aria-label="نشان کردن">
-                <Heart className="w-5 h-5" style={{ color: '#fff' }} fill={isFavorite ? '#fff' : 'none'} />
-              </button>
-              <button onClick={(e) => { e.stopPropagation(); onEdit(pose); }} className="absolute top-14 left-3 p-2 rounded-full" style={{ background: 'rgba(8,6,14,.55)', backdropFilter: 'blur(6px)' }} aria-label="ویرایش همه بخش‌های ژست">
-                <Pencil className="w-5 h-5" style={{ color: 'var(--color-gold)' }} />
-              </button>
-
-              <div className="absolute bottom-3 right-4 left-4 pointer-events-none">
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="pill !text-[10px] pill-on">{scenarioOf(pose)}</span>
-                  <span className="pill !text-[10px]">{scopeLabel(pose)}</span>
-                  <span className="pill !text-[10px]">{pose.category}</span>
-                  <span className="pill !text-[10px]">{pose.poseType}</span>
-                  <span className="pill !text-[10px]">{pose.difficulty}</span>
-                </div>
-                <h1 className="mt-2 text-[19px] font-extrabold leading-snug">{pose.title}</h1>
+              <div className="pose-top-actions">
+                <button onClick={(e) => { e.stopPropagation(); onDelete(pose); }} className="pose-card-action pose-card-action-delete" aria-label="حذف ژست"><Trash2 className="w-5 h-5" /></button>
+                <button onClick={(e) => onToggleFavorite(pose.id, e)} className={`pose-card-action ${isFavorite ? 'is-favorite' : ''}`} aria-label="افزودن به علاقه‌مندی"><Heart className="w-5 h-5" fill={isFavorite ? 'currentColor' : 'none'} /></button>
+                <button onClick={(e) => { e.stopPropagation(); onEdit(pose); }} className="pose-card-action pose-card-action-edit" aria-label="ویرایش ژست"><Pencil className="w-5 h-5" /></button>
               </div>
+              <button onClick={(e) => { e.stopPropagation(); onBack(); }} className="pose-back-action" aria-label="بازگشت"><ChevronRight className="w-5 h-5" /></button>
+              <span className="pose-flip-hint"><Repeat className="w-3.5 h-3.5" />برای اطلاعات فیلم‌برداری لمس کن</span>
             </div>
 
-            <div className="p-3 border-t border-line">
-              <div className="flex items-center gap-2">
-                <button onClick={(e) => { e.stopPropagation(); fileRef.current?.click(); }} className="btn btn-ghost flex-1 !text-[11.5px] whitespace-nowrap">
-                  <ImagePlus className="w-3.5 h-3.5 text-gold shrink-0" />
-                  {pose.image ? 'تغییر عکس' : 'عکس مرجع'}
-                </button>
-                <button onClick={(e) => { e.stopPropagation(); onAddToProject(pose); }} className="btn btn-ghost flex-1 !text-[11.5px] whitespace-nowrap">
-                  <Plus className="w-3.5 h-3.5 text-gold shrink-0" />
-                  افزودن به پروژه روز
-                </button>
+            <div className="pose-flip-face pose-flip-back" aria-hidden={!cardFlipped}>
+              <div className="pose-film-head">
+                <div><small>پشت کارت ژست</small><h2>اطلاعات فیلم‌برداری</h2></div>
+                <button type="button" onClick={() => { setCardFlipped(false); setOpenPicker(null); }} aria-label="بازگشت به عکس"><Repeat className="w-5 h-5" /></button>
               </div>
-            </div>
-            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={pickPhoto} />
-
-            <div className="pose-inline-film-info">
               <label className="pose-subject-note">
-                <span className="pose-inline-label">توضیح ژست سوژه</span>
+                <span className="pose-inline-label">توضیح حرکت سوژه</span>
                 <textarea value={subjectMovement} onChange={e => setSubjectMovement(e.target.value)} onBlur={() => saveInline({ subjectMovement: subjectMovement.trim() || undefined })} placeholder="حرکت و توضیح اجرای سوژه را بنویس..." rows={3} />
               </label>
-              <div className="grid grid-cols-2 gap-2">
-                <InlineSelectCard title="حرکت دوربین" value={CAMERA_MOVEMENT_OPTIONS.find(item => item.key === cameraMovementType)?.label || 'انتخاب حرکت'}>
-                  <div className="pose-choice-list">{CAMERA_MOVEMENT_OPTIONS.map(option => <button type="button" key={option.key} onClick={() => chooseCameraMovement(option.key)} className={cameraMovementType === option.key ? 'selected' : ''}><span>{option.icon}</span>{option.label}</button>)}</div>
-                </InlineSelectCard>
-                <InlineSelectCard title="ابزار حرکتی" value={MOVEMENT_TOOL_OPTIONS.find(item => item.key === movementTool)?.label || 'انتخاب ابزار'}>
-                  <div className="pose-choice-list">{MOVEMENT_TOOL_OPTIONS.map(option => <button type="button" key={option.key} onClick={() => chooseMovementTool(option.key)} className={movementTool === option.key ? 'selected' : ''}>{option.label}</button>)}</div>
-                </InlineSelectCard>
+              <div className="pose-film-selectors">
+                <FilmPicker
+                  title="نوع حرکت دوربین"
+                  value={CAMERA_MOVEMENT_OPTIONS.find(item => item.key === cameraMovementType)?.label || 'انتخاب حرکت'}
+                  open={openPicker === 'camera'}
+                  onToggle={() => setOpenPicker(openPicker === 'camera' ? null : 'camera')}
+                >
+                  {CAMERA_MOVEMENT_OPTIONS.map(option => <button type="button" key={option.key} onClick={() => chooseCameraMovement(option.key)} className={cameraMovementType === option.key ? 'selected' : ''}><span>{option.icon}</span>{option.label}{cameraMovementType === option.key && <Check className="w-4 h-4" />}</button>)}
+                </FilmPicker>
+                <FilmPicker
+                  title="ابزار حرکتی"
+                  value={MOVEMENT_TOOL_OPTIONS.find(item => item.key === movementTool)?.label || 'انتخاب ابزار'}
+                  open={openPicker === 'tool'}
+                  onToggle={() => setOpenPicker(openPicker === 'tool' ? null : 'tool')}
+                >
+                  {MOVEMENT_TOOL_OPTIONS.map(option => <button type="button" key={option.key} onClick={() => chooseMovementTool(option.key)} className={movementTool === option.key ? 'selected' : ''}>{option.label}{movementTool === option.key && <Check className="w-4 h-4" />}</button>)}
+                </FilmPicker>
               </div>
             </div>
-          </>
+          </div>
+        </div>
+
+        <div className="p-3 border-t border-line">
+          <div className="flex items-center gap-2">
+            <button onClick={(e) => { e.stopPropagation(); fileRef.current?.click(); }} className="btn btn-ghost flex-1 !text-[11.5px] whitespace-nowrap"><ImagePlus className="w-3.5 h-3.5 text-gold shrink-0" />{pose.image ? 'تغییر عکس' : 'عکس مرجع'}</button>
+            <button onClick={(e) => { e.stopPropagation(); onAddToProject(pose); }} className="btn btn-ghost flex-1 !text-[11.5px] whitespace-nowrap"><Plus className="w-3.5 h-3.5 text-gold shrink-0" />افزودن به پروژه روز</button>
+          </div>
+        </div>
+        <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={pickPhoto} />
       </div>
 
       <div className="grid grid-cols-2 gap-2 pb-1">
@@ -325,11 +326,13 @@ export const PoseDetailView: React.FC<Props> = ({
 };
 
 
-const InlineSelectCard: React.FC<{ title: string; value: string; children: React.ReactNode }> = ({ title, value, children }) => (
-  <details className="pose-inline-select">
-    <summary><span><b>{title}</b><small>{value}</small></span><ChevronRight className="w-4 h-4" /></summary>
-    {children}
-  </details>
+const FilmPicker: React.FC<{ title: string; value: string; open: boolean; onToggle: () => void; children: React.ReactNode }> = ({ title, value, open, onToggle, children }) => (
+  <div className={`film-picker ${open ? 'is-open' : ''}`}>
+    <button type="button" className="film-picker-trigger" onClick={onToggle} aria-expanded={open}>
+      <span><b>{title}</b><small>{value}</small></span><ChevronRight className="w-4 h-4" />
+    </button>
+    {open && <div className="film-picker-popover a-pop" role="listbox">{children}</div>}
+  </div>
 );
 
 const Detail: React.FC<{ label: string; text: string }> = ({ label, text }) => (

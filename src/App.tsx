@@ -101,6 +101,7 @@ export default function App() {
   const [draftOfficeProject, setDraftOfficeProject] = useState<any | null>(null);
   const [projectEditorMode, setProjectEditorMode] = useState<'view' | 'edit' | 'create' | 'created'>('view');
   const [studioDialogOpen, setStudioDialogOpen] = useState(false);
+  const [newShotlistRequest, setNewShotlistRequest] = useState(0);
   const histRef = useRef<ViewTab[]>([]);
   const goBackRef = useRef<() => void>(() => {});
 
@@ -647,6 +648,8 @@ export default function App() {
             onDelete={removePose}
             onAddToProject={addToProject}
             onTab={goTab}
+            newShotlistRequest={newShotlistRequest}
+            onNewShotlistHandled={() => setNewShotlistRequest(0)}
           />
         )}
 
@@ -707,7 +710,8 @@ export default function App() {
         activeTab={tab}
         onTabChange={goTab}
         favoritesCount={favoriteIds.length}
-        onQuickStart={() => setQuickStartOpen(true)}
+        onNewOfficeProject={addOfficeProject}
+        onNewShotlist={() => { goTab('favorites'); setNewShotlistRequest(v => v + 1); }}
       />
 
       <SideMenu

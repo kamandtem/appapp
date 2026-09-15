@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { CalendarDays, Camera, Check, ChevronDown, ChevronRight, Clapperboard, Heart, LibraryBig, Pencil, Plus, Search, Trash2, Upload, X } from 'lucide-react';
 import { Pose, ViewTab } from '../types/pose';
 import { PoseCard } from '../components/PoseCard';
@@ -33,10 +33,10 @@ const readGalleryImage = (file: File): Promise<{ name: string; dataUrl: string }
   image.onerror = () => { URL.revokeObjectURL(url); fallback(); }; image.src = url;
 });
 
-interface Props { poses: Pose[]; favoriteIds: string[]; onToggleFavorite: (id: string, e: React.MouseEvent) => void; onSelect: (p: Pose) => void; onDelete: (p: Pose) => void; onAddToProject: (p: Pose) => void; onTab: (t: ViewTab) => void; }
+interface Props { poses: Pose[]; favoriteIds: string[]; onToggleFavorite: (id: string, e: React.MouseEvent) => void; onSelect: (p: Pose) => void; onDelete: (p: Pose) => void; onAddToProject: (p: Pose) => void; onTab: (t: ViewTab) => void; newShotlistRequest?: number; onNewShotlistHandled?: () => void; }
 type ProjectItem = { key: string; source: 'app'; id: string; title: string; pose: Pose } | { key: string; source: 'gallery'; id: string; title: string; gallery: ShootProjectGalleryItem };
 
-export const FavoritesView: React.FC<Props> = ({ poses, favoriteIds, onToggleFavorite, onSelect, onDelete, onAddToProject, onTab }) => {
+export const FavoritesView: React.FC<Props> = ({ poses, favoriteIds, onToggleFavorite, onSelect, onDelete, onAddToProject, onTab, newShotlistRequest = 0, onNewShotlistHandled }) => {
   const [sub, setSub] = useState<'favorites' | 'projects'>('favorites');
   const [projects, setProjects] = useState<ShootProject[]>(getProjects());
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
@@ -50,6 +50,7 @@ export const FavoritesView: React.FC<Props> = ({ poses, favoriteIds, onToggleFav
   const [pickerSearch, setPickerSearch] = useState('');
   const [galleryError, setGalleryError] = useState<string | null>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => { if (newShotlistRequest > 0) { setSub('projects'); setOpenProjectId(null); setDialogState({ open: true }); onNewShotlistHandled?.(); } }, [newShotlistRequest, onNewShotlistHandled]);
   const refresh = () => setProjects(getProjects());
   const openProject = projects.find(p => p.id === openProjectId) || null;
   const savedPoses = favoriteIds.map(id => poses.find(p => p.id === id)).filter(Boolean) as Pose[];
