@@ -268,7 +268,6 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
       setCameraMovementType(undefined);
       setCameraMovement('');
       setSubjectMovement('');
-      setActionDescription('');
       setMovementTool(undefined);
     }
   }, [open, editing]);
