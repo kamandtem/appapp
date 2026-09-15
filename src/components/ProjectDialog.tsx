@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CalendarDays, Check, X, ChevronDown } from 'lucide-react';
+import { CalendarDays, Check, X, ChevronDown, Trash2 } from 'lucide-react';
 import { JalaliDatePicker } from './JalaliDatePicker';
 import { JALALI_MONTHS, JalaliDate, gregorianToJalali, jalaliToIso, todayJalali } from '../services/jalali';
 
@@ -14,6 +14,7 @@ interface Props {
   initialDateIso?: string;
   onCancel: () => void;
   onConfirm: (result: ProjectDialogResult) => void;
+  onDelete?: () => void;
 }
 
 function isoToJalali(iso?: string): JalaliDate {
@@ -29,6 +30,7 @@ export const ProjectDialog: React.FC<Props> = ({
   initialDateIso,
   onCancel,
   onConfirm,
+  onDelete,
 }) => {
   const [name, setName] = useState(initialName || '');
   const [jd, setJd] = useState<JalaliDate>(() => isoToJalali(initialDateIso));
@@ -104,13 +106,11 @@ export const ProjectDialog: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="sticky bottom-0 flex items-center gap-2 px-4 py-3 border-t border-line bg-surface/90 backdrop-blur-md">
-          <button onClick={onCancel} className="btn btn-ghost flex-1">
-            انصراف
-          </button>
-          <button onClick={submit} disabled={!name.trim()} className="btn btn-primary flex-[2]">
+        <div className="sticky bottom-0 grid grid-cols-[auto_1fr] gap-2 px-4 py-3 border-t border-line bg-surface/90 backdrop-blur-md">
+          {initialName && onDelete && <button onClick={onDelete} className="btn btn-ghost !px-4 text-rose" aria-label="حذف پروژه"><Trash2 className="w-4 h-4" /></button>}
+          <button onClick={submit} disabled={!name.trim()} className="btn btn-primary">
             <Check className="w-4 h-4" />
-            تأیید
+            ذخیره تغییرات
           </button>
         </div>
       </section>

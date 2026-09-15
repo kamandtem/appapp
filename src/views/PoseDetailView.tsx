@@ -14,17 +14,16 @@ import {
   Plus,
   Pencil,
 } from 'lucide-react';
-import { CAMERA_MOVEMENT_OPTIONS, MOVEMENT_TOOL_OPTIONS, Pose } from '../types/pose';
+import { CAMERA_MOVEMENT_OPTIONS, MOVEMENT_TOOL_OPTIONS, CameraMovementType, MovementTool, Pose } from '../types/pose';
 import { PoseVisual } from '../components/PoseVisual';
 import { ScriptPanel } from '../components/ScriptPanel';
 import { PoseChecklist } from '../components/PoseChecklist';
 import { Accordion } from '../components/Accordion';
-import { PoseAttributes } from '../components/PoseAttributes';
 import { FilmPlan } from '../components/FilmPlan';
 import { scenarioOf, scopeLabel } from '../data/taxonomy';
 import { PhotoCropModal, CropRatio, CropPosition } from '../components/PhotoCropModal';
 import { AnimatedFileTooLargeError, MAX_ANIMATED_KB, isAnimatedFile, readFileAsDataUrl } from '../services/media';
-import { removePhotoCrop, setNote, setPhotoCrop, setPhotoRatio, setUserPhoto } from '../services/storage';
+import { removePhotoCrop, saveCustomPose, savePoseEdit, setNote, setPhotoCrop, setPhotoRatio, setUserPhoto } from '../services/storage';
 
 interface Props {
   pose: Pose;
@@ -56,7 +55,9 @@ export const PoseDetailView: React.FC<Props> = ({
   const fileRef = useRef<HTMLInputElement>(null);
   const [noteText, setNoteText] = useState(pose.note || '');
   const [savedNote, setSavedNote] = useState(false);
-  const [filmOpen, setFilmOpen] = useState(false);
+  const [subjectMovement, setSubjectMovement] = useState(pose.subjectMovement || '');
+  const [cameraMovementType, setCameraMovementType] = useState(pose.cameraMovementType);
+  const [movementTool, setMovementTool] = useState(pose.movementTool);
   const [filmPlanOpen, setFilmPlanOpen] = useState(false);
   const [cropSrc, setCropSrc] = useState<string | null>(null);
   const [cropAnimated, setCropAnimated] = useState(false);
@@ -70,7 +71,9 @@ export const PoseDetailView: React.FC<Props> = ({
     setNoteText(pose.note || '');
     setSavedNote(false);
     setRatioState(pose.imageRatio || '4/3');
-    setFilmOpen(false);
+    setSubjectMovement(pose.subjectMovement || '');
+    setCameraMovementType(pose.cameraMovementType);
+    setMovementTool(pose.movementTool);
     setFilmPlanOpen(false);
   }, [pose.id, pose.note, pose.imageRatio]);
 
@@ -118,37 +121,28 @@ export const PoseDetailView: React.FC<Props> = ({
     setTimeout(() => setSavedNote(false), 1800);
   };
 
+  const saveInline = (patch: Partial<Pose>) => {
+    const updated = { ...pose, ...patch };
+    const result = pose.isCustom ? saveCustomPose(updated) : savePoseEdit(updated);
+    if (result.ok) onDataChanged();
+  };
+  const chooseCameraMovement = (value: CameraMovementType) => {
+    const next = cameraMovementType === value ? undefined : value;
+    setCameraMovementType(next);
+    saveInline({ cameraMovementType: next });
+  };
+  const chooseMovementTool = (value: MovementTool) => {
+    const next = movementTool === value ? undefined : value;
+    setMovementTool(next);
+    saveInline({ movementTool: next });
+  };
+
   return (
     <div className="space-y-4">
       {/* تصویر و هدر */}
       <div className="card overflow-hidden">
-        {filmOpen ? (
-          <div className="p-4 min-h-[360px] a-fade-up" onClick={() => setFilmOpen(false)} role="button" tabIndex={0}>
-            <div className="flex items-start justify-between gap-3 mb-5">
-              <div>
-                <span className="text-[10px] font-extrabold text-rose">پشت کارت ژست</span>
-                <h2 className="text-[18px] font-extrabold mt-1">اطلاعات فیلم‌برداری</h2>
-
-              </div>
-              <button onClick={(e) => { e.stopPropagation(); setFilmOpen(false); }} className="btn btn-ghost !px-3 !py-2 !text-[11px]">
-                <ChevronRight className="w-4 h-4" /> برگشت به عکس
-              </button>
-            </div>
-            <div className="space-y-3" onClick={(e) => e.stopPropagation()}>
-              <div className="grid grid-cols-2 gap-2">
-                <FilmDetail label="حرکت دوربین" text={CAMERA_MOVEMENT_OPTIONS.find((item) => item.key === pose.cameraMovementType)?.label || pose.cameraMovement} />
-                <FilmDetail label="ابزار حرکتی" text={MOVEMENT_TOOL_OPTIONS.find((item) => item.key === pose.movementTool)?.label} />
-              </div>
-              <FilmDetail label="حرکت سوژه" text={pose.subjectMovement} />
-              <button onClick={() => setFilmPlanOpen(true)} className="btn btn-primary w-full !mt-4">
-                <Pencil className="w-4 h-4" /> ویرایش همه اطلاعات ژست
-              </button>
-            </div>
-          </div>
-        ) : (
-          <>
+        <>
             <div
-              onClick={() => setFilmOpen(true)}
               className={`${ratio === '3/4' ? 'relative mx-auto w-[min(80%,320px)] aspect-[3/4]' : 'relative w-full aspect-[4/3]'} cursor-pointer`}
               aria-label="نمایش اطلاعات فیلم‌برداری ژست"
             >
@@ -193,8 +187,22 @@ export const PoseDetailView: React.FC<Props> = ({
               </div>
             </div>
             <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={pickPhoto} />
+
+            <div className="pose-inline-film-info">
+              <label className="pose-subject-note">
+                <span className="pose-inline-label">توضیح ژست سوژه</span>
+                <textarea value={subjectMovement} onChange={e => setSubjectMovement(e.target.value)} onBlur={() => saveInline({ subjectMovement: subjectMovement.trim() || undefined })} placeholder="حرکت و توضیح اجرای سوژه را بنویس..." rows={3} />
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                <InlineSelectCard title="حرکت دوربین" value={CAMERA_MOVEMENT_OPTIONS.find(item => item.key === cameraMovementType)?.label || 'انتخاب حرکت'}>
+                  <div className="pose-choice-list">{CAMERA_MOVEMENT_OPTIONS.map(option => <button type="button" key={option.key} onClick={() => chooseCameraMovement(option.key)} className={cameraMovementType === option.key ? 'selected' : ''}><span>{option.icon}</span>{option.label}</button>)}</div>
+                </InlineSelectCard>
+                <InlineSelectCard title="ابزار حرکتی" value={MOVEMENT_TOOL_OPTIONS.find(item => item.key === movementTool)?.label || 'انتخاب ابزار'}>
+                  <div className="pose-choice-list">{MOVEMENT_TOOL_OPTIONS.map(option => <button type="button" key={option.key} onClick={() => chooseMovementTool(option.key)} className={movementTool === option.key ? 'selected' : ''}>{option.label}</button>)}</div>
+                </InlineSelectCard>
+              </div>
+            </div>
           </>
-        )}
       </div>
 
       <div className="grid grid-cols-2 gap-2 pb-1">
@@ -206,8 +214,6 @@ export const PoseDetailView: React.FC<Props> = ({
         </button>
       </div>
 
-      {/* ویژگی‌های ژست: انتقال مدل ذهنی «یک ژست، چند Attribute» */}
-      <PoseAttributes pose={pose} />
 
       {/* ترتیب اجرای ژست: اول راهنما، بعد تنوع و فیلم، سپس جزئیات */}
       <Accordion defaultOpen title="مراحل اجرا">
@@ -319,11 +325,11 @@ export const PoseDetailView: React.FC<Props> = ({
 };
 
 
-const FilmDetail: React.FC<{ label: string; text?: string }> = ({ label, text }) => (
-  <div className="rounded-2xl border border-line p-3">
-    <span className="text-[10px] font-extrabold text-gold">{label}</span>
-    <p className="text-[12.5px] leading-relaxed mt-1.5">{text || 'هنوز ثبت نشده است.'}</p>
-  </div>
+const InlineSelectCard: React.FC<{ title: string; value: string; children: React.ReactNode }> = ({ title, value, children }) => (
+  <details className="pose-inline-select">
+    <summary><span><b>{title}</b><small>{value}</small></span><ChevronRight className="w-4 h-4" /></summary>
+    {children}
+  </details>
 );
 
 const Detail: React.FC<{ label: string; text: string }> = ({ label, text }) => (

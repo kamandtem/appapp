@@ -45,7 +45,7 @@ export const LOCATIONS: LocationInfo[] = [
     icon: Palmtree,
     subtitle: 'نخلستان، بافت بومی و معماری گرمسیری',
     colors: ['#3A2E14', '#9C7A2E', '#E8CE8A'],
-    /** TODO: عکس کاور واقعی جایگزین این گرادیان موقت شود */
+    /** کاور اختصاصی جنوب، داخل بسته آفلاین برنامه */
     cover: '/covers/jonoub-native.jpg',
     bestTime: 'اواخر بعدازظهر که گرمای شدید ظهر فروکش کرده و نور مایل از لابه‌لای نخل‌ها می‌تابد',
     light:
@@ -109,7 +109,7 @@ export const LOCATIONS: LocationInfo[] = [
     icon: Building2,
     subtitle: 'خیابان، کافه و معماری معاصر شهری',
     colors: ['#1B1F2B', '#4A5568', '#D9B36A'],
-    /** TODO: عکس کاور واقعی جایگزین این گرادیان موقت شود */
+    /** کاور اختصاصی شهر، داخل بسته آفلاین برنامه */
     cover: '/covers/shahr.jpg',
     bestTime: 'ساعات ابتدایی صبح (خلوت‌تر و نور نرم) یا شب برای نورهای شهری و نئون',
     light:

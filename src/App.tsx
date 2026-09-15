@@ -99,7 +99,7 @@ export default function App() {
   const [officeProjects, setOfficeProjects] = useState<any[]>([]);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [draftOfficeProject, setDraftOfficeProject] = useState<any | null>(null);
-  const [projectEditorMode, setProjectEditorMode] = useState<'view' | 'edit' | 'create'>('view');
+  const [projectEditorMode, setProjectEditorMode] = useState<'view' | 'edit' | 'create' | 'created'>('view');
   const [studioDialogOpen, setStudioDialogOpen] = useState(false);
   const histRef = useRef<ViewTab[]>([]);
   const goBackRef = useRef<() => void>(() => {});
@@ -504,13 +504,12 @@ export default function App() {
       return;
     }
     setDraftOfficeProject(null);
-    setSelectedProjectId(null);
-    setProjectEditorMode('view');
+    setSelectedProjectId(project.id);
+    setProjectEditorMode('created');
     reload();
-    histRef.current = histRef.current.filter((item) => item !== 'office-project-detail');
-    setTab('office');
+    setTab('office-project-detail');
     scrollTop();
-    toast('پروژه ثبت شد و PDFها آماده‌اند.');
+    toast('پروژه ثبت شد؛ قرارداد PDF باز می‌شود.');
   };
 
   const cancelNewOfficeProject = () => {
@@ -623,8 +622,9 @@ export default function App() {
             onBack={goBack}
             onSave={saveOfficeProj}
             onDelete={deleteOfficeProj}
-            startEditing={projectEditorMode !== 'view'}
+            startEditing={projectEditorMode === 'edit' || projectEditorMode === 'create'}
             isCreating={projectEditorMode === 'create'}
+            autoOpenContract={projectEditorMode === 'created'}
             onCreateComplete={completeNewOfficeProject}
             onCancelCreate={cancelNewOfficeProject}
           />
@@ -717,6 +717,13 @@ export default function App() {
         onNavigate={goTab}
         onOpenAddPose={openAddPose}
         onOpenStudioProfile={() => setStudioDialogOpen(true)}
+        onChangeProfileImage={(dataUrl) => {
+          if (!studioProfile) return;
+          const updated = { ...studioProfile, logo: dataUrl, updatedAt: Date.now() };
+          saveStudioProfile(updated);
+          setStudioProfile(updated);
+          toast('عکس پروفایل ذخیره شد.');
+        }}
         onOpenChecklist={() => goTab('checklist')}
         profile={studioProfile}
         theme={prefs.theme}

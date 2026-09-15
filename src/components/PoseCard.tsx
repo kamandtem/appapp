@@ -11,7 +11,7 @@ interface Props {
 
 const PoseCardBase: React.FC<Props> = ({ pose, isFavorite, onToggleFavorite, onSelect, onDelete, onAddToProject, compact }) => (
   <div onClick={() => onSelect(pose)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onSelect(pose); }} role="button" tabIndex={0} className="card card-hover text-right overflow-hidden flex flex-col w-full cursor-pointer">
-    <div className={`relative w-full overflow-hidden ${compact ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
+    <div className={`relative w-full overflow-hidden ${compact ? 'aspect-[16/9]' : 'aspect-[16/11]'}`}>
       <PoseVisual pose={pose} />
       <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, color-mix(in oklch, var(--color-ink) 44%, transparent), transparent 58%)' }} />
       <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
@@ -24,7 +24,7 @@ const PoseCardBase: React.FC<Props> = ({ pose, isFavorite, onToggleFavorite, onS
       </div>
       {pose.isCustom && <span className="absolute top-2.5 left-2.5 pose-my-badge"><Sparkles className="w-2.5 h-2.5" /> ژست من</span>}
     </div>
-    <div className="p-3 flex-1 flex flex-col justify-between gap-3"><div><h3 className="font-bold text-[13px] leading-snug line-clamp-2">{pose.title}</h3><p className="text-[11px] text-muted mt-1 line-clamp-2 leading-relaxed">{pose.photographerScript[0] || pose.steps[0]}</p></div>
+    <div className="p-2.5 flex-1 flex flex-col justify-between gap-2"><div><h3 className="font-bold text-[12px] leading-snug line-clamp-1">{pose.title}</h3><p className="text-[10px] text-muted mt-1 line-clamp-1 leading-relaxed">{pose.photographerScript[0] || pose.steps[0]}</p></div>
       <button onClick={(e) => { e.stopPropagation(); onAddToProject(pose); }} className="add-shotlist"><Plus className="w-3.5 h-3.5" /> افزودن به شات‌لیست</button>
     </div>
   </div>

@@ -56,11 +56,14 @@ bigScript: true,
 keepAwakeHint: true,
 };
 
+export type ShootSubjectCategory = 'تکی عروس' | 'تکی داماد' | 'دونفره' | 'دیتیل';
+
 export interface ShootProjectGalleryItem {
 id: string;
 name: string;
 dataUrl: string;
 addedAt: number;
+category?: ShootSubjectCategory;
 }
 
 export type ShootProjectMode = 'photo' | 'video';
@@ -85,6 +88,9 @@ completedPhotoPoseIds?: string[];
 completedVideoPoseIds?: string[];
 photoGalleryItems?: ShootProjectGalleryItem[];
 videoGalleryItems?: ShootProjectGalleryItem[];
+/** دسته هر ژست انتخابی از کتابخانه، جدا برای عکس و فیلم */
+photoCategories?: Record<string, ShootSubjectCategory>;
+videoCategories?: Record<string, ShootSubjectCategory>;
 completedPhotoGalleryIds?: string[];
 completedVideoGalleryIds?: string[];
 videoDetails?: Record<string, ShootProjectVideoDetail>;
@@ -116,6 +122,8 @@ completedPhotoPoseIds: Array.isArray(project.completedPhotoPoseIds) ? project.co
 completedVideoPoseIds: Array.isArray(project.completedVideoPoseIds) ? project.completedVideoPoseIds : [],
 photoGalleryItems: Array.isArray(project.photoGalleryItems) ? project.photoGalleryItems : (Array.isArray(project.galleryItems) ? project.galleryItems : []),
 videoGalleryItems: Array.isArray(project.videoGalleryItems) ? project.videoGalleryItems : [],
+photoCategories: project.photoCategories && typeof project.photoCategories === 'object' ? project.photoCategories : {},
+videoCategories: project.videoCategories && typeof project.videoCategories === 'object' ? project.videoCategories : {},
 completedPhotoGalleryIds: Array.isArray(project.completedPhotoGalleryIds) ? project.completedPhotoGalleryIds : (Array.isArray(project.completedGalleryIds) ? project.completedGalleryIds : []),
 completedVideoGalleryIds: Array.isArray(project.completedVideoGalleryIds) ? project.completedVideoGalleryIds : [],
 videoDetails: project.videoDetails && typeof project.videoDetails === 'object' ? project.videoDetails : {},
@@ -651,6 +659,8 @@ prefs: Prefs;
 promotedPoses?: Pose[];
 deletedBuiltinIds?: string[];
 myLocations?: MyLocation[];
+projects?: ShootProject[];
+studioProfile?: StudioProfile | null;
 }
 
 /** بسته‌ای سبک برای فرستادن ژست‌های تازه به سازنده برنامه */
@@ -700,6 +710,8 @@ prefs: getPrefs(),
 promotedPoses: getPromotedPoses(),
 deletedBuiltinIds: getDeletedBuiltinIds(),
 myLocations: getMyLocations(),
+projects: getProjects(),
+studioProfile: getStudioProfile(),
 };
 }
 
@@ -854,6 +866,8 @@ if (data.prefs) savePrefs({ ...DEFAULT_PREFS, ...data.prefs });
 if (Array.isArray(data.promotedPoses)) write(K.promoted, data.promotedPoses);
 if (Array.isArray(data.deletedBuiltinIds)) write(K.deletedBuiltin, data.deletedBuiltinIds);
 if (Array.isArray(data.myLocations)) write(K.myLocations, data.myLocations);
+if (Array.isArray(data.projects)) write(K.projects, data.projects);
+if (data.studioProfile) write('pd_studio_profile_v1', data.studioProfile);
 return {
 ok: true,
 message: `بازیابی انجام شد: ${(data.customPoses || []).length} ژست شخصی برگشت.`,

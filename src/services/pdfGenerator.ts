@@ -96,13 +96,20 @@ function invoicePages(project: OfficeProject, profile: StudioProfile | null) {
 }
 
 const ascii = (text: string) => new TextEncoder().encode(text);
-const dataUrlBytes = (url: string) => { const binary = atob(url.split(',')[1]); const bytes = new Uint8Array(binary.length); for (let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i); return bytes; };
+const dataUrlBytes = (url: string) => {
+  const payload = url.split(',')[1];
+  if (!payload) throw new Error('تصویر PDF نامعتبر است');
+  const binary = atob(payload);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+};
 function pdfFromJpegs(urls: string[]): Blob {
   const images = urls.map(dataUrlBytes); const n = images.length; const pageStart = 3; const imageStart = pageStart + n; const contentStart = imageStart + n; const count = 2 + n * 3; const objects: Uint8Array[] = new Array(count + 1);
   objects[1] = ascii('<< /Type /Catalog /Pages 2 0 R >>');
   objects[2] = ascii(`<< /Type /Pages /Count ${n} /Kids [${Array.from({length:n},(_,i)=>`${pageStart+i} 0 R`).join(' ')}] >>`);
   for (let i=0;i<n;i++) {
-    objects[pageStart+i] = ascii(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /XObject << /Im0 ${imageStart+i} 0 R >> >> /Contents ${contentStart+i} 0 R >>`);
+    objects[pageStart+i] = ascii(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /ProcSet [/PDF /ImageC] /XObject << /Im0 ${imageStart+i} 0 R >> >> /Contents ${contentStart+i} 0 R >>`);
     const head = ascii(`<< /Type /XObject /Subtype /Image /Width ${W} /Height ${H} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${images[i].length} >>\nstream\n`); const tail=ascii('\nendstream'); const img=new Uint8Array(head.length+images[i].length+tail.length); img.set(head); img.set(images[i],head.length); img.set(tail,head.length+images[i].length); objects[imageStart+i]=img;
     const stream='q 595 0 0 842 0 0 cm /Im0 Do Q'; objects[contentStart+i]=ascii(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);
   }
@@ -115,6 +122,8 @@ function pdfFromJpegs(urls: string[]): Blob {
 export async function createPdfDocument(kind: 'contract' | 'invoice', project: OfficeProject, profile: StudioProfile | null): Promise<PdfDocument> {
   if (document.fonts?.ready) await document.fonts.ready;
   const pages = kind === 'contract' ? contractPages(project, profile) : invoicePages(project, profile);
-  const blob = pdfFromJpegs(pages); const label = kind === 'contract' ? 'قرارداد' : 'فاکتور';
+  if (!pages.length) throw new Error('صفحه‌ای برای ساخت PDF وجود ندارد');
+  const blob = pdfFromJpegs(pages);
+  if (!blob.size) throw new Error('ساخت PDF انجام نشد'); const label = kind === 'contract' ? 'قرارداد' : 'فاکتور';
   return { blob, url: URL.createObjectURL(blob), pages, fileName: `${label}-${project.name || 'پروژه'}.pdf` };
 }

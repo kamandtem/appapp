@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Building2, Phone, FileText, X, Check, Image, ChevronDown, Camera, Sparkles } from 'lucide-react';
+import { Building2, Phone, FileText, X, Check, ChevronDown, Camera, Sparkles, WalletCards, MapPin } from 'lucide-react';
 import { StudioProfile, CameraType, ServiceType } from '../types/pose';
 import { formatMoney, parseMoney } from '../services/money';
 
@@ -21,7 +21,7 @@ export const StudioProfileDialog: React.FC<Props> = ({ open, profile, onCancel, 
   const [logo, setLogo] = useState<string | null>(null);
   const [bankName, setBankName] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
-  const [pricesOpen, setPricesOpen] = useState(false);
+  const [pricesOpen, setPricesOpen] = useState(true);
   const [servicePrices, setServicePrices] = useState<Partial<Record<ServiceType, number>>>({});
   const [cameraPrices, setCameraPrices] = useState<Partial<Record<CameraType, number>>>({});
 
@@ -47,8 +47,9 @@ export const StudioProfileDialog: React.FC<Props> = ({ open, profile, onCancel, 
     const file = e.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = (evt) => { setLogo(evt.target?.result as string); };
+    reader.onload = (evt) => setLogo(evt.target?.result as string);
     reader.readAsDataURL(file);
+    e.target.value = '';
   };
 
   const submit = () => {
@@ -73,74 +74,65 @@ export const StudioProfileDialog: React.FC<Props> = ({ open, profile, onCancel, 
   return (
     <div className="fixed inset-0 z-[110] flex items-end sm:items-center justify-center p-3" dir="rtl">
       <div className="absolute inset-0" style={{ background: 'rgba(4,3,8,.72)', backdropFilter: 'blur(3px)' }} onClick={onCancel} />
-      <section className="relative w-full sm:max-w-sm max-h-[90vh] overflow-y-auto no-scrollbar card a-fade-up" style={{ borderRadius: '26px 26px 0 0' }}>
-        <header className="sticky top-0 z-10 flex items-center gap-3 px-4 py-3.5 border-b border-line bg-surface/90 backdrop-blur-md">
-          <span className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'color-mix(in srgb, var(--color-gold) 16%, transparent)', color: 'var(--color-gold)' }}>
-            <Building2 className="w-4.5 h-4.5" />
-          </span>
-          <h2 className="flex-1 font-extrabold text-[15px]">پروفایل استودیو</h2>
-          <button onClick={onCancel} className="p-1.5 rounded-full text-muted"><X className="w-5 h-5" /></button>
+      <section className="profile-editor relative w-full sm:max-w-md max-h-[92vh] overflow-y-auto no-scrollbar card a-fade-up">
+        <header className="profile-editor-header sticky top-0 z-10 flex items-center gap-3">
+          <div className="flex-1"><span className="eyebrow">تنظیمات حساب</span><h2>ویرایش پروفایل</h2></div>
+          <button onClick={onCancel} className="profile-close" aria-label="بستن"><X className="w-5 h-5" /></button>
         </header>
-        <div className="p-4 space-y-4">
-          <div>
-            <span className="label flex items-center gap-1.5"><Image className="w-3.5 h-3.5 text-gold" />تصویر پروفایل</span>
-            <div className="flex items-center gap-3">
-              <input type="file" accept="image/*" onChange={handleLogoChange} className="field flex-1" />
-              {logo && <img src={logo} alt="logo" className="w-12 h-12 rounded-lg object-cover" />}
+
+        <div className="profile-editor-body">
+          <div className="profile-photo-block">
+            <input id="studio-profile-photo" type="file" accept="image/*" onChange={handleLogoChange} className="sr-only" />
+            <label htmlFor="studio-profile-photo" className="profile-photo-button" aria-label="انتخاب عکس پروفایل از گالری">
+              {logo ? <img src={logo} alt="عکس پروفایل" /> : <Building2 className="profile-photo-placeholder" />}
+              <span className="profile-photo-camera"><Camera className="w-4 h-4" /></span>
+            </label>
+            <div><b>عکس پروفایل</b><p>روی عکس بزن و از گالری انتخاب کن</p></div>
+          </div>
+
+          <section className="profile-form-section">
+            <div className="profile-section-heading"><Building2 className="w-4 h-4" /><b>مشخصات آتلیه</b></div>
+            <label><span className="label">نام استودیو / آتلیه</span><input autoFocus value={name} onChange={(e) => setName(e.target.value)} placeholder="مثلاً استودیو طلایی" className="field" /></label>
+            <div className="grid grid-cols-2 gap-3">
+              <label><span className="label flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-gold" />شماره تماس</span><input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="09121234567" className="field" type="tel" dir="ltr" /></label>
+              <label><span className="label flex items-center gap-1.5"><FileText className="w-3.5 h-3.5 text-gold" />شماره صنفی</span><input value={craftCode} onChange={(e) => setCraftCode(e.target.value)} placeholder="0000000000" className="field" type="tel" dir="ltr" /></label>
             </div>
-          </div>
-          <div>
-            <span className="label">نام استودیو/اتلیه</span>
-            <input autoFocus value={name} onChange={(e) => setName(e.target.value)} placeholder="مثال: استودیو طلایی" className="field" />
-          </div>
-          <div>
-            <span className="label flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-gold" />شماره تماس</span>
-            <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="09121234567" className="field" type="tel" dir="ltr" />
-          </div>
-          <div>
-            <span className="label flex items-center gap-1.5"><FileText className="w-3.5 h-3.5 text-gold" />شماره صنفی</span>
-            <input value={craftCode} onChange={(e) => setCraftCode(e.target.value)} placeholder="0000000000" className="field" type="tel" dir="ltr" />
-          </div>
-          <div>
-            <span className="label">آدرس</span>
-            <textarea value={address} onChange={(e) => setAddress(e.target.value)} placeholder="آدرس کامل..." className="field" rows={2} style={{ resize: 'none' }} />
-          </div>
-          <div>
-            <span className="label">نام بانک (اختیاری)</span>
-            <input value={bankName} onChange={(e) => setBankName(e.target.value)} placeholder="مثال: بانک ملت" className="field" />
-          </div>
-          <div>
-            <span className="label">شماره حساب (اختیاری)</span>
-            <input value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} placeholder="شماره حساب" className="field" dir="ltr" />
-          </div>
-          <section className="rounded-2xl border border-line overflow-hidden">
-            <button type="button" onClick={() => setPricesOpen(v => !v)} className="w-full min-h-14 px-4 flex items-center gap-3 text-right bg-surface2">
-              <span className="w-9 h-9 rounded-xl grid place-items-center bg-[var(--color-olive)] text-paper"><Sparkles className="w-4 h-4" /></span>
-              <span className="flex-1"><b className="block text-[13px]">قیمت پایه خدمات و دوربین</b><small className="text-[10px] text-muted">یک بار وارد کن، فاکتور پروژه‌ها خودکار پر می‌شود</small></span>
+            <label><span className="label flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-gold" />آدرس</span><textarea value={address} onChange={(e) => setAddress(e.target.value)} placeholder="آدرس کامل..." className="field" rows={2} style={{ resize: 'none' }} /></label>
+            <div className="grid grid-cols-2 gap-3">
+              <label><span className="label">نام بانک</span><input value={bankName} onChange={(e) => setBankName(e.target.value)} placeholder="مثلاً ملت" className="field" /></label>
+              <label><span className="label">شماره حساب</span><input value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} placeholder="اختیاری" className="field" dir="ltr" /></label>
+            </div>
+          </section>
+
+          <section className="profile-prices">
+            <button type="button" onClick={() => setPricesOpen(v => !v)} className="profile-prices-toggle" aria-expanded={pricesOpen}>
+              <span className="profile-prices-icon"><WalletCards className="w-5 h-5" /></span>
+              <span className="flex-1"><b>قیمت پایه خدمات</b><small>ذخیره می‌شود و فاکتورهای جدید با همین مبالغ شروع می‌شوند</small></span>
               <ChevronDown className={`w-4 h-4 transition-transform ${pricesOpen ? 'rotate-180' : ''}`} />
             </button>
-            {pricesOpen && <div className="p-3 space-y-4 bg-surface">
+            {pricesOpen && <div className="profile-prices-body">
               <PriceGroup icon={Sparkles} title="خدمات" values={SERVICES} prices={servicePrices} onChange={(key, value) => setServicePrices(v => ({ ...v, [key]: value }))} />
               <PriceGroup icon={Camera} title="دوربین و تجهیزات" values={CAMERAS} prices={cameraPrices} onChange={(key, value) => setCameraPrices(v => ({ ...v, [key]: value }))} />
+              <p className="profile-price-note">این قیمت‌ها فقط مقدار اولیه‌اند. داخل هر فاکتور می‌توانی همان‌جا تغییرشان بدهی.</p>
             </div>}
           </section>
         </div>
-        <div className="sticky bottom-0 flex items-center gap-2 px-4 py-3 border-t border-line bg-surface/90 backdrop-blur-md">
+
+        <div className="profile-editor-actions sticky bottom-0 flex items-center gap-2">
           <button onClick={onCancel} className="btn btn-ghost flex-1">انصراف</button>
-          <button onClick={submit} disabled={!name.trim() || !phone.trim() || !craftCode.trim()} className="btn btn-primary flex-[2]"><Check className="w-4 h-4" />ذخیره</button>
+          <button onClick={submit} disabled={!name.trim() || !phone.trim() || !craftCode.trim()} className="btn btn-primary flex-[2]"><Check className="w-4 h-4" />ذخیره تغییرات</button>
         </div>
       </section>
     </div>
   );
 };
 
-
 const PriceGroup = <T extends string>({ icon: Icon, title, values, prices, onChange }: { icon: React.ElementType; title: string; values: T[]; prices: Partial<Record<T, number>>; onChange: (key: T, value: number) => void }) => (
   <div className="space-y-2">
-    <h3 className="flex items-center gap-2 text-[12px] font-black"><Icon className="w-4 h-4 text-gold" />{title}</h3>
-    {values.map(value => <label key={value} className="grid grid-cols-[1fr_9rem] items-center gap-2">
-      <span className="text-[11px] font-bold">{value}</span>
-      <span className="relative"><input inputMode="numeric" value={prices[value] ? formatMoney(prices[value] || 0) : ''} onChange={e => onChange(value, parseMoney(e.target.value))} className="field pl-12 text-left tabular-nums" dir="ltr" placeholder="۰" /><small className="absolute left-3 top-1/2 -translate-y-1/2 text-muted">تومن</small></span>
+    <h3 className="profile-price-title"><Icon className="w-4 h-4" />{title}</h3>
+    {values.map(value => <label key={value} className="profile-price-row">
+      <span>{value}</span>
+      <span className="profile-price-input"><input inputMode="numeric" value={prices[value] ? formatMoney(prices[value] || 0) : ''} onChange={e => onChange(value, parseMoney(e.target.value))} className="field text-left tabular-nums" dir="ltr" placeholder="۰" /><small>تومن</small></span>
     </label>)}
   </div>
 );

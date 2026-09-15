@@ -5,7 +5,7 @@ import { LogoMark } from './Logo';
 interface Props { onOpenMenu: () => void; onOpenAddPose: () => void; }
 
 export const Header: React.FC<Props> = ({ onOpenMenu, onOpenAddPose }) => (
-  <header className="sticky top-0 z-40 safe-top app-header">
+  <header className="sticky z-40 safe-top app-header">
     <div className="floating-header max-w-3xl mx-auto">
       <button onClick={onOpenMenu} className="floating-header-action" aria-label="باز کردن منو"><Menu className="w-5 h-5" /></button>
       <div className="floating-header-brand" dir="ltr">

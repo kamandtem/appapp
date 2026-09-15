@@ -48,40 +48,28 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
     <div className="filter-group"><span>{label}</span><div className="filter-options">{options.map(option => <button type="button" key={option} onClick={() => onPick(option)} className={value === option ? 'selected' : ''}>{value === option && <Check className="w-3 h-3" />}{option}</button>)}</div></div>
   );
 
-  return <section className="filter-console">
+  return <section className="filter-console filter-console-compact">
     <div className="filter-search">
       <Search className="w-4 h-4" />
       <input value={filters.search} onChange={e => onChange({ ...filters, search: e.target.value })} placeholder="نام ژست یا تگ را جستجو کن..." aria-label="جستجوی نام یا تگ ژست" />
       {filters.search && <button type="button" onClick={() => onChange({ ...filters, search: '' })} aria-label="پاک کردن جستجو"><X className="w-4 h-4" /></button>}
+      <button type="button" onClick={() => setMoreOpen(v => !v)} className="filter-trigger" aria-expanded={moreOpen}><SlidersHorizontal className="w-4 h-4" />فیلترها{active.length > 0 && <b>{active.length.toLocaleString('fa-IR')}</b>}</button>
     </div>
-
-    <div className="filter-group location-first">
-      <span>کجا هستی؟</span>
-      <div className="filter-options location-options no-scrollbar">{LOCATIONS.map(location => <button type="button" key={location} onClick={() => pickLocation(location)} className={selectedLocation === location ? 'selected' : ''}>{selectedLocation === location && <Check className="w-3 h-3" />}{location}</button>)}</div>
-    </div>
-
-    {asksForStage && <div className="stage-step a-fade-up">
-      <span className="filter-step-title">کدام مرحله‌ای؟</span>
-      <ScenarioRail poses={allPoses || []} value={filters.scenario} compact onPick={scenario => onChange({ ...filters, scenario, detailSubject: 'همه' })} />
-    </div>}
-
-    <button type="button" onClick={() => setMoreOpen(v => !v)} className="more-filter-toggle" aria-expanded={moreOpen}>
-      <span><SlidersHorizontal className="w-4 h-4" />فیلترهای بیشتر</span>
-      <span>{active.filter(x => !['location', 'scope', 'scenario'].includes(x.key)).length.toLocaleString('fa-IR')} انتخاب <ChevronDown className={`w-4 h-4 transition-transform ${moreOpen ? 'rotate-180' : ''}`} /></span>
-    </button>
-
-    {moreOpen && <div className="filter-panel a-fade">
-      <Row label="سوژه" options={SUBJECTS} value={filters.category} onPick={category => onChange({ ...filters, category })} />
-      <Row label="حالت بدن" options={BODY_STATES} value={filters.poseType} onPick={poseType => onChange({ ...filters, poseType })} />
-      <Row label="کادر" options={FRAMES} value={filters.framing} onPick={framing => onChange({ ...filters, framing })} />
-      <button type="button" onClick={() => onChange({ ...filters, customOnly: !filters.customOnly })} className={`mine-toggle ${filters.customOnly ? 'selected' : ''}`}>{filters.customOnly && <Check className="w-4 h-4" />} ژست‌های شخصی</button>
-      <button type="button" onClick={() => setMoreOpen(false)} className="filter-done">{total.toLocaleString('fa-IR')} نتیجه، نمایش بده</button>
-    </div>}
 
     {active.length > 0 && <div className="filter-summary">
       <b>{total.toLocaleString('fa-IR')} ژست</b>
       <div className="active-filters no-scrollbar">{active.map(item => <button type="button" key={item.key} onClick={() => clearOne(item.key)}>{item.label}<X className="w-3 h-3" /></button>)}</div>
       <button type="button" onClick={() => { onChange({ ...EMPTY_FILTERS }); setMoreOpen(false); }} className="clear-filter"><RotateCcw className="w-3.5 h-3.5" />پاک کردن</button>
+    </div>}
+
+    {moreOpen && <div className="filter-panel a-fade">
+      <div className="filter-group location-first"><span>کجا هستی؟</span><div className="filter-options location-options no-scrollbar">{LOCATIONS.map(location => <button type="button" key={location} onClick={() => pickLocation(location)} className={selectedLocation === location ? 'selected' : ''}>{selectedLocation === location && <Check className="w-3 h-3" />}{location}</button>)}</div></div>
+      {asksForStage && <div className="stage-step"><span className="filter-step-title">کدام مرحله‌ای؟</span><ScenarioRail poses={allPoses || []} value={filters.scenario} compact onPick={scenario => onChange({ ...filters, scenario, detailSubject: 'همه' })} /></div>}
+      <Row label="سوژه" options={SUBJECTS} value={filters.category} onPick={category => onChange({ ...filters, category })} />
+      <Row label="حالت بدن" options={BODY_STATES} value={filters.poseType} onPick={poseType => onChange({ ...filters, poseType })} />
+      <Row label="کادر" options={FRAMES} value={filters.framing} onPick={framing => onChange({ ...filters, framing })} />
+      <button type="button" onClick={() => onChange({ ...filters, customOnly: !filters.customOnly })} className={`mine-toggle ${filters.customOnly ? 'selected' : ''}`}>{filters.customOnly && <Check className="w-4 h-4" />} ژست‌های شخصی</button>
+      <button type="button" onClick={() => setMoreOpen(false)} className="filter-done">{total.toLocaleString('fa-IR')} نتیجه، نمایش بده <ChevronDown className="w-4 h-4 rotate-180" /></button>
     </div>}
   </section>;
 };

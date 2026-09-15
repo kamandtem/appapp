@@ -17,7 +17,6 @@ import {
   Moon,
   Sun,
   X,
-  ChevronLeft,
   ClipboardCheck,
   Instagram,
   Send,
@@ -32,6 +31,7 @@ interface Props {
   onNavigate: (tab: ViewTab) => void;
   onOpenAddPose: () => void;
   onOpenStudioProfile: () => void;
+  onChangeProfileImage: (dataUrl: string) => void;
   onOpenChecklist: () => void;
   profile: StudioProfile | null;
   theme: 'dark' | 'light';
@@ -46,6 +46,7 @@ export const SideMenu: React.FC<Props> = ({
   onNavigate,
   onOpenAddPose,
   onOpenStudioProfile,
+  onChangeProfileImage,
   onOpenChecklist,
   profile,
   theme,
@@ -74,15 +75,7 @@ export const SideMenu: React.FC<Props> = ({
       const reader = new FileReader();
       reader.onload = (event) => {
         const dataUrl = event.target?.result as string;
-        if (profile) {
-          try {
-            const updated = { ...profile, logo: dataUrl, updatedAt: Date.now() };
-            localStorage.setItem('studioProfile', JSON.stringify(updated));
-            window.location.reload();
-          } catch (e) {
-            console.error('Error saving profile image:', e);
-          }
-        }
+        if (profile) onChangeProfileImage(dataUrl);
       };
       reader.readAsDataURL(file);
     }
@@ -94,12 +87,11 @@ export const SideMenu: React.FC<Props> = ({
     label: string;
     badge?: number;
     action?: () => void;
-    accent?: boolean;
   }[] = [
     { tab: 'office', icon: Briefcase, label: 'دفتر آتلیه' },
     { tab: 'home', icon: Home, label: 'خانه' },
-    { tab: 'affiches', icon: CalendarDays, label: 'آفیش', accent: true },
-    { tab: 'colleagues', icon: UsersRound, label: 'همکارانم', accent: true },
+    { tab: 'affiches', icon: CalendarDays, label: 'آفیش' },
+    { tab: 'colleagues', icon: UsersRound, label: 'همکارانم' },
     { tab: 'library', icon: LayoutGrid, label: 'کتابخانه ژست‌ها', badge: counts.total },
     { tab: 'principles', icon: BookOpen, label: 'اصول ژست‌دهی' },
     { tab: 'myposes', icon: FolderHeart, label: 'ژست‌های من', badge: counts.mine },
@@ -139,14 +131,16 @@ export const SideMenu: React.FC<Props> = ({
         }}
       >
         {/* Profile Section */}
-        <div className="sticky top-0 z-10 px-5 pt-5 pb-4">
+        <div className="menu-profile-section">
           <div className="menu-profile-tools">
             <button onClick={() => go('settings')} className="menu-round-button" title="تنظیمات"><Settings className="w-5 h-5" /></button>
-            <button onClick={onToggleTheme} className="menu-round-button" title="تغییر تم">{theme === 'dark' ? <Sun className="w-5 h-5 text-gold" /> : <Moon className="w-5 h-5 text-gold" />}</button><button onClick={onClose} className="menu-round-button menu-close" aria-label="بستن منو"><X className="w-5 h-5" /></button>
+            <button onClick={onToggleTheme} className="menu-round-button" title={theme === 'dark' ? 'حالت روز' : 'حالت شب'}>{theme === 'dark' ? <Sun className="w-5 h-5 text-gold" /> : <Moon className="w-5 h-5 text-gold" />}</button>
+            <button onClick={onClose} className="menu-round-button menu-close" aria-label="بستن منو"><X className="w-5 h-5" /></button>
           </div>
           <div className="menu-profile-row">
-            <label
-              htmlFor="profile-image-input"
+            <button
+              type="button"
+              onClick={() => profile ? document.getElementById('profile-image-input')?.click() : onOpenStudioProfile()}
               className="block w-16 h-16 shrink-0 rounded-full overflow-hidden flex items-center justify-center cursor-pointer transition-opacity"
               style={{ background: 'rgba(255,255,255,.12)', border: '2px solid rgba(255,255,255,.82)' }}
               title="لمس برای تغییر تصویر"
@@ -156,7 +150,7 @@ export const SideMenu: React.FC<Props> = ({
               ) : (
                 <UserRound className="w-7 h-7 text-white" />
               )}
-            </label>
+            </button>
             <input
               id="profile-image-input"
               type="file"
@@ -165,9 +159,9 @@ export const SideMenu: React.FC<Props> = ({
               style={{ display: 'none' }}
               aria-label="انتخاب عکس پروفایل"
             />
-            <div className="min-w-0 flex-1 text-right">
+            <div className="menu-profile-copy min-w-0 flex-1 text-right">
               <b className="block truncate text-[16px] text-white">{profile?.name || 'آتلیتو'}</b>
-              <button onClick={onOpenStudioProfile} className="mt-2 rounded-full border border-white/30 px-3 py-1 text-[10px] font-extrabold text-white">ویرایش پروفایل</button>
+              <button onClick={onOpenStudioProfile} className="menu-edit-profile">ویرایش پروفایل</button>
             </div>
           </div>
 
@@ -182,30 +176,18 @@ export const SideMenu: React.FC<Props> = ({
               <button
                 key={idx}
                 onClick={() => (it.action ? it.action() : it.tab && go(it.tab))}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl transition-colors text-right ${it.accent ? 'menu-affiche-item' : ''}`}
-                style={{
-                  background: active
-                    ? 'rgba(255,255,255,.15)'
-                    : 'transparent',
-                  border: active
-                    ? '1px solid rgba(255,255,255,.24)'
-                    : '1px solid transparent',
-                }}
+                className="menu-nav-item"
+                data-active={active ? 'true' : 'false'}
               >
-                <Icon
-                  className="w-4 h-4 shrink-0"
-                  style={{ color: active ? '#ffb37d' : 'rgba(255,255,255,.76)' }}
-                />
+                <Icon className="menu-nav-icon" />
                 <span
-                  className="flex-1 text-[13px] font-semibold"
-                  style={{ color: '#fff' }}
+                  className="flex-1"
                 >
                   {it.label}
                 </span>
                 {typeof it.badge === 'number' && it.badge > 0 && (
                   <span className="pill text-[10px] px-2 py-0.5">{it.badge}</span>
                 )}
-                <ChevronLeft className="w-3.5 h-3.5 text-white/45" />
               </button>
             );
           })}

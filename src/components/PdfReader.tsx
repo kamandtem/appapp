@@ -6,11 +6,13 @@ import { downloadBlob, shareBlob } from '../services/fileActions';
 export const PdfReader: React.FC<{ document: PdfDocument; onClose: () => void }> = ({ document, onClose }) => {
   const [feedback, setFeedback] = useState('');
   const share = async () => {
+    setFeedback('در حال آماده‌سازی فایل PDF...');
     try {
       const result = await shareBlob(document.blob, document.fileName);
       setFeedback(result === 'shared' ? 'فایل برای ارسال آماده شد.' : 'ارسال پشتیبانی نشد؛ فایل دانلود شد.');
     } catch (error) {
-      if ((error as DOMException)?.name !== 'AbortError') setFeedback('ارسال انجام نشد. دوباره امتحان کن.');
+      if ((error as DOMException)?.name === 'AbortError') { setFeedback('ارسال لغو شد.'); return; }
+      setFeedback('ارسال انجام نشد؛ از گزینه دانلود استفاده کن.');
     }
   };
   const download = () => {

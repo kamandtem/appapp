@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Mic, Copy, Check, Volume2, Square } from 'lucide-react';
+import { Mic, Volume2, Square, ChevronDown } from 'lucide-react';
 import { speak, speechSupported, stopSpeaking } from '../services/speech';
 
 interface Props {
@@ -7,23 +7,11 @@ interface Props {
   big?: boolean;
 }
 
-/** «چی به سوژه بگم؟» — دیالوگ آماده عکاس با امکان پخش صوتی */
+/** «چی به سوژه بگم؟» با محتوای بسته و پخش صوتی هر جمله */
 export const ScriptPanel: React.FC<Props> = ({ lines, big }) => {
-  const [copied, setCopied] = useState(false);
   const [playing, setPlaying] = useState<number | null>(null);
 
   useEffect(() => () => stopSpeaking(), []);
-
-  const copyAll = async () => {
-    const text = lines.map((l, i) => `${i + 1}. ${l}`).join('\n');
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      /* در وب‌ویو ممکن است دسترسی کلیپ‌بورد محدود باشد */
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1800);
-  };
 
   const toggleLine = (line: string, i: number) => {
     if (playing === i) {
@@ -40,38 +28,19 @@ export const ScriptPanel: React.FC<Props> = ({ lines, big }) => {
   };
 
   return (
-    <div
-      className="card p-4 relative overflow-hidden"
-      style={{ borderRightWidth: '4px', borderRightColor: 'var(--color-gold)' }}
-    >
-      <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-line">
-        <div className="flex items-center gap-2.5">
-          <span
-            className="w-8 h-8 rounded-xl flex items-center justify-center"
-            style={{
-              background: 'color-mix(in srgb, var(--color-gold) 16%, transparent)',
-              color: 'var(--color-gold)',
-            }}
-          >
-            <Mic className="w-4 h-4" />
+    <details className="script-accordion card overflow-hidden">
+      <summary className="script-accordion-summary">
+        <span className="script-accordion-title">
+          <span className="script-accordion-icon"><Mic className="w-4 h-4" /></span>
+          <span>
+            <strong>چی به سوژه بگم؟</strong>
+            <small>دیالوگ آماده برای هدایت سوژه</small>
           </span>
-          <div>
-            <h3 className="font-extrabold text-[14px] text-gold">چی به سوژه بگم؟</h3>
-            <p className="text-[10px] text-faint">دیالوگ آماده برای هدایت سوژه</p>
-          </div>
-        </div>
+        </span>
+        <ChevronDown className="script-accordion-chevron w-5 h-5" />
+      </summary>
 
-        <button onClick={copyAll} className="btn btn-ghost !py-1.5 !px-3 !text-[11px]">
-          {copied ? (
-            <Check className="w-3.5 h-3.5" style={{ color: 'var(--color-teal)' }} />
-          ) : (
-            <Copy className="w-3.5 h-3.5" />
-          )}
-          {copied ? 'کپی شد' : 'کپی'}
-        </button>
-      </div>
-
-      <div className="space-y-2">
+      <div className="script-accordion-content">
         {lines.map((line, i) => {
           const active = playing === i;
           return (
@@ -85,34 +54,10 @@ export const ScriptPanel: React.FC<Props> = ({ lines, big }) => {
                 borderColor: active ? 'var(--color-gold)' : 'var(--color-line)',
               }}
             >
-              <span
-                className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-extrabold mt-0.5"
-                style={{
-                  background: 'color-mix(in srgb, var(--color-gold) 20%, transparent)',
-                  color: 'var(--color-gold)',
-                }}
-              >
-                {i + 1}
-              </span>
-
-              <p
-                className={`flex-1 font-bold leading-relaxed ${
-                  big ? 'text-[17px]' : 'text-[13px]'
-                }`}
-              >
-                «{line}»
-              </p>
-
+              <span className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-extrabold mt-0.5 script-line-number">{i + 1}</span>
+              <p className={`flex-1 font-bold leading-relaxed ${big ? 'text-[17px]' : 'text-[13px]'}`}>«{line}»</p>
               {speechSupported() && (
-                <button
-                  onClick={() => toggleLine(line, i)}
-                  className="shrink-0 p-2 rounded-xl"
-                  style={{
-                    background: active ? 'var(--color-gold)' : 'transparent',
-                    color: active ? '#241B0C' : 'var(--color-gold)',
-                  }}
-                  aria-label="پخش صوتی"
-                >
+                <button onClick={() => toggleLine(line, i)} className="shrink-0 p-2 rounded-xl" style={{ background: active ? 'var(--color-gold)' : 'transparent', color: active ? '#241B0C' : 'var(--color-gold)' }} aria-label="پخش صوتی">
                   {active ? <Square className="w-3.5 h-3.5" /> : <Volume2 className="w-4 h-4" />}
                 </button>
               )}
@@ -120,6 +65,6 @@ export const ScriptPanel: React.FC<Props> = ({ lines, big }) => {
           );
         })}
       </div>
-    </div>
+    </details>
   );
 };

@@ -19,7 +19,8 @@ export function downloadBlob(blob: Blob, fileName: string): void {
 export async function shareBlob(blob: Blob, fileName: string, title = fileName): Promise<FileActionResult> {
   const name = safeFileName(fileName);
   const file = new File([blob], name, { type: blob.type || 'application/pdf' });
-  if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+  const canShareFile = typeof navigator.share === 'function' && (!navigator.canShare || navigator.canShare({ files: [file] }));
+  if (canShareFile) {
     await navigator.share({ title, files: [file] });
     return 'shared';
   }
