@@ -4,24 +4,25 @@ import { CategoryType, EMPTY_FILTERS, FilterState, Framing, LocationType, Pose, 
 import { FRAMINGS } from '../data/taxonomy';
 import { ScenarioRail } from './ScenarioRail';
 
-const SUBJECTS: (CategoryType | 'همه')[] = ['همه', 'عروس و داماد', 'عروس', 'داماد', 'زوج', 'گروهی'];
+const SUBJECTS: (CategoryType | 'همه')[] = ['همه', 'عروس و داماد', 'عروس', 'داماد', 'گروهی'];
 const BODY_STATES: (PoseType | 'همه')[] = ['همه', 'ایستاده', 'نشسته', 'راه رفتن', 'بغل کردن', 'رمانتیک', 'رسمی', 'خلاقانه', 'حرکتی'];
 const FRAMES: (Framing | 'همه')[] = ['همه', ...FRAMINGS];
-type SimpleLocation = LocationType | 'ژست عمومی' | 'همه';
-const LOCATIONS: SimpleLocation[] = ['همه', 'باغ عمارت', 'ژست عمومی', 'شمال', 'جنوب', 'ساحل', 'کویر', 'شهر'];
+type SimpleLocation = LocationType | 'ژست عمومی' | 'گیف‌ها' | 'همه';
+const LOCATIONS: SimpleLocation[] = ['همه', 'باغ عمارت', 'ژست عمومی', 'گیف‌ها', 'شمال', 'جنوب', 'ساحل', 'کویر', 'شهر'];
 
 interface Props { filters: FilterState; onChange: (f: FilterState) => void; total: number; allPoses?: Pose[]; }
 
 export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses }) => {
   const [moreOpen, setMoreOpen] = useState(false);
   const [advancedOpen, setAdvancedOpen] = useState(false);
-  const selectedLocation: SimpleLocation = filters.scope === 'عمومی' && filters.location === 'همه' ? 'ژست عمومی' : filters.location;
+  const selectedLocation: SimpleLocation = filters.animatedOnly ? 'گیف‌ها' : filters.scope === 'عمومی' && filters.location === 'همه' ? 'ژست عمومی' : filters.location;
   const asksForStage = selectedLocation === 'باغ عمارت' || selectedLocation === 'ژست عمومی';
   const advancedCount = [filters.category !== 'همه', filters.poseType !== 'همه', filters.framing !== 'همه', filters.customOnly].filter(Boolean).length;
 
   const active = useMemo(() => [
     filters.location !== 'همه' && { key: 'location', label: filters.location },
     filters.scope === 'عمومی' && filters.location === 'همه' && { key: 'scope', label: 'ژست عمومی' },
+    filters.animatedOnly && { key: 'animatedOnly', label: 'گیف‌ها' },
     filters.scenario !== 'همه' && { key: 'scenario', label: filters.scenario },
     filters.category !== 'همه' && { key: 'category', label: filters.category },
     filters.poseType !== 'همه' && { key: 'poseType', label: filters.poseType },
@@ -31,17 +32,22 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
 
   const pickLocation = (value: SimpleLocation) => {
     if (value === 'همه') {
-      onChange({ ...filters, location: 'همه', scope: 'همه', scenario: 'همه', detailSubject: 'همه' });
+      onChange({ ...filters, location: 'همه', scope: 'همه', scenario: 'همه', detailSubject: 'همه', animatedOnly: false });
       setAdvancedOpen(true);
       return;
     }
     if (value === 'ژست عمومی') {
-      onChange({ ...filters, location: 'همه', scope: 'عمومی', scenario: 'همه', detailSubject: 'همه' });
+      onChange({ ...filters, location: 'همه', scope: 'عمومی', scenario: 'همه', detailSubject: 'همه', animatedOnly: false });
+      setAdvancedOpen(false);
+      return;
+    }
+    if (value === 'گیف‌ها') {
+      onChange({ ...filters, location: 'همه', scope: 'همه', scenario: 'همه', detailSubject: 'همه', animatedOnly: true });
       setAdvancedOpen(false);
       return;
     }
     const needsStage = value === 'باغ عمارت';
-    onChange({ ...filters, location: value, scope: 'همه', scenario: needsStage ? filters.scenario : 'همه', detailSubject: 'همه' });
+    onChange({ ...filters, location: value, scope: 'همه', scenario: needsStage ? filters.scenario : 'همه', detailSubject: 'همه', animatedOnly: false });
     setAdvancedOpen(!needsStage);
   };
 

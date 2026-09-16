@@ -806,6 +806,7 @@
 .stage-step,
 .filter-group,
 .filter-row-options { min-width:0; max-width:100%; }
+.filter-console { overflow-x:hidden; }
 .filter-panel {
   max-height:none;
   overflow:visible;

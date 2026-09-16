@@ -1,6 +1,7 @@
 import { REFERENCE_POSES } from './referencePoses';
 import { FEATURE_SEEDS } from './featureSeeds';
 import { IMPORTED_POSES } from './importedPoses';
+import { IMPORTED_BATCH3_POSES } from './importedBatch3Poses';
 import { enrichPoses } from './taxonomy';
 import {
   ArtKey,
@@ -1633,9 +1634,18 @@ const ALL_BUILTIN_POSES: Pose[] = assignCanonicalPhotos(sortForProgression(dedup
  * کادر و حرکت) را روی همان رکورد و همان ID می‌نشاند. هیچ ژستی Duplicate نمی‌شود؛
  * حضور در چند Context محاسبه‌ای است.
  */
+/** پنج ژست اصلی + بسته‌های imported قبلی و batch3 با ID و مسیر عکس پایدار نگه داشته می‌شوند. */
 export const INITIAL_POSES: Pose[] = enrichPoses([
-  ...keepCoreAndDistinct(ALL_BUILTIN_POSES),
+  ...ALL_BUILTIN_POSES.slice(0, 5).map((pose) => ({
+    ...pose,
+    // این دو بخش فقط با نوشته و ذخیره کاربر پر می‌شوند.
+    commonMistakes: [],
+    cameraTips: { framing: '', cameraAngle: '', suggestedDistance: '', lensSuggestion: '', lightTip: '' },
+  })),
+  // Imported records keep their explicit image paths; they are not passed through
+  // assignCanonicalPhotos, so prior imported assets and batch3 remain stable.
   ...IMPORTED_POSES,
+  ...IMPORTED_BATCH3_POSES,
 ]);
 
 export const TOTAL_BUILTIN_POSES = INITIAL_POSES.length;

@@ -13,10 +13,10 @@ import {
   Clapperboard,
   Plus,
   Pencil,
+  Save,
 } from 'lucide-react';
 import { CAMERA_MOVEMENT_OPTIONS, MOVEMENT_TOOL_OPTIONS, CameraMovementType, MovementTool, Pose } from '../types/pose';
 import { PoseVisual } from '../components/PoseVisual';
-import { ScriptPanel } from '../components/ScriptPanel';
 import { PoseChecklist } from '../components/PoseChecklist';
 import { Accordion } from '../components/Accordion';
 import { FilmPlan } from '../components/FilmPlan';
@@ -51,9 +51,13 @@ export const PoseDetailView: React.FC<Props> = ({
   onToast,
   bigScript,
 }) => {
+  void bigScript;
   const fileRef = useRef<HTMLInputElement>(null);
   const [noteText, setNoteText] = useState(pose.note || '');
   const [savedNote, setSavedNote] = useState(false);
+  const [savedSection, setSavedSection] = useState<'mistakes' | 'camera' | null>(null);
+  const [mistakesText, setMistakesText] = useState(pose.commonMistakes.join('\n'));
+  const [cameraDraft, setCameraDraft] = useState({ ...pose.cameraTips });
   const [subjectMovement, setSubjectMovement] = useState(pose.subjectMovement || '');
   const [cameraMovementType, setCameraMovementType] = useState(pose.cameraMovementType);
   const [movementTool, setMovementTool] = useState(pose.movementTool);
@@ -71,6 +75,9 @@ export const PoseDetailView: React.FC<Props> = ({
   useEffect(() => {
     setNoteText(pose.note || '');
     setSavedNote(false);
+    setSavedSection(null);
+    setMistakesText(pose.commonMistakes.join('\n'));
+    setCameraDraft({ ...pose.cameraTips });
     setRatioState(pose.imageRatio || '4/3');
     setSubjectMovement(pose.subjectMovement || '');
     setCameraMovementType(pose.cameraMovementType);
@@ -129,6 +136,27 @@ export const PoseDetailView: React.FC<Props> = ({
     const result = pose.isCustom ? saveCustomPose(updated) : savePoseEdit(updated);
     if (result.ok) onDataChanged();
   };
+  const saveEditableSection = (section: 'mistakes' | 'camera') => {
+    const patch: Partial<Pose> = section === 'mistakes'
+      ? { commonMistakes: mistakesText.split('\n').map((line) => line.trim()).filter(Boolean) }
+      : { cameraTips: {
+          framing: cameraDraft.framing.trim(),
+          cameraAngle: cameraDraft.cameraAngle.trim(),
+          suggestedDistance: cameraDraft.suggestedDistance.trim(),
+          lensSuggestion: cameraDraft.lensSuggestion.trim(),
+          lightTip: cameraDraft.lightTip.trim(),
+        } };
+    const updated = { ...pose, ...patch };
+    const result = pose.isCustom ? saveCustomPose(updated) : savePoseEdit(updated);
+    if (!result.ok) {
+      onToast(result.error || 'ذخیره نشد.', false);
+      return;
+    }
+    setSavedSection(section);
+    onDataChanged();
+    setTimeout(() => setSavedSection((current) => current === section ? null : current), 1800);
+  };
+
   const chooseCameraMovement = (value: CameraMovementType) => {
     const next = cameraMovementType === value ? undefined : value;
     setCameraMovementType(next);
@@ -231,7 +259,6 @@ export const PoseDetailView: React.FC<Props> = ({
         </ol>
       </Accordion>
 
-      <ScriptPanel lines={pose.photographerScript} big={bigScript} />
 
       <Accordion title="تنوع" icon={<Repeat className="w-4 h-4 text-gold" />}>
         {pose.variations.length > 0 ? (
@@ -260,35 +287,37 @@ export const PoseDetailView: React.FC<Props> = ({
         </div>
       </Accordion>
 
-      {pose.commonMistakes.length > 0 && (
-        <Accordion
-          title="اشتباهات رایج"
-          icon={<AlertTriangle className="w-4 h-4" style={{ color: 'var(--color-rose)' }} />}
-        >
-          <ul className="space-y-2">
-            {pose.commonMistakes.map((m, i) => (
-              <li key={i} className="flex items-start gap-2 text-[12.5px] leading-relaxed">
-                <span
-                  className="shrink-0 w-1.5 h-1.5 rounded-full mt-2"
-                  style={{ background: 'var(--color-rose)' }}
-                />
-                {m}
-              </li>
-            ))}
-          </ul>
-        </Accordion>
-      )}
+      <Accordion
+        title="اشتباهات رایج"
+        icon={<AlertTriangle className="w-4 h-4" style={{ color: 'var(--color-rose)' }} />}
+      >
+        <textarea
+          value={mistakesText}
+          rows={4}
+          onChange={(e) => setMistakesText(e.target.value)}
+          placeholder="هر اشتباه را در یک خط بنویس..."
+          className="field resize-none leading-relaxed"
+        />
+        <button onClick={() => saveEditableSection('mistakes')} className="btn btn-ghost !py-2 !px-3.5 mt-2 !text-[11px]">
+          {savedSection === 'mistakes' ? <Check className="w-3.5 h-3.5 text-teal" /> : <Save className="w-3.5 h-3.5 text-gold" />}
+          {savedSection === 'mistakes' ? 'ذخیره شد' : 'ذخیره اشتباهات'}
+        </button>
+      </Accordion>
 
       <Accordion title="تنظیمات دوربین" icon={<Camera className="w-4 h-4 text-gold" />}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          <Detail label="کادربندی" text={pose.cameraTips.framing} />
-          <Detail label="زاویه" text={pose.cameraTips.cameraAngle} />
-          <Detail label="فاصله" text={pose.cameraTips.suggestedDistance} />
-          <Detail label="لنز" text={pose.cameraTips.lensSuggestion} />
+          <EditableField label="کادربندی" value={cameraDraft.framing} placeholder="مثلاً مدیوم شات" onChange={(framing) => setCameraDraft((cur) => ({ ...cur, framing }))} />
+          <EditableField label="زاویه" value={cameraDraft.cameraAngle} placeholder="مثلاً هم‌سطح چشم" onChange={(cameraAngle) => setCameraDraft((cur) => ({ ...cur, cameraAngle }))} />
+          <EditableField label="فاصله" value={cameraDraft.suggestedDistance} placeholder="مثلاً ۲ تا ۳ متر" onChange={(suggestedDistance) => setCameraDraft((cur) => ({ ...cur, suggestedDistance }))} />
+          <EditableField label="لنز" value={cameraDraft.lensSuggestion} placeholder="مثلاً 85mm" onChange={(lensSuggestion) => setCameraDraft((cur) => ({ ...cur, lensSuggestion }))} />
         </div>
         <div className="mt-2.5">
-          <Detail label="نور" text={pose.cameraTips.lightTip} />
+          <EditableField label="نور" value={cameraDraft.lightTip} placeholder="نکته نور را بنویس..." onChange={(lightTip) => setCameraDraft((cur) => ({ ...cur, lightTip }))} multiline />
         </div>
+        <button onClick={() => saveEditableSection('camera')} className="btn btn-ghost !py-2 !px-3.5 mt-2 !text-[11px]">
+          {savedSection === 'camera' ? <Check className="w-3.5 h-3.5 text-teal" /> : <Save className="w-3.5 h-3.5 text-gold" />}
+          {savedSection === 'camera' ? 'ذخیره شد' : 'ذخیره تنظیمات'}
+        </button>
       </Accordion>
 
       {/* یادداشت شخصی */}
@@ -340,4 +369,16 @@ const Detail: React.FC<{ label: string; text: string }> = ({ label, text }) => (
     <span className="text-[10px] font-extrabold text-faint">{label}</span>
     <p className="text-[12.5px] leading-relaxed">{text}</p>
   </div>
+);
+
+
+const EditableField: React.FC<{ label: string; value: string; placeholder: string; onChange: (value: string) => void; multiline?: boolean }> = ({ label, value, placeholder, onChange, multiline }) => (
+  <label className="block">
+    <span className="text-[10px] font-extrabold text-faint">{label}</span>
+    {multiline ? (
+      <textarea value={value} rows={3} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="field resize-none leading-relaxed" />
+    ) : (
+      <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="field" />
+    )}
+  </label>
 );

@@ -6,7 +6,6 @@ import {
   DifficultyLevel,
   Framing,
   LocationType,
-  Mood,
   MovementTool,
   MOVEMENT_TOOL_OPTIONS,
   CameraMovementType,
@@ -17,7 +16,7 @@ import {
   PoseType,
 } from '../types/pose';
 import { LOCATION_KEYS } from '../data/locations';
-import { FRAMINGS, MOODS, SCENARIO_KEYS, SCOPES, enrichPose } from '../data/taxonomy';
+import { FRAMINGS, SCENARIO_KEYS, SCOPES, enrichPose } from '../data/taxonomy';
 import { getCustomPoses, nextTransferCode, saveCustomPose, savePoseEdit } from '../services/storage';
 import { artForText, progressionMeta } from '../data/poses';
 import { MAX_ANIMATED_KB, approxDataUrlKb, isAnimatedFile } from '../services/media';
@@ -27,7 +26,6 @@ const CATEGORIES: CategoryType[] = [
   'عروس و داماد',
   'عروس',
   'داماد',
-  'زوج',
   'گروهی',
 ];
 const TYPES: PoseType[] = [
@@ -173,11 +171,8 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
   // تاکسونومی جدید: مرحله سناریو دسته اصلی است، بقیه Attribute هستند.
   const [scenario, setScenario] = useState<ScenarioCategory>('پرتره زوج');
   const [scope, setScope] = useState<PoseScope>('عمومی');
-  const [mood, setMood] = useState<Mood>('رمانتیک');
   const [framing, setFraming] = useState<Framing>('مدیوم');
-  const [movement, setMovement] = useState(false);
   const [steps, setSteps] = useState<string[]>(blankLines);
-  const [script, setScript] = useState<string[]>(blankLines);
   const [variations, setVariations] = useState<string[]>(['']);
   const [mistakes, setMistakes] = useState<string[]>(['']);
   const [tagText, setTagText] = useState('');
@@ -211,11 +206,8 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
       setLocations(editing.locations.length ? editing.locations : ['باغ عمارت']);
       setScenario(editing.scenario || 'پرتره زوج');
       setScope(editing.scope || 'عمومی');
-      setMood(editing.mood || 'رمانتیک');
       setFraming(editing.framing || 'مدیوم');
-      setMovement(!!editing.movement);
       setSteps(editing.steps.length ? editing.steps : blankLines);
-      setScript(editing.photographerScript.length ? editing.photographerScript : blankLines);
       setVariations(editing.variations.length ? editing.variations : ['']);
       setMistakes(editing.commonMistakes.length ? editing.commonMistakes : ['']);
       setTagText(editing.tags.filter((t) => t !== editing.poseType).join('، '));
@@ -246,11 +238,8 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
       setLocations(['باغ عمارت']);
       setScenario('پرتره زوج');
       setScope('عمومی');
-      setMood('رمانتیک');
       setFraming('مدیوم');
-      setMovement(false);
       setSteps(blankLines);
-      setScript(blankLines);
       setVariations(['']);
       setMistakes(['']);
       setTagText('');
@@ -315,7 +304,6 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
 
   const submit = () => {
     const cleanSteps = steps.map((s) => s.trim()).filter(Boolean);
-    const cleanScript = script.map((s) => s.trim()).filter(Boolean);
     const cleanVariations = variations.map((s) => s.trim()).filter(Boolean);
 
     if (!title.trim()) {
@@ -364,9 +352,9 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
        */
       locationLock: scope === 'اختصاصی لوکیشن' ? (locations[0] || 'باغ عمارت') : undefined,
       suitableLocations: scope === 'اختصاصی لوکیشن' ? [locations[0] || 'باغ عمارت'] : undefined,
-      mood,
+      mood: editing?.mood,
       framing,
-      movement,
+      movement: editing?.movement,
       art,
       ...progressionMeta(difficulty, art, peopleCount),
       image,
@@ -381,15 +369,15 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
       footPosition: footPosition.trim() || 'وزن روی پای عقب، پای جلو کمی سبک.',
       headDirection: headDirection.trim() || 'چانه کمی جلو تا خط فک تمیز دیده شود.',
       eyeDirection: eyeDirection.trim() || 'نگاه در ثانیه آخر روی نقطه هدف بنشیند.',
-      photographerScript: cleanScript.length ? cleanScript : ['آرام در همین حالت بمانید.'],
+      photographerScript: [],
       commonMistakes: mistakes.map((m) => m.trim()).filter(Boolean),
       variations: cleanVariations,
       cameraTips: {
-        framing: camFraming.trim() || 'مدیوم شات',
-        cameraAngle: camAngle.trim() || 'هم‌سطح چشم سوژه',
-        suggestedDistance: camDistance.trim() || '۲ تا ۳ متر',
-        lensSuggestion: lens.trim() || '85mm f/1.8',
-        lightTip: lightTip.trim() || 'نور اصلی با زاویه ۴۵ درجه از یک سمت.',
+        framing: camFraming.trim(),
+        cameraAngle: camAngle.trim(),
+        suggestedDistance: camDistance.trim(),
+        lensSuggestion: lens.trim(),
+        lightTip: lightTip.trim(),
       },
       isCustom: !isEditingExisting,
       createdAt: editing?.createdAt || Date.now(),
@@ -424,9 +412,9 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
     scenario,
     scope,
     locationLock: scope === 'اختصاصی لوکیشن' ? (locations[0] || 'باغ عمارت') : undefined,
-    mood,
+    mood: editing?.mood,
     framing,
-    movement,
+    movement: editing?.movement,
     art: previewArt,
     ...progressionMeta(difficulty, previewArt, peopleCount),
     image,
@@ -651,14 +639,7 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <ChipSelect label="حال‌وهوا" options={MOODS} value={mood} onChange={setMood} />
-            <ChipSelect label="کادر" options={FRAMINGS} value={framing} onChange={setFraming} />
-          </div>
-
-          <button onClick={() => setMovement((v) => !v)} className={`pill ${movement ? 'pill-on' : ''}`}>
-            سوژه در این ژست حرکت می‌کند
-          </button>
+          <ChipSelect label="کادر" options={FRAMINGS} value={framing} onChange={setFraming} />
 
           <div className="p-3 rounded-2xl border border-line space-y-3">
             <span className="label !mb-0">اطلاعات فیلم‌برداری ژست</span>
@@ -695,18 +676,6 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
             items={steps}
             setter={setSteps}
           />
-
-          <div
-            className="p-3 rounded-2xl border border-line"
-            style={{ background: 'color-mix(in srgb, var(--color-gold) 8%, transparent)' }}
-          >
-            <ListEditor
-              label="چی به سوژه بگم؟ (دیالوگ مستقیم)"
-              hint="مثال: دستت را آرام دور کمرش حلقه کن، فشار نده."
-              items={script}
-              setter={setScript}
-            />
-          </div>
 
           <ListEditor
             label="تنوع"

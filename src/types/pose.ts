@@ -329,6 +329,8 @@ export interface MyLocation {
 
 export interface FilterState {
   search: string;
+  /** دسته کلی تصاویر متحرک اضافه‌شده */
+  animatedOnly: boolean;
 
   /** فیلتر اصلی و پیش‌فرض کتابخانه: مرحله سناریو */
   scenario: ScenarioCategory | 'همه';
@@ -360,6 +362,7 @@ export interface FilterState {
 
 export const EMPTY_FILTERS: FilterState = {
   search: '',
+  animatedOnly: false,
   scenario: 'همه',
   detailSubject: 'همه',
   scope: 'همه',

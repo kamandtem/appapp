@@ -90,7 +90,7 @@ let existingSource = '';
 let existingCodes = new Set();
 if (existsSync(IMPORTED_POSES_FILE)) {
   existingSource = readFileSync(IMPORTED_POSES_FILE, 'utf8');
-  const matches = existingSource.matchAll(/transferCode:\s*'([^']+)'/g);
+  const matches = existingSource.matchAll(/(?:transferCode|"transferCode")\s*:\s*['"]([^'"]+)['"]/g);
   for (const m of matches) existingCodes.add(m[1]);
 } else {
   existingSource = `import { Pose } from '../types/pose';

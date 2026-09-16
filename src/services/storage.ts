@@ -551,6 +551,7 @@ export function filterPoses(poses: Pose[], f: FilterState, favoriteIds: string[]
 const queryTerms = expandQuery(f.search || '');
 const queryWords = normalize(f.search || '').split(' ').filter(Boolean);
 return poses.filter((p) => {
+if (f.animatedOnly && !p.isAnimated) return false;
 if (f.customOnly && !p.isCustom) return false;
 
 /* --- محور اصلی: سناریوی تصویربرداری --- */
