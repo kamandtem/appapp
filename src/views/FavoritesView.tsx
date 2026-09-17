@@ -5,6 +5,7 @@ import { PoseCard } from '../components/PoseCard';
 import { PoseVisual } from '../components/PoseVisual';
 import { EmptyState } from '../components/EmptyState';
 import { SectionGuide } from '../components/SectionGuide';
+import { ShotlistFirstVisitOverlay } from '../components/FirstVisitOverlay';
 import { ConfirmDialog, ConfirmRequest } from '../components/ConfirmDialog';
 import { ProjectDialog, ProjectDialogResult } from '../components/ProjectDialog';
 import { isoToJalaliLabel } from '../services/jalali';
@@ -145,6 +146,7 @@ export const FavoritesView: React.FC<Props> = ({ poses, favoriteIds, onToggleFav
 
   return <div className="space-y-4">
     <SectionGuide section="favorites-v3" title="پروژه روز" text="ژست‌های عکاسی و پلان‌های فیلم‌برداری هر پروژه را جدا بچین." />
+    {sub === 'projects' && <ShotlistFirstVisitOverlay />}
     <div className="flex items-center gap-1.5 rounded-[20px] bg-surface2 p-1.5"><SubTab active={sub === 'projects'} onClick={() => setSub('projects')} icon={CalendarDays} label="شات‌لیست پروژه" /><SubTab active={sub === 'favorites'} onClick={() => setSub('favorites')} icon={Heart} label="ذخیره‌شده‌ها" /></div>
     {sub === 'favorites' ? savedPoses.length === 0 ? <EmptyState icon={Heart} title="هنوز ژستی نشان نکردی" text="ژست‌های دلخواهت را نشان کن تا بعداً سریع پیدایشان کنی." action={{ label: 'رفتن به کتابخانه', onClick: () => onTab('library') }} /> : <div className="space-y-5">{Object.entries(grouped).map(([category, items]) => <section key={category} className="space-y-2.5"><h2 className="text-[13px] font-extrabold text-muted">{category}</h2><div className="grid grid-cols-2 gap-3 lg:grid-cols-3">{items.map(pose => <PoseCard key={pose.id} pose={pose} isFavorite onToggleFavorite={onToggleFavorite} onSelect={onSelect} onDelete={onDelete} onAddToProject={onAddToProject} />)}</div></section>)}</div> : <>
       <div className="flex items-center justify-between gap-3"><div><h1 className="text-[18px] font-extrabold">شات‌لیست‌های پروژه</h1><p className="mt-1 text-[10px] text-muted">ژست‌های عکاسی و فیلم‌برداری جدا ذخیره می‌شوند</p></div><button onClick={() => setDialogState({ open: true })} className="btn btn-primary !px-3 !py-2 !text-[11px]"><Plus className="w-4 h-4" /> شات‌لیست جدید</button></div>

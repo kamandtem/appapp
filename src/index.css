@@ -969,3 +969,24 @@
 /* The filtered count is already visible in the summary, so the sticky action is intentionally gone. */
 .filter-done { display:none !important; }
 .office-contract-notes-lower { margin-top:40px; padding-top:24px; }
+
+/* First-visit guidance: focused overlay, not a permanent interruption. */
+.first-visit-overlay { position:fixed; inset:0; z-index:160; display:flex; align-items:flex-end; justify-content:center; padding:14px; }
+.first-visit-backdrop { position:absolute; inset:0; border:0; background:oklch(18% .018 105 / .68); cursor:pointer; }
+.first-visit-sheet { position:relative; width:min(100%, 460px); max-height:min(88dvh, 680px); overflow:auto; padding:26px 20px 18px; border:1px solid var(--color-line); border-radius:30px; background:var(--color-surface); box-shadow:0 24px 80px oklch(18% .018 105 / .28); animation:pd-slide-up .35s cubic-bezier(.22,1,.36,1); }
+.first-visit-close { position:absolute; top:14px; left:14px; width:34px; height:34px; display:grid; place-items:center; border:1px solid var(--color-line); border-radius:12px; background:var(--color-bg2); color:var(--color-muted); }
+.first-visit-mark { width:44px; height:44px; display:grid; place-items:center; margin-bottom:12px; border-radius:15px; background:color-mix(in srgb, var(--color-gold) 18%, transparent); color:var(--color-gold); }
+.first-visit-eyebrow { display:block; color:var(--color-gold); font-size:10px; font-weight:950; }
+.first-visit-sheet h2 { margin-top:6px; color:var(--color-ink); font-size:22px; line-height:1.35; font-weight:950; }
+.first-visit-lead { max-width:42ch; margin-top:8px; color:var(--color-muted); font-size:12px; line-height:1.9; }
+.first-visit-items { display:grid; gap:10px; margin-top:18px; }
+.first-visit-item { display:flex; align-items:flex-start; gap:10px; padding:11px 0; border-top:1px solid var(--color-line); }
+.first-visit-item-icon { display:grid; place-items:center; width:32px; height:32px; flex:0 0 32px; border-radius:11px; background:var(--color-bg2); color:var(--color-olive); }
+.first-visit-item b { display:block; color:var(--color-ink); font-size:12px; font-weight:900; }
+.first-visit-item p { margin-top:3px; color:var(--color-muted); font-size:10.5px; line-height:1.8; }
+.first-visit-action { width:100%; min-height:46px; justify-content:center; margin-top:17px; }
+@keyframes pd-slide-up { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
+
+/* Keep the complete stage rail in one horizontal content row on every phone width. */
+.stage-step .scenario-stage-options { display:flex; flex-wrap:nowrap; width:max-content; min-width:100%; max-width:none; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; touch-action:pan-x; -webkit-overflow-scrolling:touch; padding:2px 1px 7px; }
+.stage-step .scenario-stage-options .pill { flex:0 0 auto; min-width:max-content; max-width:none; white-space:nowrap; }
