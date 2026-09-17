@@ -245,19 +245,21 @@ export const PoseDetailView: React.FC<Props> = ({
 
 
       {/* ترتیب اجرای ژست: اول راهنما، بعد تنوع و فیلم، سپس جزئیات */}
-      <Accordion defaultOpen title="مراحل اجرا">
-        <ol className="space-y-2.5">
-          {pose.steps.map((step, i) => (
-            <li key={i} className="flex items-start gap-2.5 text-[12.5px] leading-relaxed">
-              <span
-                className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-extrabold mt-0.5"
-                style={{ background: 'color-mix(in srgb, var(--color-gold) 18%, transparent)', color: 'var(--color-gold)' }}
-              >{i + 1}</span>
-              {step}
-            </li>
-          ))}
-        </ol>
-      </Accordion>
+      {pose.steps.length > 0 && (
+        <Accordion defaultOpen title="مراحل اجرا">
+          <ol className="space-y-2.5">
+            {pose.steps.map((step, i) => (
+              <li key={i} className="flex items-start gap-2.5 text-[12.5px] leading-relaxed">
+                <span
+                  className="shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-extrabold mt-0.5"
+                  style={{ background: 'color-mix(in srgb, var(--color-gold) 18%, transparent)', color: 'var(--color-gold)' }}
+                >{i + 1}</span>
+                {step}
+              </li>
+            ))}
+          </ol>
+        </Accordion>
+      )}
 
 
       <Accordion title="تنوع" icon={<Repeat className="w-4 h-4 text-gold" />}>

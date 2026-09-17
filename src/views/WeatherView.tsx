@@ -71,14 +71,9 @@ export const WeatherView: React.FC<Props> = ({ selected, onBack, onManageLocatio
 
   const locName = selected?.name || 'موقعیت فعلی';
 
-  // پس‌زمینه‌ی گرادیانت غروب هماهنگ با پالت طلایی/بنفش تیره‌ی برنامه
-  const sunsetBg =
-    'linear-gradient(180deg,#F0B357 0%,#E4715B 26%,#7C4B84 55%,#2A2140 78%,#17141F 100%)';
-
   return (
     <div
-      className="-mx-3 -mt-5 min-h-[calc(100vh-64px)] rounded-b-none"
-      style={{ background: sunsetBg }}
+      className="-mx-3 -mt-5 min-h-[calc(100dvh-64px)] rounded-b-none"
       dir="rtl"
     >
       <div className="max-w-md mx-auto px-4 pt-4 pb-10">

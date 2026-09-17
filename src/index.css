@@ -15,6 +15,11 @@
   h1,h2,h3 { letter-spacing: -.025em; text-wrap: balance; } p { text-wrap: pretty; }
   button:focus-visible,input:focus-visible,summary:focus-visible { outline: 3px solid color-mix(in oklch,var(--color-orange) 55%,transparent); outline-offset: 3px; }
 }
+.weather-app {
+  min-height:100dvh;
+  background:linear-gradient(180deg,oklch(78% .14 70) 0%,oklch(68% .17 38) 26%,oklch(48% .11 315) 55%,oklch(28% .055 292) 78%,oklch(18% .025 292) 100%);
+}
+.weather-app .app-header { background:transparent; }
 @layer components {
   .card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); }
   .card-hover { transition: transform .15s cubic-bezier(.22,1,.36,1),box-shadow .2s cubic-bezier(.22,1,.36,1); } .card-hover:active { transform: scale(.985); }
@@ -989,4 +994,10 @@
 
 /* Keep the complete stage rail in one horizontal content row on every phone width. */
 .stage-step .scenario-stage-options { display:flex; flex-wrap:nowrap; width:max-content; min-width:100%; max-width:none; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; touch-action:pan-x; -webkit-overflow-scrolling:touch; padding:2px 1px 7px; }
+.stage-step .scenario-stage-options .pill { flex:0 0 auto; min-width:max-content; max-width:none; white-space:nowrap; }
+
+
+/* Stage filter: the viewport scrolls, the chip row keeps its full content width. */
+.stage-step .scenario-stage-scroll { width:100%; min-width:0; max-width:100%; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; touch-action:pan-x; -webkit-overflow-scrolling:touch; padding:2px 1px 7px; }
+.stage-step .scenario-stage-options { display:flex; flex-wrap:nowrap; width:max-content; min-width:max-content; max-width:none; overflow:visible; gap:7px; }
 .stage-step .scenario-stage-options .pill { flex:0 0 auto; min-width:max-content; max-width:none; white-space:nowrap; }

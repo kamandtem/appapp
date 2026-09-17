@@ -36,7 +36,7 @@ export const LibraryView: React.FC<Props> = ({
   onDelete,
   onAddToProject,
 }) => {
-  const grouped = filters.location === 'باغ عمارت' || (filters.location === 'همه' && filters.scope === 'عمومی');
+  const grouped = filters.animatedOnly || filters.location === 'باغ عمارت' || (filters.location === 'همه' && filters.scope === 'عمومی');
   const groups = grouped ? groupByScenario(poses) : [];
 
   const card = (p: Pose) => (

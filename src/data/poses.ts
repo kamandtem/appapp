@@ -2,6 +2,7 @@ import { REFERENCE_POSES } from './referencePoses';
 import { FEATURE_SEEDS } from './featureSeeds';
 import { IMPORTED_POSES } from './importedPoses';
 import { IMPORTED_BATCH3_POSES } from './importedBatch3Poses';
+import { GIF_POSES } from './gifPoses';
 import { enrichPoses } from './taxonomy';
 import {
   ArtKey,
@@ -1640,6 +1641,7 @@ export const INITIAL_POSES: Pose[] = enrichPoses([
   // assignCanonicalPhotos, so prior imported assets and batch3 remain stable.
   ...IMPORTED_POSES,
   ...IMPORTED_BATCH3_POSES,
+  ...GIF_POSES,
 ]);
 
 export const TOTAL_BUILTIN_POSES = INITIAL_POSES.length;

@@ -539,7 +539,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className={`min-h-screen pb-24 ${tab === 'weather' ? 'weather-app' : ''}`}>
       <Header
         onOpenMenu={() => setMenuOpen(true)}
         onOpenAddPose={openAddPose}
