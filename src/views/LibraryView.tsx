@@ -20,8 +20,8 @@ interface Props {
 
 /**
  * کتابخانه، حالا سناریو‌محور:
- *  • وقتی مرحله‌ای انتخاب نشده، ژست‌ها به ترتیب روز تصویربرداری گروه‌بندی می‌شوند.
- *  • وقتی مرحله انتخاب شده، همان مرحله به‌صورت شبکه ساده نشان داده می‌شود.
+ *  • بدون فیلتر، همه ژست‌ها در یک شبکه ساده و بدون گروه‌بندی نمایش داده می‌شوند.
+ *  • فقط با انتخاب «باغ عمارت» یا «ژست عمومی»، گروه‌بندی سناریویی فعال می‌شود.
  * لوکیشن هیچ‌جا «دسته» نیست؛ فقط فیلتر سازگاری است.
  */
 export const LibraryView: React.FC<Props> = ({
@@ -35,7 +35,7 @@ export const LibraryView: React.FC<Props> = ({
   onDelete,
   onAddToProject,
 }) => {
-  const grouped = filters.scenario === 'همه';
+  const grouped = filters.location === 'باغ عمارت' || (filters.location === 'همه' && filters.scope === 'عمومی');
   const groups = grouped ? groupByScenario(poses) : [];
 
   const card = (p: Pose) => (
@@ -52,7 +52,7 @@ export const LibraryView: React.FC<Props> = ({
 
   return (
     <div className="library-flow">
-      <div className="flex items-center justify-between px-1"><b className="text-[13px]">{filters.scenario === 'همه' ? 'همه سناریوها' : filters.scenario}</b><span className="text-[10px] text-muted">{poses.length} نتیجه</span></div>
+      <div className="flex items-center justify-between px-1"><b className="text-[13px]">{grouped ? (filters.scenario === 'همه' ? 'همه سناریوها' : filters.scenario) : 'همه ژست‌ها'}</b><span className="text-[10px] text-muted">{poses.length} نتیجه</span></div>
       <Filters filters={filters} onChange={onFilters} total={poses.length} allPoses={allPoses} />
 
       {poses.length === 0 ? (
@@ -91,7 +91,7 @@ export const LibraryView: React.FC<Props> = ({
                   <ArrowLeft className="w-3.5 h-3.5" />
                 </button>
               </div>
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">{g.poses.slice(0, 4).map(card)}</div>
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">{g.poses.map(card)}</div>
             </section>
           ))}
         </div>

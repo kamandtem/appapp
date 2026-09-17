@@ -1636,12 +1636,6 @@ const ALL_BUILTIN_POSES: Pose[] = assignCanonicalPhotos(sortForProgression(dedup
  */
 /** پنج ژست اصلی + بسته‌های imported قبلی و batch3 با ID و مسیر عکس پایدار نگه داشته می‌شوند. */
 export const INITIAL_POSES: Pose[] = enrichPoses([
-  ...ALL_BUILTIN_POSES.slice(0, 5).map((pose) => ({
-    ...pose,
-    // این دو بخش فقط با نوشته و ذخیره کاربر پر می‌شوند.
-    commonMistakes: [],
-    cameraTips: { framing: '', cameraAngle: '', suggestedDistance: '', lensSuggestion: '', lightTip: '' },
-  })),
   // Imported records keep their explicit image paths; they are not passed through
   // assignCanonicalPhotos, so prior imported assets and batch3 remain stable.
   ...IMPORTED_POSES,
