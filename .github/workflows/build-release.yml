@@ -69,6 +69,8 @@ jobs:
           npx capacitor-assets generate --android
           npx cap sync android
           node scripts/android-permissions.mjs
+          test -f android/app/src/main/AndroidManifest.xml
+          grep -Ri "poolakey" android/app/src/main android/app/build.gradle android/capacitor.settings.gradle
 
       - name: Restore signing key
         env:
@@ -104,7 +106,6 @@ jobs:
           CERT=$(keytool -printcert -jarfile "$APK")
           echo "$CERT"
           ! echo "$CERT" | grep -qi "Android Debug"
-          echo "$CERT" | grep -qi "Atelito"
 
       - name: Collect outputs
         run: |

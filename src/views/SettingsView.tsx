@@ -59,9 +59,9 @@ export const SettingsView: React.FC<Props> = ({
 
   const restorePurchase = async () => {
     setBillingBusy(true);
-    const found = await restorePremium();
-    setPremium(found);
-    onToast(found ? 'خرید قبلی بازیابی شد.' : 'خریدی برای این حساب پیدا نشد.', found);
+    const result = await restorePremium();
+    setPremium(result.active);
+    onToast(result.message, result.active);
     setBillingBusy(false);
   };
 

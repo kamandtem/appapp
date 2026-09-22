@@ -221,7 +221,9 @@ export default function App() {
 
   useEffect(() => {
     reload();
-    void restorePremium().then(() => reload());
+    void restorePremium()
+      .then(() => reload())
+      .catch(() => reload());
     void requestAfficheNotifications();
     setShowIntro(!hasOnboarded());
     const t1 = setTimeout(() => setLeavingSplash(true), 700);
