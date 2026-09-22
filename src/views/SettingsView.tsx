@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import {
   Moon,
   Sun,
@@ -8,13 +8,11 @@ import {
   Trash2,
   Database,
   WifiOff,
-  Package,
 } from 'lucide-react';
 import { Pose, ViewTab } from '../types/pose';
 import {
   Prefs,
   buildBackup,
-  buildPosePackZip,
   estimateUsageMb,
   restoreBackup,
   wipeAll,
@@ -54,32 +52,6 @@ export const SettingsView: React.FC<Props> = ({
     a.remove();
     URL.revokeObjectURL(url);
     onToast('فایل پشتیبان ساخته شد.', true);
-  };
-
-  const [packing, setPacking] = useState(false);
-
-  const exportPosePack = async () => {
-    setPacking(true);
-    try {
-      const result = await buildPosePackZip();
-      if (!result) {
-        onToast('هنوز چیزی برای انتقال نداری (نه ژست شخصی، نه عکس یا ژست تغییرکرده، نه ژست حذف‌شده‌ای).', false);
-        return;
-      }
-      const url = URL.createObjectURL(result.blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `atelito-pose-pack-${new Date().toISOString().slice(0, 10)}.zip`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      onToast(`بسته انتقال (${result.count} عکس + اطلاعات ژست‌ها) در یک فایل zip آماده شد.`, true);
-    } catch {
-      onToast('ساخت بسته انتقال انجام نشد، دوباره تلاش کن.', false);
-    } finally {
-      setPacking(false);
-    }
   };
 
   const importBackup = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -149,14 +121,6 @@ export const SettingsView: React.FC<Props> = ({
             بازیابی
           </button>
         </div>
-        <button onClick={exportPosePack} disabled={packing} className="btn btn-primary w-full">
-          <Package className="w-4 h-4" />
-          {packing ? 'در حال آماده‌سازی...' : 'آماده‌سازی بسته ژست برای انتقال'}
-        </button>
-        <p className="text-[10.5px] leading-relaxed text-muted">
-          این گزینه یک فایل zip می‌سازد که عکس‌های ژست‌های شخصی‌ات و اطلاعات متنی آن‌ها، و همچنین عکس هر ژست آماده‌ای که خودت عوضش کرده‌ای، را کنار هم دارد.
-          همین یک فایل را برای سازنده برنامه بفرست.
-        </p>
         <input
           ref={importRef}
           type="file"
