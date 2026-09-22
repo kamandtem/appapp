@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Moon,
   Sun,
@@ -17,6 +17,7 @@ import {
   restoreBackup,
   wipeAll,
 } from '../services/storage';
+import { buyPremium, isPremiumUnlocked, restorePremium } from '../services/bazaarBilling';
 
 interface Props {
   poses: Pose[];
@@ -39,6 +40,30 @@ export const SettingsView: React.FC<Props> = ({
 }) => {
   const importRef = useRef<HTMLInputElement>(null);
   const mine = poses.filter((p) => p.isCustom).length;
+  const [premium, setPremium] = useState(isPremiumUnlocked());
+  const [billingBusy, setBillingBusy] = useState(false);
+
+  useEffect(() => {
+    const refresh = () => setPremium(isPremiumUnlocked());
+    window.addEventListener('atelito:premium-changed', refresh);
+    return () => window.removeEventListener('atelito:premium-changed', refresh);
+  }, []);
+
+  const purchasePremium = async () => {
+    setBillingBusy(true);
+    const result = await buyPremium();
+    if (result.ok) setPremium(true);
+    onToast(result.message, result.ok);
+    setBillingBusy(false);
+  };
+
+  const restorePurchase = async () => {
+    setBillingBusy(true);
+    const found = await restorePremium();
+    setPremium(found);
+    onToast(found ? 'خرید قبلی بازیابی شد.' : 'خریدی برای این حساب پیدا نشد.', found);
+    setBillingBusy(false);
+  };
 
   const exportBackup = () => {
     const data = JSON.stringify(buildBackup(), null, 2);
@@ -101,6 +126,23 @@ export const SettingsView: React.FC<Props> = ({
           on={prefs.bigScript}
           onToggle={() => onPrefs({ ...prefs, bigScript: !prefs.bigScript })}
         />
+      </div>
+
+      <div className="card p-4 space-y-3">
+        <h3 className="font-extrabold text-[14px]">امکانات کامل آتلیتو</h3>
+        <p className="text-[11px] leading-relaxed text-muted">
+          {premium ? 'خرید شما فعال است و امکانات کامل برنامه در دسترس است.' : 'با خرید نسخه کامل، امکانات حرفه‌ای آتلیتو را فعال کن.'}
+        </p>
+        {!premium ? (
+          <button onClick={purchasePremium} disabled={billingBusy} className="btn btn-primary w-full">
+            {billingBusy ? 'در حال اتصال به بازار...' : 'خرید و فعال‌سازی امکانات کامل'}
+          </button>
+        ) : (
+          <div className="rounded-2xl border border-line p-3 text-center text-[11px] font-bold text-[var(--color-olive)]">فعال شد</div>
+        )}
+        <button onClick={restorePurchase} disabled={billingBusy} className="btn btn-ghost w-full">
+          بازیابی خرید قبلی
+        </button>
       </div>
 
       <div className="card p-4 space-y-3">

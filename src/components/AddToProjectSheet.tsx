@@ -19,7 +19,8 @@ export const AddToProjectSheet: React.FC<Props> = ({ pose, onClose, onAdded }) =
   if (!pose) return null;
 
   const addTo = (project: ShootProject) => {
-    saveProject({ ...project, poseIds: Array.from(new Set([...(project.poseIds || []), pose.id])), photoPoseIds: Array.from(new Set([...(project.photoPoseIds || project.poseIds || []), pose.id])), videoPoseIds: project.videoPoseIds || [], photoGalleryItems: project.photoGalleryItems || [], videoGalleryItems: project.videoGalleryItems || [], videoDetails: project.videoDetails || {} });
+    const saved = saveProject({ ...project, poseIds: Array.from(new Set([...(project.poseIds || []), pose.id])), photoPoseIds: Array.from(new Set([...(project.photoPoseIds || project.poseIds || []), pose.id])), videoPoseIds: project.videoPoseIds || [], photoGalleryItems: project.photoGalleryItems || [], videoGalleryItems: project.videoGalleryItems || [], videoDetails: project.videoDetails || {} });
+    if (!saved) { onAdded('در نسخه رایگان هر پروژه روز فقط ۵ عکس یا ژست می‌تواند داشته باشد. برای ادامه، برنامه را بخر.'); return; }
     onAdded(`«${pose.title}» به «${project.name}» اضافه شد.`);
     onClose();
   };
@@ -37,7 +38,7 @@ export const AddToProjectSheet: React.FC<Props> = ({ pose, onClose, onAdded }) =
       videoDetails: {},
       createdAt: Date.now(),
     };
-    saveProject(project);
+    if (!saveProject(project)) { onAdded('در نسخه رایگان فقط یک پروژه روز می‌توانی بسازی. برای پروژه بعدی، برنامه را بخر.'); return; }
     setProjects(getProjects());
     setNewOpen(false);
     onAdded(`پروژه «${project.name}» ساخته شد و «${pose.title}» به آن اضافه شد.`);

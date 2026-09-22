@@ -72,6 +72,7 @@ import { ColleaguesView } from './views/ColleaguesView';
 import { requestAfficheNotifications } from './services/afficheNotifications';
 import { ShootMode } from './components/ShootMode';
 import { QuickStartSheet } from './components/QuickStartSheet';
+import { restorePremium } from './services/bazaarBilling';
 
 export default function App() {
   const [booting, setBooting] = useState(true);
@@ -130,6 +131,12 @@ export default function App() {
     setSelLocId(getSelectedLocationId());
     setSelected((cur) => (cur ? all.find((p) => p.id === cur.id) || null : null));
   }, []);
+
+  useEffect(() => {
+    const refreshEntitlements = () => reload();
+    window.addEventListener('atelito:premium-changed', refreshEntitlements);
+    return () => window.removeEventListener('atelito:premium-changed', refreshEntitlements);
+  }, [reload]);
 
   // ناوبری برگشت: هر تغییر صفحه یک ورودی تاریخچه مرورگر می‌سازد تا دکمه برگشت
   // (چه در وب، چه دکمه سخت‌افزاری اندروید) همیشه دقیقاً یک قدم به عقب برود.
@@ -214,6 +221,7 @@ export default function App() {
 
   useEffect(() => {
     reload();
+    void restorePremium().then(() => reload());
     void requestAfficheNotifications();
     setShowIntro(!hasOnboarded());
     const t1 = setTimeout(() => setLeavingSplash(true), 700);
