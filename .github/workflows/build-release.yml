@@ -98,7 +98,9 @@ jobs:
       - name: Verify release is not debug-signed
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
-          apksigner verify --verbose "$APK"
+          APKSIGNER="$ANDROID_HOME/build-tools/35.0.0/apksigner"
+          test -x "$APKSIGNER"
+          "$APKSIGNER" verify --verbose "$APK"
           CERT=$(keytool -printcert -jarfile "$APK")
           echo "$CERT"
           ! echo "$CERT" | grep -qi "Android Debug"
