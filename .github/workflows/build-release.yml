@@ -66,6 +66,7 @@ jobs:
       - name: Create and sync Android project
         run: |
           npx cap add android
+          node scripts/android-jitpack.mjs
           npx capacitor-assets generate --android
           npx cap sync android
           node scripts/android-permissions.mjs
