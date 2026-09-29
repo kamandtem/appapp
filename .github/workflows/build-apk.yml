@@ -57,6 +57,9 @@ jobs:
       - name: Inject location permissions into AndroidManifest
         run: node scripts/android-permissions.mjs
 
+      - name: Add JitPack repository (for capacitor-poolakey)
+        run: node scripts/android-jitpack.mjs
+
       - name: Generate launcher icon and splash screen
         run: npx capacitor-assets generate --android
 
