@@ -135,9 +135,12 @@ export function saveProject(project: ShootProject): boolean {
 const all = getProjects().filter((p) => p.id !== project.id);
 if (!canUsePremium() && !all.some((p) => p.id === project.id) && all.length >= FREE_DAILY_PROJECTS) return false;
 if (!canUsePremium()) {
-  const items = (project.photoPoseIds || []).length + (project.videoPoseIds || []).length
-    + (project.photoGalleryItems || []).length + (project.videoGalleryItems || []).length;
-  if (items > FREE_PROJECT_ITEMS) return false;
+  const countItems = (p: ShootProject) => (p.photoPoseIds || []).length + (p.videoPoseIds || []).length
+    + (p.photoGalleryItems || []).length + (p.videoGalleryItems || []).length;
+  const items = countItems(project);
+  const previous = getProjects().find((p) => p.id === project.id);
+  // اگر پروژه از قبل بیشتر از سقف داشت، کم کردن یا ویرایش آن همیشه مجاز است؛ فقط اضافه‌کردن بسته است.
+  if (items > FREE_PROJECT_ITEMS && (!previous || items > countItems(previous))) return false;
 }
 return write(K.projects, [project, ...all]);
 }
@@ -443,6 +446,32 @@ return next;
 
 /* ---------------------------- خواندن کل ---------------------------- */
 
+/**
+ * نسخه رایگان: همه ژست‌های آماده نمایش داده می‌شوند، ولی فقط FREE_BUILTIN_POSES تا
+ * باز هستند. ژست‌های باز به‌صورت نوبتی از سناریوهای مختلف انتخاب می‌شوند تا هیچ
+ * فیلتری خالی نماند. بقیه با isLocked علامت می‌خورند (حذف نمی‌شوند).
+ */
+function lockForFreeTier(list: Pose[]): Pose[] {
+if (canUsePremium()) return list.map((p) => (p.isLocked ? { ...p, isLocked: false } : p));
+const groups = new Map<string, Pose[]>();
+list.forEach((p) => {
+  const key = p.scenario || 'other';
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(p);
+});
+const free = new Set<string>();
+const buckets = Array.from(groups.values());
+let round = 0;
+while (free.size < FREE_BUILTIN_POSES && buckets.some((b) => b.length > round)) {
+  for (const b of buckets) {
+    if (free.size >= FREE_BUILTIN_POSES) break;
+    if (b[round]) free.add(b[round].id);
+  }
+  round += 1;
+}
+return list.map((p) => ({ ...p, isLocked: !free.has(p.id) }));
+}
+
 /** ژست‌های آماده + ژست‌های کاربر، با عکس‌ها و یادداشت‌های ذخیره‌شده */
 export function getAllPoses(): Pose[] {
 const photos = getUserPhotos();
@@ -471,7 +500,7 @@ const promotedIds = new Set(getPromotedPoses().map((p) => p.id));
 return [
 ...getCustomPoses().map(merge),
 ...getPromotedPoses().map(merge),
-...INITIAL_POSES.filter((p) => !deleted.has(p.id) && !promotedIds.has(p.id)).slice(0, canUsePremium() ? undefined : FREE_BUILTIN_POSES).map(merge),
+...lockForFreeTier(INITIAL_POSES.filter((p) => !deleted.has(p.id) && !promotedIds.has(p.id)).map(merge)),
 ];
 }
 
@@ -636,7 +665,7 @@ sessionStorage.removeItem(K.session);
 
 /** ژست بعدی را با توجه به فیلتر فعال و ژست‌های دیده‌شده در همین جلسه پیشنهاد می‌دهد */
 export function getNextPose(currentId: string | undefined, filters: FilterState): Pose {
-const all = getAllPoses();
+const all = getAllPoses().filter((p) => !p.isLocked);
 let pool = filterPoses(all, filters);
 if (pool.length === 0) pool = all;
 
@@ -1001,7 +1030,7 @@ export function saveOfficeProject(proj: OfficeProject): { ok: boolean; error?: s
   const K = { officeProjects: 'pd_office_projects_v1' };
   const all = getOfficeProjects();
   const idx = all.findIndex((p) => p.id === proj.id);
-  if (!canUsePremium() && idx < 0 && all.length >= FREE_OFFICE_PROJECTS) return { ok: false, error: 'در نسخه رایگان فقط یک زوج می‌توانی در مدیریت آتلیه ثبت کنی. برای زوج دوم، برنامه را بخر.' };
+  if (!canUsePremium() && idx < 0 && all.length >= FREE_OFFICE_PROJECTS) return { ok: false, error: `در نسخه رایگان فقط ${FREE_OFFICE_PROJECTS.toLocaleString('fa-IR')} زوج می‌توانی در مدیریت آتلیه ثبت کنی. برای زوج بعدی، برنامه را بخر.` };
   const next = [...all];
   if (idx >= 0) next[idx] = proj;
   else next.unshift(proj);

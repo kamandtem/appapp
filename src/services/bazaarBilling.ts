@@ -10,7 +10,7 @@ type PurchaseInfo = {
   productId?: string;
   packageName?: string;
   purchaseToken?: string;
-  purchaseState?: number;
+  purchaseState?: number | string;
   dataSignature?: string;
   orderId?: string;
 };
@@ -50,7 +50,7 @@ const isValidPurchase = (item: PurchaseInfo | null | undefined): item is Purchas
   !!item
   && item.productId === BAZAAR_PRODUCT_ID
   && item.packageName === ANDROID_PACKAGE_NAME
-  && item.purchaseState === 0
+  && (item.purchaseState === 0 || item.purchaseState === '0' || item.purchaseState === 'PURCHASED')
   && typeof item.purchaseToken === 'string'
   && item.purchaseToken.length > 10
   && typeof item.dataSignature === 'string'

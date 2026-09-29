@@ -245,6 +245,11 @@ export default function App() {
   };
 
   const openPose = (pose: Pose) => {
+    if (pose.isLocked) {
+      toast('این ژست در نسخه کامل باز می‌شود. از تنظیمات می‌توانی نسخه کامل را بخری.', false);
+      goTab('settings');
+      return;
+    }
     setSelected(pose);
     setRecentIds(pushRecent(pose.id));
     if (tab !== 'detail') {
@@ -363,14 +368,15 @@ export default function App() {
       location: location || 'همه',
       scope: location ? 'همه' : 'عمومی',
     };
-    let queue = sortForProgression(filterPoses(poses, base, favoriteIds));
+    const openPoses = poses.filter((p) => !p.isLocked);
+    let queue = sortForProgression(filterPoses(openPoses, base, favoriteIds));
     if (location) {
       const general = queue.filter((p) => scopeOf(p) === 'عمومی');
       const special = queue.filter((p) => scopeOf(p) !== 'عمومی');
       queue = [...general, ...special];
     }
     if (queue.length === 0) {
-      queue = sortForProgression(filterPoses(poses, { ...EMPTY_FILTERS, scenario }, favoriteIds));
+      queue = sortForProgression(filterPoses(openPoses, { ...EMPTY_FILTERS, scenario }, favoriteIds));
     }
     if (queue.length === 0) { toast('ژستی برای این بخش پیدا نشد.', false); return; }
     setShootQueue(queue);

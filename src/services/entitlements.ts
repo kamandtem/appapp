@@ -2,7 +2,7 @@ import { isPremiumUnlocked } from './bazaarBilling';
 
 export const FREE_BUILTIN_POSES = 20;
 export const FREE_CUSTOM_POSES = 5;
-export const FREE_OFFICE_PROJECTS = 1;
+export const FREE_OFFICE_PROJECTS = 3;
 export const FREE_DAILY_PROJECTS = 1;
 export const FREE_PROJECT_ITEMS = 5;
 export const FREE_POSE_TIPS = 10;

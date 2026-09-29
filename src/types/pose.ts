@@ -278,6 +278,8 @@ export interface Pose {
   /** کد ثابت برای تطبیق عکس بیرونی با ژست هنگام انتقال به نسخه اصلی */
   transferCode?: string;
   isCustom?: boolean;
+  /** در نسخه رایگان قفل است؛ نمایش داده می‌شود ولی باز نمی‌شود */
+  isLocked?: boolean;
   createdAt?: number;
   note?: string;
   suggestedMinutes?: number;

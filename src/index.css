@@ -1001,3 +1001,6 @@
 .stage-step .scenario-stage-scroll { width:100%; min-width:0; max-width:100%; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; touch-action:pan-x; -webkit-overflow-scrolling:touch; padding:2px 1px 7px; }
 .stage-step .scenario-stage-options { display:flex; flex-wrap:nowrap; width:max-content; min-width:max-content; max-width:none; overflow:visible; gap:7px; }
 .stage-step .scenario-stage-options .pill { flex:0 0 auto; min-width:max-content; max-width:none; white-space:nowrap; }
+
+/* ژست قفل در نسخه رایگان */
+.pose-locked-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; background:color-mix(in oklch,var(--color-ink) 55%,transparent); color:var(--color-paper); font-size:11px; font-weight:700; backdrop-filter:blur(3px); pointer-events:none; }
