@@ -58,8 +58,8 @@ import { MyPosesView } from './views/MyPosesView';
 import { LocationsView } from './views/LocationsView';
 import { PoseDetailView } from './views/PoseDetailView';
 import { SettingsView } from './views/SettingsView';
-import { PrinciplesView } from './views/PrinciplesView';
-import { PoseTipsView } from './views/PoseTipsView';
+import { PoseEducationView } from './views/PoseEducationView';
+import { PURCHASE_REQUEST_EVENT, requestPurchase } from './services/entitlements';
 import { MyLocationsView } from './views/MyLocationsView';
 import { OfficeView } from './views/OfficeView';
 import { ProjectDetailView } from './views/ProjectDetailView';
@@ -246,8 +246,7 @@ export default function App() {
 
   const openPose = (pose: Pose) => {
     if (pose.isLocked) {
-      toast('این ژست در نسخه کامل باز می‌شود. از تنظیمات می‌توانی نسخه کامل را بخری.', false);
-      goTab('settings');
+      requestPurchase('این ژست در نسخه کامل باز می‌شود.');
       return;
     }
     setSelected(pose);
@@ -258,6 +257,20 @@ export default function App() {
     }
     scrollTop();
   };
+
+  // هر جای برنامه که به سقف نسخه رایگان برسد، کاربر مستقیم به بخش خرید می‌رود.
+  const goTabRef = useRef(goTab);
+  goTabRef.current = goTab;
+  useEffect(() => {
+    const onPurchaseRequest = (event: Event) => {
+      const message = (event as CustomEvent<{ message?: string }>).detail?.message;
+      if (message) toast(message, false);
+      goTabRef.current('settings');
+      setTimeout(() => document.getElementById('premium-purchase')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 250);
+    };
+    window.addEventListener(PURCHASE_REQUEST_EVENT, onPurchaseRequest);
+    return () => window.removeEventListener(PURCHASE_REQUEST_EVENT, onPurchaseRequest);
+  }, [toast]);
 
   const handleFavorite = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -695,8 +708,7 @@ export default function App() {
           />
         )}
 
-        {tab === 'principles' && <PrinciplesView />}
-        {tab === 'pose-tips' && <PoseTipsView />}
+        {(tab === 'pose-tips' || tab === 'principles') && <PoseEducationView initial={tab === 'principles' ? 'principles' : 'tips'} />}
 
         {tab === 'detail' && selected && (
           <PoseDetailView

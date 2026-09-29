@@ -4,6 +4,7 @@ import { Pose } from '../types/pose';
 import { ShootProject, getProjects, saveProject } from '../services/storage';
 import { ProjectDialog, ProjectDialogResult } from './ProjectDialog';
 import { isoToJalaliLabel } from '../services/jalali';
+import { DAILY_PROJECT_LIMIT_MESSAGE, PROJECT_ITEMS_LIMIT_MESSAGE, dailyProjectLimitReached, requestPurchase } from '../services/entitlements';
 
 interface Props {
   pose: Pose | null;
@@ -20,7 +21,7 @@ export const AddToProjectSheet: React.FC<Props> = ({ pose, onClose, onAdded }) =
 
   const addTo = (project: ShootProject) => {
     const saved = saveProject({ ...project, poseIds: Array.from(new Set([...(project.poseIds || []), pose.id])), photoPoseIds: Array.from(new Set([...(project.photoPoseIds || project.poseIds || []), pose.id])), videoPoseIds: project.videoPoseIds || [], photoGalleryItems: project.photoGalleryItems || [], videoGalleryItems: project.videoGalleryItems || [], videoDetails: project.videoDetails || {} });
-    if (!saved) { onAdded('در نسخه رایگان هر پروژه روز فقط ۵ عکس یا ژست می‌تواند داشته باشد. برای ادامه، برنامه را بخر.'); return; }
+    if (!saved) { onClose(); requestPurchase(PROJECT_ITEMS_LIMIT_MESSAGE); return; }
     onAdded(`«${pose.title}» به «${project.name}» اضافه شد.`);
     onClose();
   };
@@ -38,7 +39,7 @@ export const AddToProjectSheet: React.FC<Props> = ({ pose, onClose, onAdded }) =
       videoDetails: {},
       createdAt: Date.now(),
     };
-    if (!saveProject(project)) { onAdded('در نسخه رایگان فقط یک پروژه روز می‌توانی بسازی. برای پروژه بعدی، برنامه را بخر.'); return; }
+    if (!saveProject(project)) { setNewOpen(false); onClose(); requestPurchase(DAILY_PROJECT_LIMIT_MESSAGE); return; }
     setProjects(getProjects());
     setNewOpen(false);
     onAdded(`پروژه «${project.name}» ساخته شد و «${pose.title}» به آن اضافه شد.`);
@@ -100,7 +101,7 @@ export const AddToProjectSheet: React.FC<Props> = ({ pose, onClose, onAdded }) =
             })}
 
             <button
-              onClick={() => setNewOpen(true)}
+              onClick={() => { if (dailyProjectLimitReached(getProjects().length)) { onClose(); requestPurchase(DAILY_PROJECT_LIMIT_MESSAGE); return; } setNewOpen(true); }}
               className="w-full btn btn-ghost !py-3 mt-1.5"
             >
               <Plus className="w-4 h-4 text-gold" />

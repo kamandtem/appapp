@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Aperture, ArrowRight, Camera, Check, ChevronLeft, CircleAlert, Images, Search, SlidersHorizontal, Sparkles, Users, X } from 'lucide-react';
-import { canUsePremium, FREE_POSE_TIPS } from '../services/entitlements';
+import { Aperture, ArrowRight, Camera, Check, ChevronLeft, CircleAlert, Images, Lock, Search, SlidersHorizontal, Sparkles, Users, X } from 'lucide-react';
+import { canUsePremium, FREE_POSE_TIPS, requestPurchase } from '../services/entitlements';
 
 type PoseTip = {
   id: string;
@@ -28,7 +28,25 @@ const CATEGORIES: Array<{ id: CategoryId; label: string; count: number; icon: Re
 const DIFFICULTY: Record<PoseTip['difficulty'], string> = { easy: 'آسان', medium: 'متوسط', hard: 'حرفه‌ای' };
 const assetUrl = (path: string) => `${import.meta.env.BASE_URL}pose-tips/${path.replace(/^\/+/, '')}`;
 
+/** ۲۰ ترفند باز نسخه رایگان، نوبتی از هر دسته تا همه دسته‌ها نمونه باز داشته باشند. */
+const freeTipIds = (all: PoseTip[]): Set<string> => {
+  const groups = new Map<string, PoseTip[]>();
+  all.forEach(tip => { if (!groups.has(tip.categoryId)) groups.set(tip.categoryId, []); groups.get(tip.categoryId)!.push(tip); });
+  const buckets = Array.from(groups.values());
+  const free = new Set<string>();
+  for (let round = 0; free.size < FREE_POSE_TIPS && buckets.some(b => b.length > round); round += 1) {
+    for (const b of buckets) { if (free.size >= FREE_POSE_TIPS) break; if (b[round]) free.add(b[round].id); }
+  }
+  return free;
+};
+
 export const PoseTipsView: React.FC = () => {
+  const [premium, setPremium] = useState(canUsePremium());
+  useEffect(() => {
+    const refresh = () => setPremium(canUsePremium());
+    window.addEventListener('atelito:premium-changed', refresh);
+    return () => window.removeEventListener('atelito:premium-changed', refresh);
+  }, []);
   const [pack, setPack] = useState<PosePack | null>(null);
   const [error, setError] = useState(false);
   const [category, setCategory] = useState<CategoryId>('all');
@@ -52,7 +70,10 @@ export const PoseTipsView: React.FC = () => {
       return [pose.name, pose.description, pose.category, ...pose.tags, ...pose.steps].join(' ').toLocaleLowerCase('fa').includes(query);
     });
   }, [pack, category, search]);
-  const visiblePoses = canUsePremium() ? poses : poses.slice(0, FREE_POSE_TIPS);
+  const freeIds = useMemo(() => freeTipIds(pack?.poses || []), [pack]);
+  const isLocked = (tip: PoseTip) => !premium && !freeIds.has(tip.id);
+  // همه ترفندها نمایش داده می‌شوند؛ قفل‌ها بعد از بازها می‌آیند.
+  const visiblePoses = premium ? poses : [...poses.filter(p => !isLocked(p)), ...poses.filter(p => isLocked(p))];
 
   if (selected) return <PoseTipDetail pose={selected} onBack={() => setSelected(null)} />;
 
@@ -80,7 +101,7 @@ export const PoseTipsView: React.FC = () => {
     <div className="flex items-center justify-between gap-3"><div><h2 className="text-[16px] font-black">ترفندها</h2><p className="mt-1 text-[10px] text-muted">{visiblePoses.length.toLocaleString('fa-IR')} نتیجه</p></div><SlidersHorizontal className="h-4 w-4 text-olive" aria-hidden /></div>
     {!pack && !error && <PoseTipsSkeleton />}
     {error && <section className="rounded-[24px] border border-line bg-surface p-6 text-center"><CircleAlert className="mx-auto h-7 w-7 text-rose" /><h2 className="mt-3 text-[14px] font-extrabold">بسته ژست‌ها باز نشد</h2><p className="mt-2 text-[11px] leading-6 text-muted">برنامه را یک بار ببند و دوباره باز کن.</p></section>}
-    {pack && visiblePoses.length > 0 && <section className="grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3">{visiblePoses.map(pose => <button key={pose.id} onClick={() => { setSelected(pose); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group text-right"><span className="relative block aspect-[3/4] overflow-hidden rounded-[22px] bg-surface2"><img src={assetUrl(pose.image)} alt={pose.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-active:scale-[1.02]" /><span className="absolute bottom-2 right-2 rounded-full bg-olive px-2.5 py-1 text-[9px] font-extrabold text-paper">{DIFFICULTY[pose.difficulty]}</span></span><span className="mt-2.5 block truncate text-left text-[12px] font-extrabold" dir="ltr">{pose.name}</span><span className="mt-1 flex items-center justify-between text-[9px] text-muted"><span>{CATEGORIES.find(item => item.id === pose.categoryId)?.label}</span><ChevronLeft className="h-3.5 w-3.5 text-faint" /></span></button>)}</section>}
+    {pack && visiblePoses.length > 0 && <section className="grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3">{visiblePoses.map(pose => <button key={pose.id} onClick={() => { if (isLocked(pose)) { requestPurchase('این ترفند در نسخه کامل باز می‌شود.'); return; } setSelected(pose); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group text-right"><span className="relative block aspect-[3/4] overflow-hidden rounded-[22px] bg-surface2"><img src={assetUrl(pose.image)} alt={pose.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-active:scale-[1.02]" />{isLocked(pose) && <span className="pose-locked-overlay"><Lock className="w-5 h-5" /><span>نسخه کامل</span></span>}<span className="absolute bottom-2 right-2 rounded-full bg-olive px-2.5 py-1 text-[9px] font-extrabold text-paper">{DIFFICULTY[pose.difficulty]}</span></span><span className="mt-2.5 block truncate text-left text-[12px] font-extrabold" dir="ltr">{pose.name}</span><span className="mt-1 flex items-center justify-between text-[9px] text-muted"><span>{CATEGORIES.find(item => item.id === pose.categoryId)?.label}</span><ChevronLeft className="h-3.5 w-3.5 text-faint" /></span></button>)}</section>}
     {pack && poses.length === 0 && <section className="py-12 text-center"><Search className="mx-auto h-7 w-7 text-faint" /><h2 className="mt-3 text-[14px] font-extrabold">چیزی پیدا نشد</h2><button onClick={() => { setSearch(''); setCategory('all'); }} className="btn btn-ghost mt-4">پاک کردن فیلترها</button></section>}
   </div>;
 };

@@ -40,7 +40,7 @@ export const PrinciplesView: React.FC = () => {
   const current = PHASES[phase];
   return (
     <div className="space-y-5">
-      <SectionGuide section="principles" title="اصول ژست‌دهی" text="بدن، ارتباط، حرکت و کادر را مرحله‌به‌مرحله تمرین کن." />
+      <SectionGuide section="principles" title="اصول پایه ژست‌دهی" text="بدن، ارتباط، حرکت و کادر را مرحله‌به‌مرحله تمرین کن." />
       <section className="relative pt-1">
         <div className="flex items-end justify-between gap-3"><div><span className="pill"><WandSparkles className="w-3 h-3 text-gold" /> مسیر یادگیری</span><h1 className="text-[24px] font-extrabold leading-tight mt-3">ژست حفظ نکن،<br /><span className="text-gold">ژست بساز.</span></h1></div><span className="text-[11px] text-muted">مرحله {phase + 1} از {PHASES.length}</span></div>
         <div className="mt-6 relative"><div className="absolute top-5 right-5 left-5 h-px bg-line" /><div className="relative flex justify-between">{PHASES.map((p, i) => <button key={p.n} onClick={() => { setPhase(i); setOpen(`${i}-0`); }} className="flex flex-col items-center gap-2" style={{ color: i === phase ? p.color : 'var(--color-faint)' }}><span className="w-10 h-10 rounded-full flex items-center justify-center border-2 text-[11px] font-extrabold" style={{ background: i <= phase ? `color-mix(in srgb, ${p.color} 16%, var(--color-bg))` : 'var(--color-bg)', borderColor: i <= phase ? p.color : 'var(--color-line)' }}>{i < phase ? <Check className="w-4 h-4" /> : p.n}</span><span className="text-[10px] font-bold">{p.label}</span></button>)}</div></div>
