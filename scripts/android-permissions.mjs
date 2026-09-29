@@ -1,5 +1,5 @@
 /**
- * تزریق مجوزهای موقعیت مکانی به AndroidManifest.xml بعد از `cap add android`.
+ * تزریق مجوزهای موقعیت مکانی، اعلان و مخاطبین به AndroidManifest.xml بعد از `cap add android`.
  *
  * چرا اینجا؟ پوشه‌ی android/ در .gitignore است و در هر بیلد CI با
  * `npx cap add android` از نو ساخته می‌شود. پس هر ویرایش دستی مانیفست از بین می‌رود.
@@ -17,6 +17,8 @@ const PERMISSIONS = [
   'android.permission.INTERNET',
   'android.permission.ACCESS_NETWORK_STATE',
   'android.permission.POST_NOTIFICATIONS',
+  // اتصال به مخاطبین برای افزودن همکاران، اعضای آتلیه و مشتری‌ها
+  'android.permission.READ_CONTACTS',
 ];
 
 if (!existsSync(MANIFEST)) {

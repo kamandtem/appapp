@@ -73,11 +73,14 @@ import { requestAfficheNotifications } from './services/afficheNotifications';
 import { ShootMode } from './components/ShootMode';
 import { QuickStartSheet } from './components/QuickStartSheet';
 import { restorePremium } from './services/bazaarBilling';
+import { ContactPickerSheet, ContactsPermissionPrompt } from './components/ContactPickerSheet';
+import { shouldAskContactsOnFirstRun } from './services/contactPicker';
 
 export default function App() {
   const [booting, setBooting] = useState(true);
   const [leavingSplash, setLeavingSplash] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
+  const [askContacts, setAskContacts] = useState(false);
 
   const [prefs, setPrefs] = useState<Prefs>(getPrefs());
   const [tab, setTab] = useState<ViewTab>('home');
@@ -233,6 +236,14 @@ export default function App() {
       clearTimeout(t2);
     };
   }, [reload]);
+
+  // بعد از نصب: اولین اجرا، بعد از اسپلش و معرفی برنامه، اجازه اتصال به مخاطبین گرفته شود.
+  useEffect(() => {
+    if (booting || showIntro) return;
+    let alive = true;
+    const t = window.setTimeout(() => { void shouldAskContactsOnFirstRun().then((ask) => { if (alive && ask) setAskContacts(true); }); }, 900);
+    return () => { alive = false; window.clearTimeout(t); };
+  }, [booting, showIntro]);
 
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -780,6 +791,8 @@ export default function App() {
       />
 
       <ToastStack items={toasts} />
+      <ContactPickerSheet />
+      <ContactsPermissionPrompt open={askContacts} onClose={() => setAskContacts(false)} />
 
       <ConfirmDialog request={confirmRequest} onClose={() => setConfirmRequest(null)} />
 

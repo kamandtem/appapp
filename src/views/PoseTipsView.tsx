@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Aperture, ArrowRight, Camera, Check, ChevronLeft, CircleAlert, Images, Lock, Search, SlidersHorizontal, Sparkles, Users, X } from 'lucide-react';
+import { Aperture, ArrowRight, Camera, Check, ChevronLeft, CircleAlert, Hand, Images, Lock, Search, SlidersHorizontal, Sparkles, Users, X } from 'lucide-react';
 import { canUsePremium, FREE_POSE_TIPS, requestPurchase } from '../services/entitlements';
 
 type PoseTip = {
@@ -101,20 +101,49 @@ export const PoseTipsView: React.FC = () => {
     <div className="flex items-center justify-between gap-3"><div><h2 className="text-[16px] font-black">ترفندها</h2><p className="mt-1 text-[10px] text-muted">{visiblePoses.length.toLocaleString('fa-IR')} نتیجه</p></div><SlidersHorizontal className="h-4 w-4 text-olive" aria-hidden /></div>
     {!pack && !error && <PoseTipsSkeleton />}
     {error && <section className="rounded-[24px] border border-line bg-surface p-6 text-center"><CircleAlert className="mx-auto h-7 w-7 text-rose" /><h2 className="mt-3 text-[14px] font-extrabold">بسته ژست‌ها باز نشد</h2><p className="mt-2 text-[11px] leading-6 text-muted">برنامه را یک بار ببند و دوباره باز کن.</p></section>}
-    {pack && visiblePoses.length > 0 && <section className="grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3">{visiblePoses.map(pose => <button key={pose.id} onClick={() => { if (isLocked(pose)) { requestPurchase('این ترفند در نسخه کامل باز می‌شود.'); return; } setSelected(pose); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group text-right"><span className="relative block aspect-[3/4] overflow-hidden rounded-[22px] bg-surface2"><img src={assetUrl(pose.image)} alt={pose.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-active:scale-[1.02]" />{isLocked(pose) && <span className="pose-locked-overlay"><Lock className="w-5 h-5" /><span>نسخه کامل</span></span>}<span className="absolute bottom-2 right-2 rounded-full bg-olive px-2.5 py-1 text-[9px] font-extrabold text-paper">{DIFFICULTY[pose.difficulty]}</span></span><span className="mt-2.5 block truncate text-left text-[12px] font-extrabold" dir="ltr">{pose.name}</span><span className="mt-1 flex items-center justify-between text-[9px] text-muted"><span>{CATEGORIES.find(item => item.id === pose.categoryId)?.label}</span><ChevronLeft className="h-3.5 w-3.5 text-faint" /></span></button>)}</section>}
+    {pack && visiblePoses.length > 0 && <section className="grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3">{visiblePoses.map(pose => <button key={pose.id} onClick={() => { if (isLocked(pose)) { requestPurchase('این ترفند در نسخه کامل باز می‌شود.'); return; } setSelected(pose); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group text-right"><span className="relative block aspect-[3/4] overflow-hidden rounded-[22px] bg-surface2"><img src={assetUrl(pose.image)} alt={pose.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-active:scale-[1.02]" />{isLocked(pose) && <span className="pose-locked-overlay"><Lock className="w-5 h-5" /><span>نسخه کامل</span></span>}<span className="absolute bottom-2 right-2 rounded-full bg-olive px-2.5 py-1 text-[9px] font-extrabold text-paper">{DIFFICULTY[pose.difficulty]}</span></span><span className="mt-2.5 block truncate text-right text-[12px] font-extrabold">{pose.name}</span><span className="mt-1 flex items-center justify-between text-[9px] text-muted"><span>{CATEGORIES.find(item => item.id === pose.categoryId)?.label}</span><ChevronLeft className="h-3.5 w-3.5 text-faint" /></span></button>)}</section>}
     {pack && poses.length === 0 && <section className="py-12 text-center"><Search className="mx-auto h-7 w-7 text-faint" /><h2 className="mt-3 text-[14px] font-extrabold">چیزی پیدا نشد</h2><button onClick={() => { setSearch(''); setCategory('all'); }} className="btn btn-ghost mt-4">پاک کردن فیلترها</button></section>}
   </div>;
 };
+
+/** راهنمای دست متناسب با دسته و تگ‌های هر ژست (بر اساس اصول رایج آموزش ژست عروسی). */
+function handGuideFor(pose: PoseTip): string[] {
+  const text = [pose.name, pose.description, ...pose.tags, ...pose.steps].join(' ');
+  const out: string[] = [];
+  const has = (re: RegExp) => re.test(text);
+  if (pose.categoryId === 'couple') {
+    if (has(/آغوش|بغل|در آغوش/)) out.push('دست آقا روی پشت خانم کمی بالاتر از کمر، کف دست باز و بدون فشار؛ دست خانم روی سینه یا شانه او.');
+    if (has(/پشت/)) out.push('در آغوش از پشت، دست‌های آقا روی شکم یا کمر خانم؛ خانم دستش را روی دست او بگذارد و حلقه رو به دوربین باشد.');
+    if (has(/بوس|پیشانی|صورت|گونه/)) out.push('یک دست کنار صورت نفر مقابل: نوک انگشت‌ها زیر گوش و شست نرم روی گونه؛ کف دست صورت را نپوشاند.');
+    if (has(/قدم|راه|دست در دست|دست‌ها را بگیر/)) out.push('انگشت‌ها درهم و نرم، دست‌ها هم‌سطح کمر و کمی در حرکت؛ بازوها کاملاً کشیده نباشند.');
+    if (has(/نشست|نشسته/)) out.push('در حالت نشسته، دست‌ها روی زانوی خود یا نفر مقابل با لبه دست؛ کف دست تخت روی ران نباشد.');
+    out.push('در کلوز حداکثر دو دست در کادر بماند تا قاب شلوغ نشود.');
+  } else if (pose.categoryId === 'group') {
+    out.push('هر نفر حداقل یک دست روی شانه یا دور کمر نفر کناری بگذارد؛ دست‌های آویزان موازی در ردیف نباشد.');
+    out.push('دست‌های قفل جلوی کمر (برگ انجیر) و دست‌به‌سینه ممنوع؛ آقایان یک دست در جیب با شست بیرون.');
+    out.push('دسته‌گل‌ها یا اشیای دستی هم‌ارتفاع روی لگن نگه داشته شوند.');
+  } else {
+    if (has(/صورت|چانه|مو|گونه/)) out.push('فقط نوک انگشت‌ها کنار خط فک یا مو؛ دست کمی عقب‌تر از صورت و لبه دست رو به دوربین.');
+    if (has(/کمر|لگن|باسن/)) out.push('دست روی لگن با انگشت‌های رو به پایین و آرنج کمی دور از بدن تا خط کمر باز شود.');
+    if (has(/جیب/)) out.push('دست در جیب فقط تا بند دوم انگشت‌ها، شست بیرون؛ دست کامل ناپدید نشود.');
+    if (has(/نشست|نشسته|زانو/)) out.push('ساعد روی ران یا زانو و مچ آزاد؛ کف دست تخت روی پا نگذارید.');
+    if (has(/دیوار|تکیه/)) out.push('دست آزاد را با نوک انگشت روی دیوار یا لباس بگذارید؛ به دیوار فشار ندهید.');
+    out.push('هر دو دست یک مقصد داشته باشند (لباس، مو، جیب، کمر یا محیط)؛ دست آویزان نماند.');
+    out.push('انگشت‌ها شل و کمی جدا، مچ کمی خم و شست پنهان؛ کف یا پشت دست تخت رو به لنز نباشد.');
+  }
+  return Array.from(new Set(out)).slice(0, 5);
+}
 
 const PoseTipDetail: React.FC<{ pose: PoseTip; onBack: () => void }> = ({ pose, onBack }) => <article className="space-y-6" dir="rtl">
   <button onClick={onBack} className="btn btn-ghost !px-4"><ArrowRight className="h-4 w-4" />همه ترفندها</button>
   <header className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] sm:items-end">
     <div className="overflow-hidden rounded-[28px] bg-surface2"><img src={assetUrl(pose.image)} alt={pose.name} className="aspect-[3/4] h-full w-full object-cover" /></div>
-    <div className="pb-1"><div className="flex flex-wrap gap-2"><span className="pill">{CATEGORIES.find(item => item.id === pose.categoryId)?.label}</span><span className="pill">{DIFFICULTY[pose.difficulty]}</span></div><h1 className="mt-4 text-left text-[25px] font-black leading-tight" dir="ltr">{pose.name}</h1><p className="mt-4 text-left text-[13px] leading-7 text-muted" dir="rtl">{pose.description}</p></div>
+    <div className="pb-1"><div className="flex flex-wrap gap-2"><span className="pill">{CATEGORIES.find(item => item.id === pose.categoryId)?.label}</span><span className="pill">{DIFFICULTY[pose.difficulty]}</span></div><h1 className="mt-4 text-right text-[25px] font-black leading-tight">{pose.name}</h1><p className="mt-4 text-right text-[13px] leading-7 text-muted">{pose.description}</p></div>
   </header>
-  <DetailSection icon={Check} title="مراحل اجرا"><ol className="space-y-3" dir="ltr">{pose.steps.map((step, index) => <li key={step} className="flex items-start gap-3 text-left"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-olive text-[10px] font-black text-paper">{index + 1}</span><p className="pt-0.5 text-[12px] leading-6 text-muted">{step}</p></li>)}</ol></DetailSection>
-  <DetailSection icon={Camera} title="تنظیم دوربین"><dl className="grid grid-cols-2 gap-x-4 gap-y-5 text-left" dir="ltr"><CameraFact label="زاویه" value={pose.camera_tips.angle} /><CameraFact label="کادربندی" value={pose.camera_tips.framing} /><CameraFact label="لنز" value={pose.camera_tips.lens} /><CameraFact label="نور" value={pose.camera_tips.lighting} /></dl></DetailSection>
-  <DetailSection icon={CircleAlert} title="اشتباهات رایج" tone="rose"><ul className="space-y-2.5 text-left" dir="ltr">{pose.common_mistakes.map(mistake => <li key={mistake} className="flex items-start gap-2 text-[12px] leading-6 text-muted"><X className="mt-1 h-3.5 w-3.5 shrink-0 text-rose" />{mistake}</li>)}</ul></DetailSection>
+  <DetailSection icon={Check} title="مراحل اجرا"><ol className="space-y-3">{pose.steps.map((step, index) => <li key={step} className="flex items-start gap-3 text-right"><span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-olive text-[10px] font-black text-paper">{(index + 1).toLocaleString('fa-IR')}</span><p className="pt-0.5 text-[12px] leading-6 text-muted">{step}</p></li>)}</ol></DetailSection>
+  <DetailSection icon={Hand} title="دست‌ها چه کنند؟"><ul className="space-y-2.5 text-right">{handGuideFor(pose).map(tip => <li key={tip} className="flex items-start gap-2 text-[12px] leading-6 text-muted"><Check className="mt-1 h-3.5 w-3.5 shrink-0 text-olive" />{tip}</li>)}</ul><p className="mt-4 text-[10.5px] leading-6 text-faint">آموزش کامل در تب «دست‌ها» همین بخش است.</p></DetailSection>
+  <DetailSection icon={Camera} title="تنظیم دوربین"><dl className="grid grid-cols-2 gap-x-4 gap-y-5 text-right"><CameraFact label="زاویه" value={pose.camera_tips.angle} /><CameraFact label="کادربندی" value={pose.camera_tips.framing} /><CameraFact label="لنز" value={pose.camera_tips.lens} /><CameraFact label="نور" value={pose.camera_tips.lighting} /></dl></DetailSection>
+  <DetailSection icon={CircleAlert} title="اشتباهات رایج" tone="rose"><ul className="space-y-2.5 text-right">{pose.common_mistakes.map(mistake => <li key={mistake} className="flex items-start gap-2 text-[12px] leading-6 text-muted"><X className="mt-1 h-3.5 w-3.5 shrink-0 text-rose" />{mistake}</li>)}</ul></DetailSection>
   <div className="flex flex-wrap gap-2">{pose.tags.map(tag => <span key={tag} className="pill" dir="rtl">{tag}</span>)}</div>
 </article>;
 
