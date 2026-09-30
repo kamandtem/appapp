@@ -81,7 +81,7 @@ export async function requestContactsPermission(..._args: unknown[]): Promise<Co
   try { return (await Contacts.requestPermissions()).contacts; } catch { return 'denied'; }
 }
 
-export async function loadPhoneContacts(): Promise<PhoneContact[]> {
+export async function loadPhoneContacts(..._args: unknown[]): Promise<PhoneContact[]> {
   if (!isNative() || !Contacts.getContacts) return [];
   try {
     const result = await Contacts.getContacts({ projection: { name: true, phones: true } });
@@ -89,7 +89,7 @@ export async function loadPhoneContacts(): Promise<PhoneContact[]> {
   } catch { return []; }
 }
 
-export async function pickWithSystemPicker(): Promise<PhoneContact | null> {
+export async function pickWithSystemPicker(..._args: unknown[]): Promise<PhoneContact | null> {
   if (!isNative() || (await checkContactsPermission()) !== 'granted') return null;
   try {
     const result = await Contacts.pickContact({ projection: { name: true, phones: true } });
