@@ -116,10 +116,18 @@ jobs:
           cp android/app/build/outputs/bundle/release/app-release.aab \
             "out/atelito-RELEASE-${{ inputs.version_name }}-${{ inputs.version_code }}.aab"
 
-      - name: Upload signed release
+      - name: Upload signed APK separately
         uses: actions/upload-artifact@v4
         with:
-          name: atelito-signed-release-${{ inputs.version_name }}-${{ inputs.version_code }}
-          path: out/*
+          name: atelito-APK-${{ inputs.version_name }}-${{ inputs.version_code }}
+          path: out/atelito-RELEASE-${{ inputs.version_name }}-${{ inputs.version_code }}.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload signed AAB separately
+        uses: actions/upload-artifact@v4
+        with:
+          name: atelito-AAB-${{ inputs.version_name }}-${{ inputs.version_code }}
+          path: out/atelito-RELEASE-${{ inputs.version_name }}-${{ inputs.version_code }}.aab
           if-no-files-found: error
           retention-days: 30

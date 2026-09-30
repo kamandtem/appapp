@@ -8,6 +8,7 @@ import {
   Trash2,
   Database,
   WifiOff,
+  ShieldCheck,
 } from 'lucide-react';
 import { Pose, ViewTab } from '../types/pose';
 import {
@@ -183,6 +184,14 @@ export const SettingsView: React.FC<Props> = ({
           <Trash2 className="w-4 h-4" />
           پاک کردن همه داده‌های شخصی
         </button>
+      </div>
+
+      <div className="card p-4 space-y-2">
+        <a href="/privacy.html" target="_blank" rel="noreferrer" className="flex items-center gap-2.5 text-[12px] font-bold text-ink">
+          <ShieldCheck className="w-4 h-4 text-gold" />
+          سیاست حریم خصوصی
+        </a>
+        <p className="text-[10px] leading-relaxed text-muted">اطلاعات مخاطبین و موقعیت مکانی فقط برای قابلیت‌های داخل برنامه استفاده می‌شود و به سرور ارسال نمی‌شود.</p>
       </div>
 
       <div className="card p-4 flex items-start gap-2.5">
