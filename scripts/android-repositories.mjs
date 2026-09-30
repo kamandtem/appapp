@@ -1,32 +1,26 @@
-/**
- * افزودن مخزن JitPack به پروژه اندروید.
- * کتابخانه Poolakey بازار (com.github.cafebazaar.Poolakey) فقط روی JitPack منتشر شده
- * و بدون این مخزن، بیلد با خطای «Could not find com.github.cafebazaar.Poolakey» متوقف می‌شود.
- * اجرا: بعد از `npx cap add android` (و قبل یا بعد از cap sync).
- */
+/** Add the repository used by CafeBazaar Poolakey to a freshly generated Capacitor project. */
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
-const JITPACK = "maven { url 'https://jitpack.io' }";
-let patched = 0;
+const files = ['android/settings.gradle', 'android/build.gradle'];
+const repo = "maven { url = uri('https://jitpack.io') }";
+let changed = false;
 
-const patch = (path, pattern) => {
-  if (!existsSync(path)) return;
-  let text = readFileSync(path, 'utf8');
-  if (text.includes('jitpack.io')) { patched += 1; return; }
-  const next = text.replace(pattern, (m) => `${m}\n        ${JITPACK}`);
-  if (next !== text) {
-    writeFileSync(path, next, 'utf8');
-    patched += 1;
-    console.log(`[android-repositories] JitPack به ${path} اضافه شد.`);
+for (const file of files) {
+  if (!existsSync(file)) continue;
+  let text = readFileSync(file, 'utf8');
+  if (text.includes('https://jitpack.io')) continue;
+  if (file.endsWith('settings.gradle') && text.includes('dependencyResolutionManagement')) {
+    text = text.replace(/(repositories\s*\{)/, `$1\n        ${repo}`);
+  } else if (text.includes('allprojects')) {
+    text = text.replace(/(repositories\s*\{)/, `$1\n        ${repo}`);
+  } else {
+    text += `\nallprojects { repositories { ${repo} } }\n`;
   }
-};
-
-// الگوی پیش‌فرض Capacitor: allprojects { repositories { google() ...
-patch('android/build.gradle', /allprojects\s*\{\s*repositories\s*\{/);
-// اگر پروژه از dependencyResolutionManagement استفاده کند
-patch('android/settings.gradle', /dependencyResolutionManagement\s*\{[\s\S]*?repositories\s*\{/);
-
-if (patched === 0) {
-  console.error('[android-repositories] جای مناسب برای افزودن JitPack پیدا نشد.');
+  writeFileSync(file, text, 'utf8');
+  changed = true;
+  console.log(`[android-repositories] added JitPack to ${file}`);
+}
+if (!changed) {
+  console.error('[android-repositories] no Android Gradle file found');
   process.exit(1);
 }
