@@ -11,7 +11,6 @@ import {
   Heart,
   FolderHeart,
   PlusCircle,
-  BookOpen,
   Images,
   Settings,
   UserRound,
@@ -94,7 +93,7 @@ export const SideMenu: React.FC<Props> = ({
     { tab: 'affiches', icon: CalendarDays, label: 'آفیش' },
     { tab: 'colleagues', icon: UsersRound, label: 'همکارانم' },
     { tab: 'library', icon: LayoutGrid, label: 'کتابخانه ژست‌ها', badge: counts.total },
-    { tab: 'pose-tips', icon: BookOpen, label: 'آموزش ژست‌دهی' },
+    { tab: 'pose-tips', icon: Images, label: 'آموزش ژست‌دهی', badge: 120 },
     { tab: 'myposes', icon: FolderHeart, label: 'ژست‌های من', badge: counts.mine },
     { tab: 'mylocations', icon: MapPinned, label: 'لوکیشن‌های من' },
     { tab: 'weather', icon: CloudSun, label: 'آب‌وهوا و نور' },
@@ -171,7 +170,7 @@ export const SideMenu: React.FC<Props> = ({
         {/* Navigation Menu */}
         <nav className="mx-4 border-t border-white/16 py-3">
           {items.map((it, idx) => {
-            const active = it.tab && activeTab === it.tab;
+            const active = it.tab && (activeTab === it.tab || (it.tab === 'pose-tips' && activeTab === 'principles'));
             const Icon = it.icon;
             return (
               <button

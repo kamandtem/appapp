@@ -69,8 +69,6 @@ jobs:
           npx capacitor-assets generate --android
           npx cap sync android
           node scripts/android-permissions.mjs
-          node scripts/android-repositories.mjs
-          grep -q "jitpack.io" android/build.gradle android/settings.gradle
           test -f android/app/src/main/AndroidManifest.xml
           grep -Ri "poolakey" android/app/src/main android/app/build.gradle android/capacitor.settings.gradle
 

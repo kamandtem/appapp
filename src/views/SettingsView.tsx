@@ -128,7 +128,7 @@ export const SettingsView: React.FC<Props> = ({
         />
       </div>
 
-      <div id="premium-purchase" className="card p-4 space-y-3">
+      <div className="card p-4 space-y-3">
         <h3 className="font-extrabold text-[14px]">امکانات کامل آتلیتو</h3>
         <p className="text-[11px] leading-relaxed text-muted">
           {premium ? 'خرید شما فعال است و امکانات کامل برنامه در دسترس است.' : 'با خرید نسخه کامل، امکانات حرفه‌ای آتلیتو را فعال کن.'}

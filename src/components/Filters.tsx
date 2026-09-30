@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Check, ChevronDown, RotateCcw, Search, SlidersHorizontal, X } from 'lucide-react';
 import { CategoryType, EMPTY_FILTERS, FilterState, Framing, LocationType, Pose, PoseType } from '../types/pose';
 import { FRAMINGS, runsIn, scopeOf } from '../data/taxonomy';
@@ -24,13 +24,6 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
     if (selectedLocation === 'ژست عمومی') return source.filter((pose) => scopeOf(pose) === 'عمومی');
     return source;
   }, [allPoses, selectedLocation]);
-  const stageRef = useRef<HTMLDivElement>(null);
-  // بلافاصله بعد از انتخاب «باغ عمارت / ژست عمومی / گیف‌ها» فیلتر دوم (مرحله) جلوی چشم بیاید.
-  useEffect(() => {
-    if (!asksForStage || !moreOpen) return;
-    const t = window.setTimeout(() => stageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
-    return () => window.clearTimeout(t);
-  }, [asksForStage, selectedLocation, moreOpen]);
   const advancedCount = [filters.category !== 'همه', filters.poseType !== 'همه', filters.framing !== 'همه', filters.customOnly].filter(Boolean).length;
 
   const active = useMemo(() => [
@@ -90,7 +83,7 @@ export const Filters: React.FC<Props> = ({ filters, onChange, total, allPoses })
 
     {moreOpen && <div className="filter-panel a-fade">
       <div className="filter-group location-first"><span>کجا هستی؟</span><div className="filter-options location-options no-scrollbar">{LOCATIONS.map(location => <button type="button" key={location} onClick={() => pickLocation(location)} className={selectedLocation === location ? 'selected' : ''}>{selectedLocation === location && <Check className="w-3 h-3" />}{location}</button>)}</div></div>
-      {asksForStage && <div ref={stageRef} className="stage-step a-fade"><span className="filter-step-title">کدام مرحله‌ای؟</span><ScenarioRail poses={stagePoses} value={filters.scenario} compact onPick={scenario => onChange({ ...filters, scenario, detailSubject: 'همه' })} /></div>}
+      {asksForStage && <div className="stage-step"><span className="filter-step-title">کدام مرحله‌ای؟</span><ScenarioRail poses={stagePoses} value={filters.scenario} compact onPick={scenario => onChange({ ...filters, scenario, detailSubject: 'همه' })} /></div>}
       <button type="button" className="more-filter-toggle" onClick={() => setAdvancedOpen(v => !v)} aria-expanded={advancedOpen}>
         <span><SlidersHorizontal className="w-4 h-4" />فیلترهای بیشتر</span>
         <span>{advancedCount > 0 ? `${advancedCount.toLocaleString('fa-IR')} انتخاب` : 'انتخاب'}<ChevronDown className={`w-4 h-4 ${advancedOpen ? 'rotate-180' : ''}`} /></span>

@@ -146,8 +146,7 @@
 @media (max-width:420px) {
   .filter-console { overflow:hidden; }
   .filter-panel { width:100%; max-width:100%; overflow-x:hidden; }
-  .advanced-filter-body { min-width:0; max-width:100%; overflow:hidden; }
-  .stage-step { min-width:0; max-width:100%; }
+  .stage-step, .advanced-filter-body { min-width:0; max-width:100%; overflow:hidden; }
   .filter-panel .filter-options.location-options { flex-wrap:nowrap; overflow-x:auto; max-width:100%; }
   .filter-panel .filter-options.location-options button { flex:0 0 auto; }
   .filter-panel .more-filter-toggle { min-width:0; }
@@ -717,6 +716,8 @@
 .library-flow > *, .filter-console > * { min-width:0; max-width:100%; }
 .library-flow .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 .pose-grid-card { min-width:0; max-width:100%; }
+.scenario-stage-options { display:flex; flex-wrap:wrap; align-items:center; gap:7px; width:100%; min-width:0; padding-bottom:2px; }
+.scenario-stage-options .pill { flex:0 1 auto; min-width:0; max-width:100%; }
 .filter-summary { margin-top:2px; padding:12px 0 2px; border-top:1px solid var(--color-line); }
 .active-filters { flex-wrap:wrap; overflow:visible; min-width:0; }
 @media (max-width:480px) {
@@ -816,6 +817,20 @@
   overflow:visible;
   overscroll-behavior:auto;
 }
+.stage-step .scenario-stage-options {
+  display:flex;
+  flex-wrap:nowrap;
+  width:max-content;
+  min-width:100%;
+  max-width:none;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  touch-action:pan-x;
+  -webkit-overflow-scrolling:touch;
+  padding:2px 1px 6px;
+}
+.stage-step .scenario-stage-options .pill { flex:0 0 auto; white-space:nowrap; }
 .advanced-filter-body .filter-options {
   flex-wrap:nowrap;
   width:100%;
@@ -978,32 +993,28 @@
 @keyframes pd-slide-up { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
 
 /* Keep the complete stage rail in one horizontal content row on every phone width. */
+.stage-step .scenario-stage-options { display:flex; flex-wrap:nowrap; width:max-content; min-width:100%; max-width:none; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; touch-action:pan-x; -webkit-overflow-scrolling:touch; padding:2px 1px 7px; }
+.stage-step .scenario-stage-options .pill { flex:0 0 auto; min-width:max-content; max-width:none; white-space:nowrap; }
 
 
 /* Stage filter: the viewport scrolls, the chip row keeps its full content width. */
+.stage-step .scenario-stage-scroll { width:100%; min-width:0; max-width:100%; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; touch-action:pan-x; -webkit-overflow-scrolling:touch; padding:2px 1px 7px; }
+.stage-step .scenario-stage-options { display:flex; flex-wrap:nowrap; width:max-content; min-width:max-content; max-width:none; overflow:visible; gap:7px; }
+.stage-step .scenario-stage-options .pill { flex:0 0 auto; min-width:max-content; max-width:none; white-space:nowrap; }
 
 /* ژست قفل در نسخه رایگان */
 .pose-locked-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; background:color-mix(in oklch,var(--color-ink) 55%,transparent); color:var(--color-paper); font-size:11px; font-weight:700; backdrop-filter:blur(3px); pointer-events:none; }
 
-/* ============================================================
-   فیلتر «کدام مرحله‌ای؟» — نسخه نهایی
-   علت اینکه فقط دو مرحله دیده می‌شد: .stage-step یک grid است و فرزندش
-   (ریل مراحل) min-width:auto داشت؛ یعنی به اندازه همه چیپ‌ها پهن می‌شد و
-   بعد overflow:hidden والد آن را می‌برید، پس هیچ اسکرولی ساخته نمی‌شد.
-   حالا ستون grid با minmax(0,1fr) محدود می‌شود و خود ردیف چیپ‌ها
-   دقیقاً مثل فیلتر «حالت بدن» اسکرول افقی می‌خورد.
-   ============================================================ */
-.stage-step { display:grid; grid-template-columns:minmax(0,1fr); gap:8px; width:100%; min-width:0; max-width:100%; overflow:visible; }
-.stage-step > * { min-width:0; max-width:100%; }
-.scenario-rail { display:grid; grid-template-columns:minmax(0,1fr); gap:8px; width:100%; min-width:0; max-width:100%; }
-.scenario-stage-scroll {
-  display:flex; flex-wrap:nowrap; align-items:center; gap:7px;
-  width:100%; min-width:0; max-width:100%;
-  overflow-x:auto; overflow-y:hidden;
-  overscroll-behavior-x:contain; touch-action:pan-x; -webkit-overflow-scrolling:touch;
-  scroll-snap-type:x proximity; scroll-padding-inline:4px;
-  padding:2px 1px 7px;
-}
-.scenario-stage-scroll > .pill { flex:0 0 auto; min-width:max-content; max-width:none; white-space:nowrap; scroll-snap-align:start; }
-.filter-panel { grid-template-columns:minmax(0,1fr); }
-.filter-panel > * { min-width:0; max-width:100%; }
+/* Pose training: two tabs + principles timeline stay inside the viewport on narrow phones (no sideways drag). */
+.pose-training-view,
+.principles-view { width:100%; max-width:100%; min-width:0; overflow-x:hidden; overflow-x:clip; }
+.principles-view * { min-width:0; }
+.principles-view p, .principles-view h1, .principles-view h2 { overflow-wrap:anywhere; }
+.pose-training-tabs { display:grid; grid-template-columns:1fr 1fr; gap:4px; padding:5px; border:1px solid var(--color-line); border-radius:20px; background:var(--color-surface); }
+.pose-training-tabs button { min-width:0; min-height:44px; display:flex; align-items:center; justify-content:center; gap:6px; padding:0 8px; border-radius:15px; color:var(--color-muted); font-size:.75rem; font-weight:850; transition:transform .15s; }
+.pose-training-tabs button:active { transform:scale(.97); }
+.pose-training-tabs button.active { background:var(--color-olive); color:var(--color-paper); }
+/* Body & posture step: 4 body-part sub-tabs, equal width so nothing overflows on phones. */
+.posture-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; padding:4px; border:1px solid var(--color-line); border-radius:18px; background:var(--color-surface); }
+.posture-tabs button { min-width:0; min-height:40px; padding:0 4px; border-radius:14px; color:var(--color-muted); font-size:.6875rem; font-weight:850; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.posture-tabs button.active { color:var(--color-paper); }

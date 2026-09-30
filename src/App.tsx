@@ -58,8 +58,8 @@ import { MyPosesView } from './views/MyPosesView';
 import { LocationsView } from './views/LocationsView';
 import { PoseDetailView } from './views/PoseDetailView';
 import { SettingsView } from './views/SettingsView';
-import { PoseEducationView } from './views/PoseEducationView';
-import { PURCHASE_REQUEST_EVENT, requestPurchase } from './services/entitlements';
+import { PoseTrainingView } from './views/PoseTrainingView';
+import { requestContactsAccessOnFirstLaunch } from './services/contactPicker';
 import { MyLocationsView } from './views/MyLocationsView';
 import { OfficeView } from './views/OfficeView';
 import { ProjectDetailView } from './views/ProjectDetailView';
@@ -73,14 +73,11 @@ import { requestAfficheNotifications } from './services/afficheNotifications';
 import { ShootMode } from './components/ShootMode';
 import { QuickStartSheet } from './components/QuickStartSheet';
 import { restorePremium } from './services/bazaarBilling';
-import { ContactPickerSheet, ContactsPermissionPrompt } from './components/ContactPickerSheet';
-import { shouldAskContactsOnFirstRun } from './services/contactPicker';
 
 export default function App() {
   const [booting, setBooting] = useState(true);
   const [leavingSplash, setLeavingSplash] = useState(false);
   const [showIntro, setShowIntro] = useState(false);
-  const [askContacts, setAskContacts] = useState(false);
 
   const [prefs, setPrefs] = useState<Prefs>(getPrefs());
   const [tab, setTab] = useState<ViewTab>('home');
@@ -227,7 +224,8 @@ export default function App() {
     void restorePremium()
       .then(() => reload())
       .catch(() => reload());
-    void requestAfficheNotifications();
+    // مجوزها فقط یک بار و همان اولین اجرای بعد از نصب پرسیده می‌شوند (پشت سر هم، نه هم‌زمان).
+    void requestAfficheNotifications().catch(() => false).finally(() => { void requestContactsAccessOnFirstLaunch(); });
     setShowIntro(!hasOnboarded());
     const t1 = setTimeout(() => setLeavingSplash(true), 700);
     const t2 = setTimeout(() => setBooting(false), 1050);
@@ -236,14 +234,6 @@ export default function App() {
       clearTimeout(t2);
     };
   }, [reload]);
-
-  // بعد از نصب: اولین اجرا، بعد از اسپلش و معرفی برنامه، اجازه اتصال به مخاطبین گرفته شود.
-  useEffect(() => {
-    if (booting || showIntro) return;
-    let alive = true;
-    const t = window.setTimeout(() => { void shouldAskContactsOnFirstRun().then((ask) => { if (alive && ask) setAskContacts(true); }); }, 900);
-    return () => { alive = false; window.clearTimeout(t); };
-  }, [booting, showIntro]);
 
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -257,7 +247,8 @@ export default function App() {
 
   const openPose = (pose: Pose) => {
     if (pose.isLocked) {
-      requestPurchase('این ژست در نسخه کامل باز می‌شود.');
+      toast('این ژست در نسخه کامل باز می‌شود. از تنظیمات می‌توانی نسخه کامل را بخری.', false);
+      goTab('settings');
       return;
     }
     setSelected(pose);
@@ -268,20 +259,6 @@ export default function App() {
     }
     scrollTop();
   };
-
-  // هر جای برنامه که به سقف نسخه رایگان برسد، کاربر مستقیم به بخش خرید می‌رود.
-  const goTabRef = useRef(goTab);
-  goTabRef.current = goTab;
-  useEffect(() => {
-    const onPurchaseRequest = (event: Event) => {
-      const message = (event as CustomEvent<{ message?: string }>).detail?.message;
-      if (message) toast(message, false);
-      goTabRef.current('settings');
-      setTimeout(() => document.getElementById('premium-purchase')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 250);
-    };
-    window.addEventListener(PURCHASE_REQUEST_EVENT, onPurchaseRequest);
-    return () => window.removeEventListener(PURCHASE_REQUEST_EVENT, onPurchaseRequest);
-  }, [toast]);
 
   const handleFavorite = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -719,7 +696,7 @@ export default function App() {
           />
         )}
 
-        {(tab === 'pose-tips' || tab === 'principles') && <PoseEducationView initial={tab === 'principles' ? 'principles' : 'tips'} />}
+        {(tab === 'pose-tips' || tab === 'principles') && <PoseTrainingView key={tab} initial={tab === 'principles' ? 'principles' : 'visual'} />}
 
         {tab === 'detail' && selected && (
           <PoseDetailView
@@ -791,8 +768,6 @@ export default function App() {
       />
 
       <ToastStack items={toasts} />
-      <ContactPickerSheet />
-      <ContactsPermissionPrompt open={askContacts} onClose={() => setAskContacts(false)} />
 
       <ConfirmDialog request={confirmRequest} onClose={() => setConfirmRequest(null)} />
 

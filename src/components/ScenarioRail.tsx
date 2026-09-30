@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Pose, ScenarioCategory } from '../types/pose';
 import { SCENARIOS, scenarioOf } from '../data/taxonomy';
 
@@ -18,19 +18,12 @@ interface Props {
 export const ScenarioRail: React.FC<Props> = ({ poses, value, onPick, compact }) => {
   const countOf = (key: ScenarioCategory) => poses.filter((p) => scenarioOf(p) === key).length;
   const active = SCENARIOS.find((s) => s.key === value);
-  const railRef = useRef<HTMLDivElement>(null);
-
-  // مرحله انتخاب‌شده همیشه داخل دید ریل بماند (مثلاً وقتی مرحله ۱۲ فعال است).
-  useEffect(() => {
-    const chip = railRef.current?.querySelector<HTMLElement>('[aria-selected="true"]');
-    chip?.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
-  }, [value]);
 
   return (
-    <div className="scenario-rail">
-      {/* همان ساختار فیلتر «حالت بدن»: خود ردیف چیپ‌ها viewport اسکرول افقی است */}
-      <div ref={railRef} className="scenario-stage-scroll no-scrollbar" role="tablist" aria-label="مرحله روز تصویربرداری">
-        <button type="button" role="tab" aria-selected={value === 'همه'} onClick={() => onPick('همه')} className={`pill shrink-0 ${value === 'همه' ? 'pill-on' : ''}`}>
+    <div className="space-y-2">
+      <div className="scenario-stage-scroll">
+        <div className="scenario-stage-options">
+        <button onClick={() => onPick('همه')} className={`pill shrink-0 ${value === 'همه' ? 'pill-on' : ''}`}>
           همه مراحل
           <span className="opacity-60">{poses.length}</span>
         </button>
@@ -39,9 +32,6 @@ export const ScenarioRail: React.FC<Props> = ({ poses, value, onPick, compact })
           return (
             <button
               key={s.key}
-              type="button"
-              role="tab"
-              aria-selected={value === s.key}
               onClick={() => onPick(s.key)}
               className={`pill shrink-0 ${value === s.key ? 'pill-on' : ''}`}
               style={count === 0 ? { opacity: 0.45 } : undefined}
@@ -60,6 +50,7 @@ export const ScenarioRail: React.FC<Props> = ({ poses, value, onPick, compact })
             </button>
           );
         })}
+        </div>
       </div>
 
       {!compact && active && (

@@ -63,9 +63,6 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
-      - name: Add JitPack repository (Poolakey)
-        run: node scripts/android-repositories.mjs
-
       - name: Build debug APK
         run: |
           cd android

@@ -6,7 +6,7 @@ import { JalaliDatePicker } from '../components/JalaliDatePicker';
 import { AfficheEntry, deleteAffiche, getAffiches, saveAffiche } from '../services/storage';
 import { requestAfficheNotifications, scheduleAfficheNotification } from '../services/afficheNotifications';
 import { gregorianToJalali, jalaliToIso, todayJalali, JalaliDate, isoToJalaliLabel } from '../services/jalali';
-import { pickContact } from '../services/contactPicker';
+import { pickPhoneFromContacts } from '../services/contactPicker';
 
 const SERVICES = ['کرین', 'دوربین ثابت', 'رونین', 'تی وی', 'پخش پروجکشن', 'تدوین لایو', 'هلی شات', 'FPV', 'سایرم'];
 const blank = () => ({ projectName: '', date: jalaliToIso(todayJalali()), location: '', clientName: '', clientPhone: '', services: [] as string[], otherService: '', wage: 0, reminderTime: '08:00' });
@@ -25,7 +25,7 @@ export const AfficheView: React.FC = () => {
   const start = () => { setEditing(null); setDraft(blank()); };
   const edit = (item: AfficheEntry) => setDraft({ projectName: item.projectName, date: item.date, location: item.location, clientName: item.clientName, clientPhone: item.clientPhone, services: item.services, otherService: item.otherService || '', wage: item.wage, reminderTime: item.reminderTime || '08:00' });
   const update = <K extends keyof Draft>(key: K, value: Draft[K]) => setDraft((current) => ({ ...current, [key]: value }));
-  const chooseContact = async () => { const picked = await pickContact(); if (picked) { update('clientPhone', picked.phone); setContactMessage(`شماره «${picked.name || picked.phone}» از مخاطبین انتخاب شد.`); } else setContactMessage('مخاطبی انتخاب نشد؛ می‌توانی شماره را دستی وارد کنی.'); };
+  const chooseContact = async () => { setContactMessage(''); const result = await pickPhoneFromContacts(); if (result.status === 'ok') { update('clientPhone', result.phone); setContactMessage('شماره از مخاطبین انتخاب شد.'); } else if (result.status === 'denied') setContactMessage('دسترسی به مخاطبین داده نشده؛ از تنظیمات گوشی برای Atelito فعالش کن یا شماره را دستی وارد کن.'); else if (result.status === 'unavailable') setContactMessage('انتخاب مخاطب در این دستگاه در دسترس نیست؛ شماره را دستی وارد کن.'); };
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
     if (!draft.projectName.trim() || !draft.date || !draft.location.trim() || !draft.clientName.trim() || !draft.clientPhone.trim()) return;
