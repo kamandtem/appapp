@@ -7,11 +7,20 @@ import { Capacitor, registerPlugin } from '@capacitor/core';
  * مستقیم لیست مخاطبین را باز می‌کند.
  * پلاگین بومی: @capacitor-community/contacts
  */
-type PermissionState = 'granted' | 'denied' | 'prompt' | 'prompt-with-rationale';
+export type ContactsPermission = 'granted' | 'denied' | 'prompt' | 'prompt-with-rationale';
+type PermissionState = ContactsPermission;
 type ContactsPlugin = {
   checkPermissions(): Promise<{ contacts: PermissionState }>;
   requestPermissions(): Promise<{ contacts: PermissionState }>;
-  pickContact(options: { projection: { name?: boolean; phones?: boolean } }): Promise<{ contact?: { phones?: Array<{ number?: string | null }> } }>;
+  pickContact(options: { projection: { name?: boolean; phones?: boolean } }): Promise<{ contact?: PhoneContact }>;
+  getContacts?: (options: { projection: { name?: boolean; phones?: boolean } }) => Promise<{ contacts?: PhoneContact[] }>;
+};
+
+export type PhoneContact = {
+  contactId?: string;
+  id?: string;
+  name?: string | null;
+  phones?: Array<{ number?: string | null }>;
 };
 
 const Contacts = registerPlugin<ContactsPlugin>('Contacts');
@@ -64,3 +73,47 @@ export async function pickPhoneFromContacts(): Promise<ContactPickResult> {
 }
 
 const normalizePhone = (value: string) => value.replace(/[\s()-]/g, '').replace(/^\+98/, '0');
+
+
+/** Compatibility API for the original ContactPickerSheet component. */
+export const CONTACT_PICK_EVENT = 'atelito:contact-picked';
+
+export async function checkContactsPermission(): Promise<ContactsPermission> {
+  if (!isNative()) return 'granted';
+  try {
+    return (await Contacts.checkPermissions()).contacts;
+  } catch {
+    return 'denied';
+  }
+}
+
+export async function requestContactsPermission(): Promise<ContactsPermission> {
+  if (!isNative()) return 'granted';
+  try {
+    return (await Contacts.requestPermissions()).contacts;
+  } catch {
+    return 'denied';
+  }
+}
+
+export async function loadPhoneContacts(): Promise<PhoneContact[]> {
+  if (!isNative() || !Contacts.getContacts) return [];
+  try {
+    const result = await Contacts.getContacts({ projection: { name: true, phones: true } });
+    return result.contacts ?? [];
+  } catch {
+    return [];
+  }
+}
+
+export async function pickWithSystemPicker(): Promise<PhoneContact | null> {
+  if (!isNative()) return null;
+  try {
+    const permission = await checkContactsPermission();
+    if (permission !== 'granted') return null;
+    const result = await Contacts.pickContact({ projection: { name: true, phones: true } });
+    return result.contact ?? null;
+  } catch {
+    return null;
+  }
+}
