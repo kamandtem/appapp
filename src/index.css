@@ -1018,3 +1018,7 @@
 .posture-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; padding:4px; border:1px solid var(--color-line); border-radius:18px; background:var(--color-surface); }
 .posture-tabs button { min-width:0; min-height:40px; padding:0 4px; border-radius:14px; color:var(--color-muted); font-size:.6875rem; font-weight:850; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .posture-tabs button.active { color:var(--color-paper); }
+
+/* Keep the stage filter as a real horizontal rail inside the filter panel. */
+.scenario-stage-scroll { overflow-x: auto; overflow-y: hidden; width: 100%; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+.scenario-stage-options { display: inline-flex; min-width: max-content; flex-wrap: nowrap; gap: .375rem; padding-bottom: .125rem; }

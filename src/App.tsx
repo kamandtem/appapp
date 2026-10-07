@@ -59,7 +59,6 @@ import { LocationsView } from './views/LocationsView';
 import { PoseDetailView } from './views/PoseDetailView';
 import { SettingsView } from './views/SettingsView';
 import { PoseTrainingView } from './views/PoseTrainingView';
-import { requestContactsAccessOnFirstLaunch } from './services/contactPicker';
 import { MyLocationsView } from './views/MyLocationsView';
 import { OfficeView } from './views/OfficeView';
 import { ProjectDetailView } from './views/ProjectDetailView';
@@ -224,8 +223,7 @@ export default function App() {
     void restorePremium()
       .then(() => reload())
       .catch(() => reload());
-    // مجوزها فقط یک بار و همان اولین اجرای بعد از نصب پرسیده می‌شوند (پشت سر هم، نه هم‌زمان).
-    void requestAfficheNotifications().catch(() => false).finally(() => { void requestContactsAccessOnFirstLaunch(); });
+    void requestAfficheNotifications().catch(() => false);
     setShowIntro(!hasOnboarded());
     const t1 = setTimeout(() => setLeavingSplash(true), 700);
     const t2 = setTimeout(() => setBooting(false), 1050);

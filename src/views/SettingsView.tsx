@@ -191,7 +191,7 @@ export const SettingsView: React.FC<Props> = ({
           <ShieldCheck className="w-4 h-4 text-gold" />
           سیاست حریم خصوصی
         </a>
-        <p className="text-[10px] leading-relaxed text-muted">اطلاعات مخاطبین و موقعیت مکانی فقط برای قابلیت‌های داخل برنامه استفاده می‌شود و به سرور ارسال نمی‌شود.</p>
+        <p className="text-[10px] leading-relaxed text-muted">اطلاعات موقعیت مکانی فقط برای قابلیت‌های داخل برنامه استفاده می‌شود و به سرور ارسال نمی‌شود.</p>
       </div>
 
       <div className="card p-4 flex items-start gap-2.5">

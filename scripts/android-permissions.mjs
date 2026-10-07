@@ -17,8 +17,6 @@ const PERMISSIONS = [
   'android.permission.INTERNET',
   'android.permission.ACCESS_NETWORK_STATE',
   'android.permission.POST_NOTIFICATIONS',
-  // مخاطبین: پلاگین @capacitor-community/contacts هر دو را در alias «contacts» لازم دارد.
-  'android.permission.READ_CONTACTS',
 ];
 
 if (!existsSync(MANIFEST)) {
