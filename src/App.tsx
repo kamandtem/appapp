@@ -48,6 +48,8 @@ import { Onboarding } from './components/Onboarding';
 import { AddPoseSheet } from './components/AddPoseSheet';
 import { ToastData, ToastStack } from './components/Toast';
 import { ConfirmDialog, ConfirmRequest } from './components/ConfirmDialog';
+import { PaywallDialog } from './components/PaywallDialog';
+import { PAYWALL_EVENT, PaywallFeature, openPaywall } from './services/paywall';
 import { AddToProjectSheet } from './components/AddToProjectSheet';
 import { LogOut, Trash2 } from 'lucide-react';
 
@@ -91,6 +93,7 @@ export default function App() {
   const [editingPose, setEditingPose] = useState<Pose | null>(null);
   const [toasts, setToasts] = useState<ToastData[]>([]);
   const [confirmRequest, setConfirmRequest] = useState<ConfirmRequest | null>(null);
+  const [paywallFeature, setPaywallFeature] = useState<PaywallFeature | null>(null);
   const [addToProjectPose, setAddToProjectPose] = useState<Pose | null>(null);
   const [myLocations, setMyLocations] = useState<MyLocation[]>([]);
   const [selectedLocationId, setSelLocId] = useState<string | null>(null);
@@ -137,6 +140,18 @@ export default function App() {
     return () => window.removeEventListener('atelito:premium-changed', refreshEntitlements);
   }, [reload]);
 
+  // هر بخش از برنامه که به سقف نسخه رایگان بخورد، همین دیالوگ را باز می‌کند.
+  useEffect(() => {
+    const open = (e: Event) => setPaywallFeature((e as CustomEvent<PaywallFeature>).detail);
+    const close = () => setPaywallFeature(null);
+    window.addEventListener(PAYWALL_EVENT, open);
+    window.addEventListener('atelito:premium-changed', close);
+    return () => {
+      window.removeEventListener(PAYWALL_EVENT, open);
+      window.removeEventListener('atelito:premium-changed', close);
+    };
+  }, []);
+
   // ناوبری برگشت: هر تغییر صفحه یک ورودی تاریخچه مرورگر می‌سازد تا دکمه برگشت
   // (چه در وب، چه دکمه سخت‌افزاری اندروید) همیشه دقیقاً یک قدم به عقب برود.
   const askExit = useCallback(() => {
@@ -173,6 +188,7 @@ export default function App() {
     if (quickStartOpen) { setQuickStartOpen(false); return; }
     if (sheetOpen) { setSheetOpen(false); return; }
     if (menuOpen) { setMenuOpen(false); return; }
+    if (paywallFeature) { setPaywallFeature(null); return; }
     if (confirmRequest) { setConfirmRequest(null); return; }
     if (addToProjectPose) { setAddToProjectPose(null); return; }
     if (locDialogOpen) { setLocDialogOpen(false); return; }
@@ -189,7 +205,7 @@ export default function App() {
 
     // ۳) در خانه هستیم: خروج از برنامه را بپرس
     askExit();
-  }, [shootOpen, quickStartOpen, sheetOpen, menuOpen, confirmRequest, addToProjectPose, locDialogOpen, studioDialogOpen, askExit]);
+  }, [shootOpen, quickStartOpen, sheetOpen, menuOpen, confirmRequest, paywallFeature, addToProjectPose, locDialogOpen, studioDialogOpen, askExit]);
 
   useEffect(() => { goBackRef.current = goBack; }, [goBack]);
 
@@ -245,8 +261,7 @@ export default function App() {
 
   const openPose = (pose: Pose) => {
     if (pose.isLocked) {
-      toast('این ژست در نسخه کامل باز می‌شود. از تنظیمات می‌توانی نسخه کامل را بخری.', false);
-      goTab('settings');
+      openPaywall('lockedPose');
       return;
     }
     setSelected(pose);
@@ -490,7 +505,7 @@ export default function App() {
     if (result.ok) {
       reload();
       toast('پروژه ذخیره شد.');
-    } else {
+    } else if (!result.limit) {
       toast(result.error || 'ذخیره پروژه انجام نشد.', false);
     }
   };
@@ -517,7 +532,7 @@ export default function App() {
   const completeNewOfficeProject = (project: any) => {
     const result = saveOfficeProject(project);
     if (!result.ok) {
-      toast(result.error || 'ذخیره پروژه انجام نشد.', false);
+      if (!result.limit) toast(result.error || 'ذخیره پروژه انجام نشد.', false);
       return;
     }
     setDraftOfficeProject(null);
@@ -768,6 +783,7 @@ export default function App() {
       <ToastStack items={toasts} />
 
       <ConfirmDialog request={confirmRequest} onClose={() => setConfirmRequest(null)} />
+      <PaywallDialog feature={paywallFeature} onClose={() => setPaywallFeature(null)} onToast={toast} />
 
       <AddToProjectSheet
         pose={addToProjectPose}

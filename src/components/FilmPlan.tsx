@@ -39,7 +39,7 @@ export const FilmPlan: React.FC<Props> = ({ pose, open, onClose, onSaved }) => {
       setError(null);
       onSaved?.();
       window.setTimeout(() => setSavedNow(false), 1200);
-    } else setError(res.error || 'ثبت نشد، دوباره تلاش کن.');
+    } else if (!res.limit) setError(res.error || 'ثبت نشد، دوباره تلاش کن.');
   };
 
   const saveSubject = () => save({ subjectMovement: subjectMovement.trim() || undefined });

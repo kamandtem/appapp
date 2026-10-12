@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Aperture, ArrowRight, Camera, Check, ChevronLeft, CircleAlert, Images, Search, SlidersHorizontal, Sparkles, Users, X } from 'lucide-react';
+import { Aperture, ArrowRight, Camera, Check, ChevronLeft, CircleAlert, Images, Lock, Search, SlidersHorizontal, Sparkles, Users, X } from 'lucide-react';
 import { canUsePremium, FREE_POSE_TIPS } from '../services/entitlements';
+import { openPaywall } from '../services/paywall';
 
 type PoseTip = {
   id: string;
@@ -52,7 +53,24 @@ export const PoseTipsView: React.FC = () => {
       return [pose.name, pose.description, pose.category, ...pose.tags, ...pose.steps].join(' ').toLocaleLowerCase('fa').includes(query);
     });
   }, [pack, category, search]);
-  const visiblePoses = canUsePremium() ? poses : poses.slice(0, FREE_POSE_TIPS);
+  // ۲۰ ترفند رایگان، نوبتی از همه دسته‌ها و مستقل از جستجو/فیلتر؛ وگرنه با عوض‌کردن دسته، سهمیه از نو شروع می‌شد.
+  const freeIds = useMemo(() => {
+    const all = pack?.poses || [];
+    if (canUsePremium()) return new Set(all.map(pose => pose.id));
+    const buckets = new Map<string, PoseTip[]>();
+    all.forEach(pose => buckets.set(pose.categoryId, [...(buckets.get(pose.categoryId) || []), pose]));
+    const lists = Array.from(buckets.values());
+    const free = new Set<string>();
+    for (let round = 0; free.size < FREE_POSE_TIPS && lists.some(list => list.length > round); round += 1) {
+      for (const list of lists) {
+        if (free.size >= FREE_POSE_TIPS) break;
+        if (list[round]) free.add(list[round].id);
+      }
+    }
+    return free;
+  }, [pack]);
+  const visiblePoses = poses;
+  const lockedCount = canUsePremium() ? 0 : (pack?.poses || []).filter(pose => !freeIds.has(pose.id)).length;
 
   if (selected) return <PoseTipDetail pose={selected} onBack={() => setSelected(null)} />;
 
@@ -80,7 +98,8 @@ export const PoseTipsView: React.FC = () => {
     <div className="flex items-center justify-between gap-3"><div><h2 className="text-[16px] font-black">ترفندها</h2><p className="mt-1 text-[10px] text-muted">{visiblePoses.length.toLocaleString('fa-IR')} نتیجه</p></div><SlidersHorizontal className="h-4 w-4 text-olive" aria-hidden /></div>
     {!pack && !error && <PoseTipsSkeleton />}
     {error && <section className="rounded-[24px] border border-line bg-surface p-6 text-center"><CircleAlert className="mx-auto h-7 w-7 text-rose" /><h2 className="mt-3 text-[14px] font-extrabold">بسته ژست‌ها باز نشد</h2><p className="mt-2 text-[11px] leading-6 text-muted">برنامه را یک بار ببند و دوباره باز کن.</p></section>}
-    {pack && visiblePoses.length > 0 && <section className="grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3">{visiblePoses.map(pose => <button key={pose.id} onClick={() => { setSelected(pose); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group text-right"><span className="relative block aspect-[3/4] overflow-hidden rounded-[22px] bg-surface2"><img src={assetUrl(pose.image)} alt={pose.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-active:scale-[1.02]" /><span className="absolute bottom-2 right-2 rounded-full bg-olive px-2.5 py-1 text-[9px] font-extrabold text-paper">{DIFFICULTY[pose.difficulty]}</span></span><span className="mt-2.5 block truncate text-left text-[12px] font-extrabold" dir="ltr">{pose.name}</span><span className="mt-1 flex items-center justify-between text-[9px] text-muted"><span>{CATEGORIES.find(item => item.id === pose.categoryId)?.label}</span><ChevronLeft className="h-3.5 w-3.5 text-faint" /></span></button>)}</section>}
+    {pack && visiblePoses.length > 0 && <section className="grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3">{visiblePoses.map(pose => <button key={pose.id} onClick={() => { if (!freeIds.has(pose.id)) { openPaywall('poseTips'); return; } setSelected(pose); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group text-right"><span className="relative block aspect-[3/4] overflow-hidden rounded-[22px] bg-surface2"><img src={assetUrl(pose.image)} alt={pose.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-active:scale-[1.02]" />{!freeIds.has(pose.id) && <span className="absolute inset-0 grid place-items-center bg-black/45 backdrop-blur-[3px]"><span className="flex items-center gap-1 rounded-full bg-paper px-3 py-1.5 text-[10px] font-extrabold text-ink"><Lock className="h-3 w-3" />نسخه کامل</span></span>}<span className="absolute bottom-2 right-2 rounded-full bg-olive px-2.5 py-1 text-[9px] font-extrabold text-paper">{DIFFICULTY[pose.difficulty]}</span></span><span className="mt-2.5 block truncate text-left text-[12px] font-extrabold" dir="ltr">{pose.name}</span><span className="mt-1 flex items-center justify-between text-[9px] text-muted"><span>{CATEGORIES.find(item => item.id === pose.categoryId)?.label}</span><ChevronLeft className="h-3.5 w-3.5 text-faint" /></span></button>)}</section>}
+    {lockedCount > 0 && <button onClick={() => openPaywall('poseTips')} className="card w-full p-4 text-right"><span className="block text-[13px] font-black">{lockedCount.toLocaleString('fa-IR')} ترفند دیگر در نسخه کامل منتظر توست</span><span className="mt-1 block text-[11px] leading-6 text-muted">با یک‌بار پرداخت، همه‌ی نمونه‌ها با مراحل اجرا و خطاهای رایج باز می‌شوند.</span><span className="btn btn-primary mt-3 w-full">مشاهده نسخه کامل</span></button>}
     {pack && poses.length === 0 && <section className="py-12 text-center"><Search className="mx-auto h-7 w-7 text-faint" /><h2 className="mt-3 text-[14px] font-extrabold">چیزی پیدا نشد</h2><button onClick={() => { setSearch(''); setCategory('all'); }} className="btn btn-ghost mt-4">پاک کردن فیلترها</button></section>}
   </div>;
 };

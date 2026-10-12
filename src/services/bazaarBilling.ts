@@ -29,6 +29,20 @@ export type RestorePremiumResult = {
   message: string;
 };
 
+export type BuyPremiumResult = { ok: boolean; cancelled?: boolean; message: string };
+
+// پلاگین فقط یک اتصال سراسری (payment/paymentConnection) نگه می‌دارد؛ اگر restore هنگام باز شدن برنامه
+// با خرید همزمان شود، disconnect یکی اتصال دیگری را قطع می‌کند. پس همه‌ی عملیات بازار پشت‌سرهم اجرا می‌شوند.
+let queue: Promise<unknown> = Promise.resolve();
+const serial = <T,>(task: () => Promise<T>): Promise<T> => {
+  const run = queue.then(task, task);
+  queue = run.catch(() => undefined);
+  return run;
+};
+
+const errorText = (error: unknown): string =>
+  String((error as { message?: string })?.message ?? error ?? '').toLowerCase();
+
 const readEntitlement = (): EntitlementRecord | null => {
   try {
     const value = JSON.parse(localStorage.getItem(ENTITLEMENT_KEY) || 'null');
@@ -73,27 +87,40 @@ const clearPremium = () => {
   window.dispatchEvent(new Event('atelito:premium-changed'));
 };
 
-export async function buyPremium(): Promise<{ ok: boolean; message: string }> {
-  if (!Capacitor.isNativePlatform()) {
-    return { ok: false, message: 'پرداخت بازار فقط در نسخه اندروید برنامه کار می‌کند.' };
-  }
-  try {
-    await Poolakey.connectPayment(BAZAAR_RSA_KEY);
-    const result = await Poolakey.purchaseProduct(BAZAAR_PRODUCT_ID);
-    if (isValidPurchase(result)) {
-      markPremium(result);
-      return { ok: true, message: 'امکانات کامل آتلیتو فعال شد.' };
+export function buyPremium(): Promise<BuyPremiumResult> {
+  return serial(async () => {
+    if (isPremiumUnlocked()) return { ok: true, message: 'نسخه کامل از قبل برای شما فعال است.' };
+    if (!Capacitor.isNativePlatform()) {
+      return { ok: false, message: 'پرداخت بازار فقط در نسخه اندروید برنامه کار می‌کند.' };
     }
-    return { ok: false, message: 'اطلاعات خرید معتبر نبود؛ مبلغی کسر نشده یا خرید کامل نشده است.' };
-  } catch (error) {
-    console.warn('[billing] purchase failed', error);
-    return { ok: false, message: 'پرداخت انجام نشد؛ اتصال اینترنت و ورود به بازار را بررسی کن.' };
-  } finally {
-    await Poolakey.disconnectPayment().catch(() => undefined);
-  }
+    try {
+      await Poolakey.connectPayment(BAZAAR_RSA_KEY);
+      const result = await Poolakey.purchaseProduct(BAZAAR_PRODUCT_ID);
+      if (isValidPurchase(result)) {
+        markPremium(result);
+        return { ok: true, message: 'نسخه کامل آتلیتو فعال شد. ممنون که حمایت کردی!' };
+      }
+      return { ok: false, message: 'اطلاعات خرید معتبر نبود. اگر مبلغی کسر شده، گزینه «بازیابی خرید قبلی» را بزن.' };
+    } catch (error) {
+      console.warn('[billing] purchase failed', error);
+      const text = errorText(error);
+      // کاربر خودش صفحه پرداخت را بسته است؛ خطا نیست و نباید پیام قرمز ببیند.
+      if (text.includes('cancel')) return { ok: false, cancelled: true, message: '' };
+      if (text.includes('connection')) {
+        return { ok: false, message: 'ارتباط با کافه‌بازار برقرار نشد. مطمئن شو بازار نصب است و وارد حسابت شده‌ای.' };
+      }
+      return { ok: false, message: 'پرداخت کامل نشد. اینترنت را بررسی کن و دوباره امتحان کن.' };
+    } finally {
+      await Poolakey.disconnectPayment().catch(() => undefined);
+    }
+  });
 }
 
-export async function restorePremium(): Promise<RestorePremiumResult> {
+export function restorePremium(): Promise<RestorePremiumResult> {
+  return serial(restorePremiumNow);
+}
+
+async function restorePremiumNow(): Promise<RestorePremiumResult> {
   if (!Capacitor.isNativePlatform()) {
     return {
       active: isPremiumUnlocked(),

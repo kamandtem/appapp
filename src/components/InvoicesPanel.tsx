@@ -28,9 +28,10 @@ export const InvoicesPanel: React.FC = () => {
   const resetForm = () => { setTitle(''); setCustomerName(''); setDate(todayJalali()); setCalendarOpen(false); setItems([]); };
   const saveInvoice = () => {
     if (!title.trim() || !customerName.trim() || items.length === 0) return;
-    const total = items.reduce((sum, x) => sum + x.count * x.price, 0);
+    const items_ = items.map(x => ({ ...x, count: Math.max(1, x.count || 1) }));
+    const total = items_.reduce((sum, x) => sum + x.count * x.price, 0);
     const now = Date.now();
-    const invoice: Invoice = { id: 'inv_' + now.toString(36), title: title.trim(), customerName: customerName.trim(), date: jalaliToIso(date), items, total, createdAt: now, updatedAt: now };
+    const invoice: Invoice = { id: 'inv_' + now.toString(36), title: title.trim(), customerName: customerName.trim(), date: jalaliToIso(date), items: items_, total, createdAt: now, updatedAt: now };
     const updated = [...invoices, invoice];
     setInvoices(updated);
     try { localStorage.setItem('invoices', JSON.stringify(updated)); } catch { /* storage full */ }
@@ -56,7 +57,7 @@ export const InvoicesPanel: React.FC = () => {
         <div className="invoice-items-title"><b>آیتم‌های فاکتور</b><small>{items.length.toLocaleString('fa-IR')} مورد</small></div>
         {items.map((item, idx) => <div key={idx} className="invoice-entry">
           <label className="invoice-entry-name"><span>شرح خدمت</span><input value={item.name} onChange={e => { const n = [...items]; n[idx] = { ...n[idx], name: e.target.value }; setItems(n); }} placeholder="نام خدمت" className="field" /></label>
-          <label><span>تعداد</span><input type="number" inputMode="numeric" min="1" value={item.count} onChange={e => { const n = [...items]; n[idx] = { ...n[idx], count: Math.max(1, Number(e.target.value)) }; setItems(n); }} className="field" /></label>
+          <label><span>تعداد</span><input type="text" inputMode="numeric" value={item.count ? String(item.count.toLocaleString('fa-IR')) : ''} onFocus={e => e.currentTarget.select()} onChange={e => { const n = [...items]; n[idx] = { ...n[idx], count: Math.min(9999, cleanNumber(e.target.value)) }; setItems(n); }} onBlur={() => { if (!item.count) { const n = [...items]; n[idx] = { ...n[idx], count: 1 }; setItems(n); } }} className="field" placeholder="۱" /></label>
           <label><span>مبلغ، تومن</span><input type="text" inputMode="numeric" value={item.price ? money(item.price) : ''} onChange={e => { const n = [...items]; n[idx] = { ...n[idx], price: cleanNumber(e.target.value) }; setItems(n); }} className="field" placeholder="۰" /></label>
           <button type="button" onClick={() => setItems(items.filter((_, j) => j !== idx))} className="invoice-entry-delete" aria-label="حذف آیتم"><Trash2 className="w-4 h-4" /></button>
         </div>)}

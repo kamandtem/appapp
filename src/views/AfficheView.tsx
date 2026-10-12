@@ -28,7 +28,7 @@ export const AfficheView: React.FC = () => {
     if (!draft.projectName.trim() || !draft.date || !draft.location.trim() || !draft.clientName.trim() || !draft.clientPhone.trim()) return;
     const now = Date.now(); const entry: AfficheEntry = { ...draft, projectName: draft.projectName.trim(), location: draft.location.trim(), clientName: draft.clientName.trim(), clientPhone: draft.clientPhone.trim(), otherService: draft.otherService.trim(), id: editing?.id || `affiche-${now}`, createdAt: editing?.createdAt || now, updatedAt: now };
     const result = saveAffiche(entry);
-    if (!result.ok) { window.alert(result.error || 'ذخیره آفیش انجام نشد.'); return; }
+    if (!result.ok) { if (!result.limit) window.alert(result.error || 'ذخیره آفیش انجام نشد.'); return; }
     setItems(getAffiches()); setEditing(null); setDraft(blank()); void requestAfficheNotifications().then((granted) => granted && scheduleAfficheNotification(entry));
   };
   const remove = (item: AfficheEntry) => setConfirm({ title: 'حذف آفیش', text: `آفیش «${item.projectName}» حذف شود؟`, confirmLabel: 'حذف آفیش', tone: 'danger', icon: Trash2, onConfirm: () => { deleteAffiche(item.id); setItems(getAffiches()); } });

@@ -395,7 +395,7 @@ export const AddPoseSheet: React.FC<Props> = ({ open, onClose, onSaved, editing 
       onSaved(editing ? 'ژست به‌روزرسانی شد.' : 'ژست شما ذخیره شد و در جستجو پیدا می‌شود.', true);
       onClose();
     } else {
-      onSaved(res.error || 'ذخیره نشد.', false);
+      if (!res.limit) onSaved(res.error || 'ذخیره نشد.', false);
     }
   };
 

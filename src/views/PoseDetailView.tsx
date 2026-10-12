@@ -149,7 +149,7 @@ export const PoseDetailView: React.FC<Props> = ({
     const updated = { ...pose, ...patch };
     const result = pose.isCustom ? saveCustomPose(updated) : savePoseEdit(updated);
     if (!result.ok) {
-      onToast(result.error || 'ذخیره نشد.', false);
+      if (!result.limit) onToast(result.error || 'ذخیره نشد.', false);
       return;
     }
     setSavedSection(section);

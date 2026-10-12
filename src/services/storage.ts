@@ -2,6 +2,7 @@ import { FilterState, MyLocation, Pose, PhotoCrop, StudioProfile, OfficeProject 
 import { INITIAL_POSES } from '../data/poses';
 import { enrichPose, runsIn, scenarioOf, scopeOf } from '../data/taxonomy';
 import { extensionForDataUrl, isAnimatedDataUrl } from './media';
+import { limitFailure, type SaveResult } from './paywall';
 import { canUsePremium, FREE_BUILTIN_POSES, FREE_CUSTOM_POSES, FREE_DAILY_PROJECTS, FREE_OFFICE_PROJECTS, FREE_PROJECT_ITEMS, FREE_AFFICHE_ENTRIES, FREE_COLLEAGUES, FREE_STUDIO_MEMBERS } from './entitlements';
 
 const K = {
@@ -133,14 +134,15 @@ videoDetails: project.videoDetails && typeof project.videoDetails === 'object' ?
 
 export function saveProject(project: ShootProject): boolean {
 const all = getProjects().filter((p) => p.id !== project.id);
-if (!canUsePremium() && !all.some((p) => p.id === project.id) && all.length >= FREE_DAILY_PROJECTS) return false;
+const isNewProject = !getProjects().some((p) => p.id === project.id);
+if (!canUsePremium() && isNewProject && all.length >= FREE_DAILY_PROJECTS) { limitFailure('dailyProject'); return false; }
 if (!canUsePremium()) {
   const countItems = (p: ShootProject) => (p.photoPoseIds || []).length + (p.videoPoseIds || []).length
     + (p.photoGalleryItems || []).length + (p.videoGalleryItems || []).length;
   const items = countItems(project);
   const previous = getProjects().find((p) => p.id === project.id);
   // اگر پروژه از قبل بیشتر از سقف داشت، کم کردن یا ویرایش آن همیشه مجاز است؛ فقط اضافه‌کردن بسته است.
-  if (items > FREE_PROJECT_ITEMS && (!previous || items > countItems(previous))) return false;
+  if (items > FREE_PROJECT_ITEMS && (!previous || items > countItems(previous))) { limitFailure('projectItems'); return false; }
 }
 return write(K.projects, [project, ...all]);
 }
@@ -373,7 +375,7 @@ return read<Record<string, Pose>>(K.poseEdits, {});
 }
 
 /** ذخیره ویرایش کامل یک ژست «از قبل موجود» (نه ژست شخصی تازه) */
-export function savePoseEdit(pose: Pose): { ok: boolean; error?: string } {
+export function savePoseEdit(pose: Pose): SaveResult {
 const edits = getPoseEdits();
 edits[pose.id] = pose;
 const ok = write(K.poseEdits, edits);
@@ -413,11 +415,11 @@ delete notes[pose.id];
 write(K.notes, notes);
 }
 
-export function saveCustomPose(pose: Pose): { ok: boolean; error?: string } {
+export function saveCustomPose(pose: Pose): SaveResult {
 const cur = getCustomPoses();
 const i = cur.findIndex((p) => p.id === pose.id);
 if (!canUsePremium() && i < 0 && cur.length >= FREE_CUSTOM_POSES) {
-return { ok: false, error: 'در نسخه رایگان فقط ۵ ژست شخصی می‌توانی اضافه کنی. برای ادامه، برنامه را بخر.' };
+return limitFailure('customPose');
 }
 const next = [...cur];
 if (i >= 0) next[i] = pose;
@@ -966,9 +968,9 @@ export function getColleagues(): ColleagueEntry[] {
   const value = read<unknown>(COLLEAGUES_KEY, []);
   return Array.isArray(value) ? value.filter((item): item is ColleagueEntry => !!item && typeof item === 'object' && typeof (item as ColleagueEntry).id === 'string').map((item) => ({ ...item, specialties: Array.isArray(item.specialties) ? item.specialties : [] })) : [];
 }
-export function saveColleague(entry: ColleagueEntry): { ok: boolean; error?: string } {
+export function saveColleague(entry: ColleagueEntry): SaveResult {
   const existing = getColleagues();
-  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_COLLEAGUES) return { ok: false, error: 'در نسخه رایگان فقط ۲ همکار می‌توانی اضافه کنی. برای ادامه، برنامه را بخر.' };
+  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_COLLEAGUES) return limitFailure('colleague');
   const next = [entry, ...existing.filter((item) => item.id !== entry.id)];
   return write(COLLEAGUES_KEY, next) ? { ok: true } : { ok: false, error: 'ذخیره همکار انجام نشد.' };
 }
@@ -982,9 +984,9 @@ export interface MemberLedgerEntry { id: string; memberId: string; eventName: st
 const STUDIO_MEMBERS_KEY = 'pd_studio_members_v1';
 const MEMBER_LEDGER_KEY = 'pd_member_ledger_v1';
 export function getStudioMembers(): StudioMemberEntry[] { const value = read<unknown>(STUDIO_MEMBERS_KEY, []); return Array.isArray(value) ? value.filter((x): x is StudioMemberEntry => !!x && typeof x === 'object' && typeof (x as StudioMemberEntry).id === 'string') : []; }
-export function saveStudioMember(entry: StudioMemberEntry): { ok: boolean; error?: string } {
+export function saveStudioMember(entry: StudioMemberEntry): SaveResult {
   const existing = getStudioMembers();
-  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_STUDIO_MEMBERS) return { ok: false, error: 'در نسخه رایگان فقط ۲ عضو آتلیه می‌توانی اضافه کنی. برای ادامه، برنامه را بخر.' };
+  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_STUDIO_MEMBERS) return limitFailure('member');
   return write(STUDIO_MEMBERS_KEY, [entry, ...existing.filter(x => x.id !== entry.id)]) ? { ok: true } : { ok: false, error: 'ذخیره عضو آتلیه انجام نشد.' };
 }
 export function deleteStudioMember(id: string): void { write(STUDIO_MEMBERS_KEY, getStudioMembers().filter(x => x.id !== id)); write(MEMBER_LEDGER_KEY, getMemberLedgers().filter(x => x.memberId !== id)); }
@@ -1012,9 +1014,9 @@ export function getAffiches(): AfficheEntry[] {
   const value = read<unknown>(AFFICHE_KEY, []);
   return Array.isArray(value) ? value.filter((item): item is AfficheEntry => !!item && typeof item === 'object' && typeof (item as AfficheEntry).id === 'string') : [];
 }
-export function saveAffiche(entry: AfficheEntry): { ok: boolean; error?: string } {
+export function saveAffiche(entry: AfficheEntry): SaveResult {
   const existing = getAffiches();
-  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_AFFICHE_ENTRIES) return { ok: false, error: 'در نسخه رایگان فقط ۲ آفیش می‌توانی ثبت کنی. برای ادامه، برنامه را بخر.' };
+  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_AFFICHE_ENTRIES) return limitFailure('affiche');
   const next = [entry, ...existing.filter((item) => item.id !== entry.id)];
   return write(AFFICHE_KEY, next) ? { ok: true } : { ok: false, error: 'ذخیره آفیش انجام نشد.' };
 }
@@ -1026,11 +1028,11 @@ export function getOfficeProjects(): OfficeProject[] {
   return Array.isArray(value) ? value.filter((item): item is OfficeProject => !!item && typeof item === 'object' && typeof (item as OfficeProject).id === 'string') : [];
 }
 
-export function saveOfficeProject(proj: OfficeProject): { ok: boolean; error?: string } {
+export function saveOfficeProject(proj: OfficeProject): SaveResult {
   const K = { officeProjects: 'pd_office_projects_v1' };
   const all = getOfficeProjects();
   const idx = all.findIndex((p) => p.id === proj.id);
-  if (!canUsePremium() && idx < 0 && all.length >= FREE_OFFICE_PROJECTS) return { ok: false, error: `در نسخه رایگان فقط ${FREE_OFFICE_PROJECTS.toLocaleString('fa-IR')} زوج می‌توانی در مدیریت آتلیه ثبت کنی. برای زوج بعدی، برنامه را بخر.` };
+  if (!canUsePremium() && idx < 0 && all.length >= FREE_OFFICE_PROJECTS) return limitFailure('officeProject');
   const next = [...all];
   if (idx >= 0) next[idx] = proj;
   else next.unshift(proj);

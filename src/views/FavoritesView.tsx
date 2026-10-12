@@ -10,6 +10,7 @@ import { ConfirmDialog, ConfirmRequest } from '../components/ConfirmDialog';
 import { ProjectDialog, ProjectDialogResult } from '../components/ProjectDialog';
 import { isoToJalaliLabel } from '../services/jalali';
 import { deriveScenario } from '../data/taxonomy';
+import { canUsePremium } from '../services/entitlements';
 import { ShootProject, ShootProjectGalleryItem, ShootProjectMode, ShootSubjectCategory, deleteProject, getProjects, saveProject } from '../services/storage';
 
 const SUBJECT_CATEGORIES: ShootSubjectCategory[] = ['تکی عروس', 'تکی داماد', 'دونفره', 'دیتیل'];
@@ -88,16 +89,16 @@ export const FavoritesView: React.FC<Props> = ({ poses, favoriteIds, onToggleFav
   const saveNewOrEdited = (result: ProjectDialogResult) => {
     if (dialogState.editing) { persist({ ...dialogState.editing, name: result.name, date: result.date }); setDialogState({ open: false }); return; }
     const project: ShootProject = { id: `project-${Date.now()}`, name: result.name, date: result.date, poseIds: [], photoPoseIds: [], videoPoseIds: [], photoGalleryItems: [], videoGalleryItems: [], photoCategories: {}, videoCategories: {}, videoDetails: {}, createdAt: Date.now() };
-    if (!persist(project)) { window.alert('در نسخه رایگان فقط یک پروژه روز می‌توانی بسازی. برای پروژه بعدی، برنامه را بخر.'); return; }
+    if (!persist(project)) { if (canUsePremium()) window.alert('ذخیره پروژه انجام نشد؛ فضای خالی دستگاه را بررسی کن.'); return; }
     setDialogState({ open: false }); setOpenProjectId(project.id); setActiveMode(null); setModePickerOpen(true);
   };
   const enterProject = (id: string) => { setOpenProjectId(id); setActiveMode(null); setActiveCategory('دونفره'); setModePickerOpen(true); };
   const chooseMode = (mode: ShootProjectMode, toSource = false) => { setActiveMode(mode); setModePickerOpen(false); if (toSource) setSourcePickerOpen(true); };
   const chooseSource = (source: 'app' | 'gallery') => { setSourcePickerOpen(false); if (source === 'app') { setPickerSearch(''); setLibraryPickerOpen(true); } else galleryInputRef.current?.click(); };
-  const addPose = (pose: Pose) => { if (!openProject || !activeMode) return; const next = activeMode === 'photo' ? { ...openProject, photoPoseIds: Array.from(new Set([...(openProject.photoPoseIds || []), pose.id])), photoCategories: { ...(openProject.photoCategories || {}), [pose.id]: activeCategory } } : { ...openProject, videoPoseIds: Array.from(new Set([...(openProject.videoPoseIds || []), pose.id])), videoCategories: { ...(openProject.videoCategories || {}), [pose.id]: activeCategory } }; if (!persist(next)) window.alert('در نسخه رایگان هر پروژه روز فقط ۵ عکس یا ژست می‌تواند داشته باشد. برای ادامه، برنامه را بخر.'); };
+  const addPose = (pose: Pose) => { if (!openProject || !activeMode) return; const next = activeMode === 'photo' ? { ...openProject, photoPoseIds: Array.from(new Set([...(openProject.photoPoseIds || []), pose.id])), photoCategories: { ...(openProject.photoCategories || {}), [pose.id]: activeCategory } } : { ...openProject, videoPoseIds: Array.from(new Set([...(openProject.videoPoseIds || []), pose.id])), videoCategories: { ...(openProject.videoCategories || {}), [pose.id]: activeCategory } }; if (!persist(next) && canUsePremium()) window.alert('ذخیره انجام نشد؛ فضای خالی دستگاه را بررسی کن.'); };
   const handleGalleryFiles = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!openProject || !activeMode) return; const files = Array.from(event.target.files || []).filter(f => f.type.startsWith('image/')).slice(0, 30); if (!files.length) return; setGalleryError(null);
-    try { const images = await Promise.all(files.map(readGalleryImage)); const added = images.map((image, index) => ({ id: `gallery-${Date.now()}-${index}`, name: image.name, dataUrl: image.dataUrl, addedAt: Date.now(), category: activeCategory })); const next = activeMode === 'photo' ? { ...openProject, photoGalleryItems: [...(openProject.photoGalleryItems || []), ...added] } : { ...openProject, videoGalleryItems: [...(openProject.videoGalleryItems || []), ...added] }; const ok = persist(next); if (!ok) setGalleryError('در نسخه رایگان هر پروژه روز فقط ۵ عکس یا ژست می‌تواند داشته باشد. برای ادامه، برنامه را بخر.'); } catch { setGalleryError('خواندن عکس‌های گالری انجام نشد. دوباره تلاش کن.'); }
+    try { const images = await Promise.all(files.map(readGalleryImage)); const added = images.map((image, index) => ({ id: `gallery-${Date.now()}-${index}`, name: image.name, dataUrl: image.dataUrl, addedAt: Date.now(), category: activeCategory })); const next = activeMode === 'photo' ? { ...openProject, photoGalleryItems: [...(openProject.photoGalleryItems || []), ...added] } : { ...openProject, videoGalleryItems: [...(openProject.videoGalleryItems || []), ...added] }; const ok = persist(next); if (!ok && canUsePremium()) setGalleryError('ذخیره انجام نشد؛ فضای خالی دستگاه را بررسی کن.'); } catch { setGalleryError('خواندن عکس‌های گالری انجام نشد. دوباره تلاش کن.'); }
     event.target.value = '';
   };
   const toggleCompleted = (item: ProjectItem) => {

@@ -1022,3 +1022,32 @@
 /* Keep the stage filter as a real horizontal rail inside the filter panel. */
 .scenario-stage-scroll { overflow-x: auto; overflow-y: hidden; width: 100%; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
 .scenario-stage-options { display: inline-flex; min-width: max-content; flex-wrap: nowrap; gap: .375rem; padding-bottom: .125rem; }
+
+/* ===== اصلاح‌های دور بعد ===== */
+
+/* مراحل کار در فیلتر ژست‌ها: ریشه‌ی ScenarioRail آیتم grid بود و min-width:auto داشت؛ پس به‌اندازه‌ی محتوا
+   بزرگ می‌شد و والد (overflow:hidden) آن را می‌برید. حالا فقط خودِ ریل اسکرول افقی می‌خورد. */
+.stage-step { grid-template-columns:minmax(0,1fr); }
+.stage-step > * { min-width:0; max-width:100%; }
+.stage-step .scenario-stage-scroll { overflow-x:auto; overflow-y:hidden; touch-action:pan-x pan-y; scrollbar-width:none; }
+.stage-step .scenario-stage-scroll::-webkit-scrollbar { display:none; }
+
+/* منوی کناری در حالت تاریک: رنگ زمینه‌ی روشن ثابت بود ولی متن‌ها در تم تاریک روشن می‌شدند. */
+[data-theme='dark'] .atelito-menu,
+[data-theme='dark'] .atelito-menu .menu-profile-section { background:oklch(24% .02 105); }
+[data-theme='dark'] .atelito-menu { border-color:var(--color-line); box-shadow:0 22px 54px oklch(8% .01 105 / .6); }
+[data-theme='dark'] .atelito-menu .menu-profile-copy>b,
+[data-theme='dark'] .atelito-menu .menu-edit-profile,
+[data-theme='dark'] .atelito-menu .menu-nav-item,
+[data-theme='dark'] .atelito-menu .menu-nav-item span.flex-1 { color:var(--color-ink) !important; }
+[data-theme='dark'] .atelito-menu .menu-edit-profile { border-color:var(--color-line); background:var(--color-surface2); }
+[data-theme='dark'] .atelito-menu .menu-round-button { border-color:var(--color-line); background:var(--color-surface2); color:var(--color-ink); }
+[data-theme='dark'] .atelito-menu .menu-round-button:hover { background:var(--color-surface); }
+[data-theme='dark'] .atelito-menu nav,
+[data-theme='dark'] .atelito-menu .menu-social-footer { border-color:var(--color-line); }
+[data-theme='dark'] .atelito-menu .menu-nav-icon { color:var(--color-orange); background:color-mix(in oklch,var(--color-orange) 14%,transparent); }
+[data-theme='dark'] .atelito-menu .menu-nav-item[data-active="true"] { background:color-mix(in oklch,var(--color-orange) 20%,var(--color-surface)) !important; }
+[data-theme='dark'] .atelito-menu .menu-nav-item[data-active="true"] .menu-nav-icon { background:color-mix(in oklch,var(--color-orange) 38%,transparent); color:var(--color-ink) !important; }
+[data-theme='dark'] .atelito-menu .menu-social-button { color:var(--color-ink); }
+[data-theme='dark'] .atelito-menu .menu-social-button:hover { background:var(--color-surface2); }
+[data-theme='dark'] .atelito-menu .menu-social-footer p { color:var(--color-muted); }
