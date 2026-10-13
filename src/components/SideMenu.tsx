@@ -160,7 +160,7 @@ export const SideMenu: React.FC<Props> = ({
               aria-label="انتخاب عکس پروفایل"
             />
             <div className="menu-profile-copy min-w-0 flex-1 text-right">
-              <b className="block truncate text-[16px] text-white">{profile?.name || 'آتلیتو'}</b>
+              <b className="block truncate text-[16px] text-white">{profile?.name || 'ژستینو'}</b>
               <button onClick={onOpenStudioProfile} className="menu-edit-profile">ویرایش پروفایل</button>
             </div>
           </div>
@@ -196,8 +196,8 @@ export const SideMenu: React.FC<Props> = ({
         {/* Social links, matching the reference footer */}
         <div className="menu-social-footer">
           <div className="menu-social-icons" aria-label="شبکه‌های اجتماعی">
-            <a href="#" onClick={(e) => e.preventDefault()} className="menu-social-button" aria-label="اینستاگرام" title="اینستاگرام"><Instagram className="w-7 h-7" /></a>
-            <a href="#" onClick={(e) => e.preventDefault()} className="menu-social-button" aria-label="تلگرام" title="تلگرام"><Send className="w-7 h-7" /></a>
+            <a href="https://instagram.com/zhestino_app" target="_blank" rel="noopener noreferrer" className="menu-social-button" aria-label="اینستاگرام" title="اینستاگرام"><Instagram className="w-7 h-7" /></a>
+            <a href="https://t.me/zhestino_app" target="_blank" rel="noopener noreferrer" className="menu-social-button" aria-label="تلگرام" title="تلگرام"><Send className="w-7 h-7" /></a>
           </div>
           <p>ما را در شبکه‌های اجتماعی دنبال کنید</p>
         </div>

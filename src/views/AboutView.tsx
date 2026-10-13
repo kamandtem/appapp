@@ -44,7 +44,7 @@ export const AboutView: React.FC = () => (
       />
       <div className="relative flex flex-col items-center">
         <LogoMark size={78} />
-        <h1 className="mt-4 text-2xl font-black text-olive">Atelito</h1>
+        <h1 className="mt-4 text-2xl font-black text-olive">ژستینو</h1>
         <p className="text-[11px] font-extrabold text-faint mt-1">آتلیه‌ی تو</p>
         <p className="text-[12.5px] text-muted leading-7 mt-4 max-w-md">
           یک دستیار جیبی برای عکاسان و فیلمبرداران عروسی. وقتی سوژه روبه‌روی دوربین خشک می‌شود و

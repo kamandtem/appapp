@@ -157,7 +157,7 @@ export default function App() {
   const askExit = useCallback(() => {
     setConfirmRequest({
       title: 'خروج از برنامه',
-      text: 'آیا می‌خواهید از Atelito خارج شوید؟',
+      text: 'آیا می‌خواهید از ژستینو خارج شوید؟',
       confirmLabel: 'خروج',
       cancelLabel: 'ماندن',
       tone: 'gold',

@@ -30,7 +30,7 @@ export const HomeView: React.FC<Props> = ({ poses, favoriteIds, recentIds, onSel
       <section className="home-hero">
         <div className="hero-copy"><span className="eyebrow"><Sparkles className="w-3.5 h-3.5" /> آماده برای صحنه</span>
           <h1>ژست بعدی،<br /><strong>قبل از مکث آماده‌ست.</strong></h1>
-          <p>بگو کجای مراسمی یا چه حسی می‌خواهی. بقیه‌اش با Atelito.</p>
+          <p>بگو کجای مراسمی یا چه حسی می‌خواهی. بقیه‌اش با ژستینو.</p>
         </div>
         <button onClick={onQuickStart} className="hero-action"><span><Sparkles className="w-5 h-5" /></span><b>پیشنهاد سریع ژست</b><small>سناریو و لوکیشن را انتخاب کن</small><ArrowLeft className="w-4 h-4 hero-arrow" /></button>
       </section>

@@ -9,6 +9,9 @@ import {
   Database,
   WifiOff,
   ShieldCheck,
+  Phone,
+  MessageSquareText,
+  Code2,
 } from 'lucide-react';
 import { Pose, ViewTab } from '../types/pose';
 import {
@@ -40,7 +43,6 @@ export const SettingsView: React.FC<Props> = ({
   onTab,
 }) => {
   const importRef = useRef<HTMLInputElement>(null);
-  const mine = poses.filter((p) => p.isCustom).length;
   const [premium, setPremium] = useState(isPremiumUnlocked());
   const [billingBusy, setBillingBusy] = useState(false);
 
@@ -103,12 +105,6 @@ export const SettingsView: React.FC<Props> = ({
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-2.5">
-        <Stat value={poses.length} label="کل ژست‌ها" />
-        <Stat value={mine} label="ژست‌های من" />
-        <Stat value={favoriteIds.length} label="نشان‌شده" />
-      </div>
-
       <div className="card p-4 space-y-3">
         <h3 className="font-extrabold text-[14px]">نمایش</h3>
 
@@ -130,9 +126,9 @@ export const SettingsView: React.FC<Props> = ({
       </div>
 
       <div className="card p-4 space-y-3">
-        <h3 className="font-extrabold text-[14px]">امکانات کامل آتلیتو</h3>
+        <h3 className="font-extrabold text-[14px]">امکانات کامل ژستینو</h3>
         <p className="text-[11px] leading-relaxed text-muted">
-          {premium ? 'خرید شما فعال است و امکانات کامل برنامه در دسترس است.' : 'با خرید نسخه کامل، امکانات حرفه‌ای آتلیتو را فعال کن.'}
+          {premium ? 'خرید شما فعال است و امکانات کامل برنامه در دسترس است.' : 'با خرید نسخه کامل، امکانات حرفه‌ای ژستینو را فعال کن.'}
         </p>
         {!premium ? (
           <button onClick={purchasePremium} disabled={billingBusy} className="btn btn-primary w-full">
@@ -145,6 +141,21 @@ export const SettingsView: React.FC<Props> = ({
           بازیابی خرید قبلی
         </button>
       </div>
+
+      <section className="card overflow-hidden p-0" aria-label="ارتباط با برنامه‌نویس">
+        <div className="flex items-center gap-3 p-4">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-surface2 text-gold"><Code2 className="h-6 w-6" /></span>
+          <div className="min-w-0 flex-1">
+            <small className="block text-[10px] font-bold text-muted">ارتباط با برنامه‌نویس</small>
+            <b className="mt-0.5 block text-[15px] font-black">محمدرضا ارجمند</b>
+            <span dir="ltr" className="mt-1 block text-right text-[12px] font-bold tracking-wide text-muted">۰۹۱۶۴۵۷۳۰۸۳</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-2 border-t border-line bg-surface2/40 p-3">
+          <a href="tel:09164573083" className="btn btn-primary"><Phone className="h-4 w-4" />تماس</a>
+          <a href="sms:09164573083" className="btn btn-ghost"><MessageSquareText className="h-4 w-4 text-gold" />پیامک</a>
+        </div>
+      </section>
 
       <div className="card p-4 space-y-3">
         <h3 className="font-extrabold text-[14px]">داده‌ها</h3>
@@ -205,13 +216,6 @@ export const SettingsView: React.FC<Props> = ({
     </div>
   );
 };
-
-const Stat: React.FC<{ value: number; label: string }> = ({ value, label }) => (
-  <div className="card p-3.5 text-center">
-    <div className="text-xl font-extrabold gold-text">{value}</div>
-    <div className="text-[10px] text-faint mt-0.5">{label}</div>
-  </div>
-);
 
 const Toggle: React.FC<{
   icon: React.ElementType;

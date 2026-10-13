@@ -6,7 +6,7 @@ import outdoorIllustration from '../assets/onboarding/outdoor-photoshoot.svg';
 
 const SLIDES = [
   { image: studioIllustration, number: '۰۱', label: 'فضای کاری تو', title: 'آتلیه‌ات را از همین‌جا جمع‌وجور کن', text: 'پروژه‌ها، مشتری‌ها و جزئیات هر مراسم را یک‌جا نگه دار؛ مرتب، سریع و آماده برای روز عکاسی.', accent: 'olive' },
-  { image: cameraIllustration, number: '۰۲', label: 'ایده برای هر قاب', title: 'وقتی ایده کم می‌آوری، آتلیتو بلده', text: 'ژست مناسب را پیدا کن، اجرای آن را قدم‌به‌قدم ببین و با چند کلمه ساده سوژه را هدایت کن.', accent: 'orange' },
+  { image: cameraIllustration, number: '۰۲', label: 'ایده برای هر قاب', title: 'وقتی ایده کم می‌آوری، ژستینو بلده', text: 'ژست مناسب را پیدا کن، اجرای آن را قدم‌به‌قدم ببین و با چند کلمه ساده سوژه را هدایت کن.', accent: 'orange' },
   { image: outdoorIllustration, number: '۰۳', label: 'آماده‌ی ثبت لحظه', title: 'قبل از شات، همه‌چیز آماده است', text: 'لوکیشن، نور، آب‌وهوا و تجهیزات را بررسی کن تا با خیال راحت بروی سراغ قاب بعدی.', accent: 'plum' },
 ];
 
@@ -21,9 +21,9 @@ export const Onboarding: React.FC<{ onDone: () => void }> = ({ onDone }) => {
     <div className={`onboarding-shell onboarding-${slide.accent} fixed inset-0 z-[95] safe-top safe-bottom`} dir="rtl">
       <div className="onboarding-noise" aria-hidden="true" />
       <header className="onboarding-header">
-        <div className="onboarding-brand" aria-label="Atelito">
+        <div className="onboarding-brand" aria-label="ژستینو">
           <span className="onboarding-brand-mark"><Sparkles className="h-4 w-4" /></span>
-          <span>atelito</span>
+          <span>ژستینو</span>
         </div>
         <button onClick={onDone} className="onboarding-skip">رد کردن</button>
       </header>
@@ -48,7 +48,7 @@ export const Onboarding: React.FC<{ onDone: () => void }> = ({ onDone }) => {
           </div>
           <div className="onboarding-actions">
             <button onClick={next} className="onboarding-primary">
-              {last ? 'شروع با آتلیتو' : 'بزن بریم'}
+              {last ? 'شروع با ژستینو' : 'بزن بریم'}
               {last ? <Check className="h-5 w-5" /> : <ArrowLeft className="h-5 w-5" />}
             </button>
             {i > 0 && <button onClick={previous} className="onboarding-back" aria-label="مرحله قبل"><ArrowRight className="h-5 w-5" /></button>}

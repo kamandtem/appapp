@@ -1028,15 +1028,26 @@ export function getOfficeProjects(): OfficeProject[] {
   return Array.isArray(value) ? value.filter((item): item is OfficeProject => !!item && typeof item === 'object' && typeof (item as OfficeProject).id === 'string') : [];
 }
 
+// شمارنده‌ی «کل پروژه‌هایی که تاکنون ساخته شده»؛ با حذف پروژه کم نمی‌شود، تا سقف نسخه رایگان دور زده نشود.
+const OFFICE_CREATED_KEY = 'pd_office_created_count_v1';
+
+function officeCreatedCount(currentLength: number): number {
+  const stored = Number(read<unknown>(OFFICE_CREATED_KEY, 0));
+  return Math.max(Number.isFinite(stored) ? stored : 0, currentLength);
+}
+
 export function saveOfficeProject(proj: OfficeProject): SaveResult {
   const K = { officeProjects: 'pd_office_projects_v1' };
   const all = getOfficeProjects();
   const idx = all.findIndex((p) => p.id === proj.id);
-  if (!canUsePremium() && idx < 0 && all.length >= FREE_OFFICE_PROJECTS) return limitFailure('officeProject');
+  const isNew = idx < 0;
+  const created = officeCreatedCount(all.length);
+  if (!canUsePremium() && isNew && created >= FREE_OFFICE_PROJECTS) return limitFailure('officeProject');
   const next = [...all];
-  if (idx >= 0) next[idx] = proj;
+  if (!isNew) next[idx] = proj;
   else next.unshift(proj);
   const ok = write(K.officeProjects, next);
+  if (ok && isNew) write(OFFICE_CREATED_KEY, created + 1);
   return ok ? { ok: true } : { ok: false, error: 'حافظه پر شد' };
 }
 

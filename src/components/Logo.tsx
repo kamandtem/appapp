@@ -12,7 +12,7 @@ export const LogoMark: React.FC<LogoProps> = ({ size = 40, className = '' }) => 
     width={size}
     height={size}
     className={`object-contain ${className}`}
-    alt="نشان Atelito"
+    alt="نشان ژستینو"
   />
 );
 
@@ -23,7 +23,7 @@ export const LogoLockup: React.FC<{ size?: number; subtitle?: boolean }> = ({
   <div className="flex items-center gap-2.5" dir="ltr">
     <LogoMark size={size} />
     <div className="text-left leading-tight">
-      <div className="text-[18px] font-black tracking-[-.035em] text-olive">Atelito</div>
+      <div className="text-[18px] font-black tracking-normal text-olive">ژستینو</div>
       {subtitle && <div className="text-[10px] font-extrabold text-muted">آتلیه‌ی تو</div>}
     </div>
   </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import atelitoLogo from '../assets/atelito-logo.png';
 
-/** اسپلش برند Atelito؛ کوتاه، آرام و هماهنگ با حرکت شاتر */
+/** اسپلش برند ژستینو؛ کوتاه، آرام و هماهنگ با حرکت شاتر */
 export const Splash: React.FC<{ leaving?: boolean }> = ({ leaving }) => (
   <div
     className="atelito-splash fixed inset-0 z-[100] safe-top safe-bottom"
@@ -13,10 +13,10 @@ export const Splash: React.FC<{ leaving?: boolean }> = ({ leaving }) => (
 
     <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-8">
       <div className="splash-mark a-pop">
-        <img src={atelitoLogo} alt="نشان Atelito" />
+        <img src={atelitoLogo} alt="نشان ژستینو" />
       </div>
       <div className="mt-5 text-center a-fade-up" style={{ animationDelay: '.16s' }}>
-        <h1 className="atelito-wordmark">Atelito</h1>
+        <h1 className="atelito-wordmark">ژستینو</h1>
         <p className="mt-1 text-[13px] font-black tracking-[.06em] text-olive">آتلیه‌ی تو</p>
         <p className="mt-3 text-[11px] text-muted">دستیار حرفه‌ای عکاسی و مدیریت آتلیه</p>
       </div>

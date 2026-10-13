@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.atelito.app',
-  appName: 'Atelito',
+  appName: 'ژستینو',
   webDir: 'dist',
   android: {
     allowMixedContent: true,

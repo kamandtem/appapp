@@ -44,7 +44,7 @@ export async function shareBlob(blob: Blob, fileName: string, title = fileName):
     });
     await Share.share({
       title,
-      text: 'فایل PDF آتلیتو',
+      text: 'فایل PDF ژستینو',
       url: saved.uri,
       dialogTitle: title,
     });
