@@ -4,6 +4,7 @@ import { OfficeProject, StudioProfile } from '../types/pose';
 import { OfficeProjectEditor } from '../components/OfficeProjectEditor';
 import { createPdfDocument, PdfDocument } from '../services/pdfGenerator';
 import { PdfReader } from '../components/PdfReader';
+import { ContractEditor } from '../components/ContractEditor';
 import { formatMoney } from '../services/money';
 
 interface Props {
@@ -26,6 +27,7 @@ export const ProjectDetailView: React.FC<Props> = ({ project, profile, onBack, o
   const [pdfLoading, setPdfLoading] = useState<'contract' | 'invoice' | null>(null);
   const [pdfError, setPdfError] = useState('');
   const autoOpened = useRef(false);
+  const [contractEditing, setContractEditing] = useState(false);
 
   const openPdf = useCallback(async (kind: 'contract' | 'invoice') => {
     setPdfLoading(kind);
@@ -41,11 +43,12 @@ export const ProjectDetailView: React.FC<Props> = ({ project, profile, onBack, o
   useEffect(() => {
     if (autoOpenContract && !editing && !autoOpened.current) {
       autoOpened.current = true;
-      void openPdf('contract');
+      setContractEditing(true);
     }
-  }, [autoOpenContract, editing, openPdf]);
+  }, [autoOpenContract, editing]);
 
   if (pdf) return <PdfReader document={pdf} onClose={() => setPdf(null)} />;
+  if (contractEditing) return <ContractEditor project={project} profile={profile} onConfirm={(doc) => { setPdf(current => { if (current?.url) URL.revokeObjectURL(current.url); return doc; }); setContractEditing(false); }} onClose={() => setContractEditing(false)} />;
 
   if (editing) return <OfficeProjectEditor project={project} profile={profile} onSave={(p) => {
     if (isCreating && onCreateComplete) onCreateComplete(p); else onSave(p);
@@ -71,7 +74,7 @@ export const ProjectDetailView: React.FC<Props> = ({ project, profile, onBack, o
     </section>
 
     <section className="grid grid-cols-2 gap-2">
-      <button onClick={() => openPdf('contract')} disabled={Boolean(pdfLoading)} className="btn btn-primary">
+      <button onClick={() => setContractEditing(true)} disabled={Boolean(pdfLoading)} className="btn btn-primary">
         {pdfLoading === 'contract' ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileSignature className="w-4 h-4" />} نمایش قرارداد
       </button>
       <button onClick={() => openPdf('invoice')} disabled={Boolean(pdfLoading)} className="btn btn-ghost">
