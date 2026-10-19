@@ -703,6 +703,13 @@ deletedBuiltinIds?: string[];
 myLocations?: MyLocation[];
 projects?: ShootProject[];
 studioProfile?: StudioProfile | null;
+colleagues?: ColleagueEntry[];
+studioMembers?: StudioMemberEntry[];
+memberLedgers?: MemberLedgerEntry[];
+memberPayments?: MemberPayment[];
+affiches?: AfficheEntry[];
+/** شمارنده‌ی سهمیه‌ی نسخه رایگان؛ با بازیابی هم حفظ می‌شود تا سقف دور زده نشود */
+quotaCounts?: Record<string, number>;
 }
 
 /** بسته‌ای سبک برای فرستادن ژست‌های تازه به سازنده برنامه */
@@ -736,6 +743,9 @@ poseEdits: Pose[];
 deletedBuiltinIds: string[];
 }
 
+/** کلیدهای شمارنده‌ی سهمیه‌ی نسخه رایگان */
+const QUOTA_KEYS = ['pd_office_created_count_v1', 'pd_colleagues_created_count_v1', 'pd_members_created_count_v1', 'pd_affiches_created_count_v1'];
+
 export function buildBackup(): Backup {
 return {
 app: 'pose-director',
@@ -754,6 +764,12 @@ deletedBuiltinIds: getDeletedBuiltinIds(),
 myLocations: getMyLocations(),
 projects: getProjects(),
 studioProfile: getStudioProfile(),
+colleagues: getColleagues(),
+studioMembers: getStudioMembers(),
+memberLedgers: getMemberLedgers(),
+memberPayments: getMemberPayments(),
+affiches: getAffiches(),
+quotaCounts: Object.fromEntries(QUOTA_KEYS.map((k) => [k, Number(read<unknown>(k, 0)) || 0])),
 };
 }
 
@@ -910,9 +926,18 @@ if (Array.isArray(data.deletedBuiltinIds)) write(K.deletedBuiltin, data.deletedB
 if (Array.isArray(data.myLocations)) write(K.myLocations, data.myLocations);
 if (Array.isArray(data.projects)) write(K.projects, data.projects);
 if (data.studioProfile) write('pd_studio_profile_v1', data.studioProfile);
+if (Array.isArray(data.colleagues)) write(COLLEAGUES_KEY, data.colleagues);
+if (Array.isArray(data.studioMembers)) write(STUDIO_MEMBERS_KEY, data.studioMembers);
+if (Array.isArray(data.memberLedgers)) write(MEMBER_LEDGER_KEY, data.memberLedgers);
+if (Array.isArray(data.memberPayments)) write('pd_member_payments_v1', data.memberPayments);
+if (Array.isArray(data.affiches)) write(AFFICHE_KEY, data.affiches);
+if (data.quotaCounts) {
+// شمارنده‌ها فقط بالا می‌روند؛ بازیابی فایل قدیمی سهمیه را کم نمی‌کند.
+QUOTA_KEYS.forEach((k) => { const incoming = Number(data.quotaCounts?.[k]) || 0; const current = Number(read<unknown>(k, 0)) || 0; write(k, Math.max(incoming, current)); });
+}
 return {
 ok: true,
-message: `بازیابی انجام شد: ${(data.customPoses || []).length} ژست شخصی برگشت.`,
+message: `بازیابی انجام شد: ${(data.customPoses || []).length} ژست شخصی، ${(data.affiches || []).length} آفیش و ${(data.colleagues || []).length + (data.studioMembers || []).length} همکار و عضو برگشت.`,
 };
 } catch {
 return { ok: false, message: 'فایل خوانده نشد. مطمئن شوید فایل پشتیبان سالم است.' };
@@ -954,6 +979,15 @@ export function saveStudioProfile(p: StudioProfile): boolean {
 
 
 
+// شمارنده‌ی «کل مواردی که تاکنون ساخته شده»؛ با حذف کم نمی‌شود تا سقف نسخه رایگان دور زده نشود.
+function lifetimeCount(key: string, currentLength: number): number {
+  const stored = Number(read<unknown>(key, 0));
+  return Math.max(Number.isFinite(stored) ? stored : 0, currentLength);
+}
+const COLLEAGUES_CREATED_KEY = 'pd_colleagues_created_count_v1';
+const MEMBERS_CREATED_KEY = 'pd_members_created_count_v1';
+const AFFICHE_CREATED_KEY = 'pd_affiches_created_count_v1';
+
 export interface ColleagueEntry {
   id: string;
   name: string;
@@ -970,9 +1004,13 @@ export function getColleagues(): ColleagueEntry[] {
 }
 export function saveColleague(entry: ColleagueEntry): SaveResult {
   const existing = getColleagues();
-  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_COLLEAGUES) return limitFailure('colleague');
+  const isNew = !existing.some((item) => item.id === entry.id);
+  const created = lifetimeCount(COLLEAGUES_CREATED_KEY, existing.length);
+  if (!canUsePremium() && isNew && created >= FREE_COLLEAGUES) return limitFailure('colleague');
   const next = [entry, ...existing.filter((item) => item.id !== entry.id)];
-  return write(COLLEAGUES_KEY, next) ? { ok: true } : { ok: false, error: 'ذخیره همکار انجام نشد.' };
+  const ok = write(COLLEAGUES_KEY, next);
+  if (ok && isNew) write(COLLEAGUES_CREATED_KEY, created + 1);
+  return ok ? { ok: true } : { ok: false, error: 'ذخیره همکار انجام نشد.' };
 }
 export function deleteColleague(id: string): void { write(COLLEAGUES_KEY, getColleagues().filter((item) => item.id !== id)); }
 
@@ -986,13 +1024,29 @@ const MEMBER_LEDGER_KEY = 'pd_member_ledger_v1';
 export function getStudioMembers(): StudioMemberEntry[] { const value = read<unknown>(STUDIO_MEMBERS_KEY, []); return Array.isArray(value) ? value.filter((x): x is StudioMemberEntry => !!x && typeof x === 'object' && typeof (x as StudioMemberEntry).id === 'string') : []; }
 export function saveStudioMember(entry: StudioMemberEntry): SaveResult {
   const existing = getStudioMembers();
-  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_STUDIO_MEMBERS) return limitFailure('member');
-  return write(STUDIO_MEMBERS_KEY, [entry, ...existing.filter(x => x.id !== entry.id)]) ? { ok: true } : { ok: false, error: 'ذخیره عضو آتلیه انجام نشد.' };
+  const isNew = !existing.some((item) => item.id === entry.id);
+  const created = lifetimeCount(MEMBERS_CREATED_KEY, existing.length);
+  if (!canUsePremium() && isNew && created >= FREE_STUDIO_MEMBERS) return limitFailure('member');
+  const ok = write(STUDIO_MEMBERS_KEY, [entry, ...existing.filter(x => x.id !== entry.id)]);
+  if (ok && isNew) write(MEMBERS_CREATED_KEY, created + 1);
+  return ok ? { ok: true } : { ok: false, error: 'ذخیره عضو آتلیه انجام نشد.' };
 }
-export function deleteStudioMember(id: string): void { write(STUDIO_MEMBERS_KEY, getStudioMembers().filter(x => x.id !== id)); write(MEMBER_LEDGER_KEY, getMemberLedgers().filter(x => x.memberId !== id)); }
+export function deleteStudioMember(id: string): void { write(STUDIO_MEMBERS_KEY, getStudioMembers().filter(x => x.id !== id)); write(MEMBER_LEDGER_KEY, getMemberLedgers().filter(x => x.memberId !== id)); write('pd_member_payments_v1', getMemberPayments().filter(x => x.memberId !== id)); }
 export function getMemberLedgers(): MemberLedgerEntry[] { const value = read<unknown>(MEMBER_LEDGER_KEY, []); return Array.isArray(value) ? value.filter((x): x is MemberLedgerEntry => !!x && typeof x === 'object' && typeof (x as MemberLedgerEntry).id === 'string') : []; }
 export function saveMemberLedger(entry: MemberLedgerEntry): { ok: boolean; error?: string } { return write(MEMBER_LEDGER_KEY, [entry, ...getMemberLedgers().filter(x => x.id !== entry.id)]) ? { ok: true } : { ok: false, error: 'ذخیره حساب انجام نشد.' }; }
 export function deleteMemberLedger(id: string): void { write(MEMBER_LEDGER_KEY, getMemberLedgers().filter(x => x.id !== id)); }
+
+/** دریافتی‌های هر عضو آتلیه؛ از بستانکاری او کسر می‌شود. */
+export interface MemberPayment { id: string; memberId: string; amount: number; date: string; createdAt: number; }
+const MEMBER_PAYMENTS_KEY = 'pd_member_payments_v1';
+export function getMemberPayments(): MemberPayment[] { const value = read<unknown>(MEMBER_PAYMENTS_KEY, []); return Array.isArray(value) ? value.filter((x): x is MemberPayment => !!x && typeof x === 'object' && typeof (x as MemberPayment).id === 'string' && typeof (x as MemberPayment).amount === 'number') : []; }
+export function saveMemberPayment(entry: MemberPayment): { ok: boolean; error?: string } { return write(MEMBER_PAYMENTS_KEY, [entry, ...getMemberPayments().filter(x => x.id !== entry.id)]) ? { ok: true } : { ok: false, error: 'ثبت دریافتی انجام نشد.' }; }
+export function deleteMemberPayment(id: string): void { write(MEMBER_PAYMENTS_KEY, getMemberPayments().filter(x => x.id !== id)); }
+
+/** آیا نسخه رایگان به سقف کل (با احتساب موارد حذف‌شده) رسیده است؟ */
+export function afficheLimitReached(): boolean { return !canUsePremium() && lifetimeCount(AFFICHE_CREATED_KEY, getAffiches().length) >= FREE_AFFICHE_ENTRIES; }
+export function colleagueLimitReached(): boolean { return !canUsePremium() && lifetimeCount(COLLEAGUES_CREATED_KEY, getColleagues().length) >= FREE_COLLEAGUES; }
+export function memberLimitReached(): boolean { return !canUsePremium() && lifetimeCount(MEMBERS_CREATED_KEY, getStudioMembers().length) >= FREE_STUDIO_MEMBERS; }
 
 export interface AfficheEntry {
   id: string;
@@ -1005,6 +1059,9 @@ export interface AfficheEntry {
   otherService?: string;
   wage: number;
   reminderTime?: string;
+  /** مبلغ این آفیش از کارفرما تسویه شده است؟ */
+  settled?: boolean;
+  settledAt?: number;
   createdAt: number;
   updatedAt: number;
 }
@@ -1016,9 +1073,28 @@ export function getAffiches(): AfficheEntry[] {
 }
 export function saveAffiche(entry: AfficheEntry): SaveResult {
   const existing = getAffiches();
-  if (!canUsePremium() && !existing.some((item) => item.id === entry.id) && existing.length >= FREE_AFFICHE_ENTRIES) return limitFailure('affiche');
+  const isNew = !existing.some((item) => item.id === entry.id);
+  const created = lifetimeCount(AFFICHE_CREATED_KEY, existing.length);
+  if (!canUsePremium() && isNew && created >= FREE_AFFICHE_ENTRIES) return limitFailure('affiche');
   const next = [entry, ...existing.filter((item) => item.id !== entry.id)];
-  return write(AFFICHE_KEY, next) ? { ok: true } : { ok: false, error: 'ذخیره آفیش انجام نشد.' };
+  const ok = write(AFFICHE_KEY, next);
+  if (ok && isNew) write(AFFICHE_CREATED_KEY, created + 1);
+  return ok ? { ok: true } : { ok: false, error: 'ذخیره آفیش انجام نشد.' };
+}
+/** تیک تسویه: فقط وضعیت تسویه را عوض می‌کند (سهمیه نسخه رایگان را مصرف نمی‌کند). */
+export function setAfficheSettled(id: string, settled: boolean): void {
+  write(AFFICHE_KEY, getAffiches().map((item) => item.id === id ? { ...item, settled, settledAt: settled ? Date.now() : undefined } : item));
+}
+/** کارفرماهای قبلی (برای پیشنهاد حین تایپ)؛ جدیدترین شماره هر کارفرما برگردانده می‌شود. */
+export function getKnownClients(): { name: string; phone: string }[] {
+  const map = new Map<string, { name: string; phone: string; at: number }>();
+  getAffiches().forEach((item) => {
+    const name = (item.clientName || '').trim(); if (!name) return;
+    const key = name.replace(/\s+/g, ' ');
+    const prev = map.get(key);
+    if (!prev || (item.updatedAt || 0) > prev.at) map.set(key, { name: key, phone: item.clientPhone || prev?.phone || '', at: item.updatedAt || 0 });
+  });
+  return [...map.values()].sort((a, b) => b.at - a.at).map(({ name, phone }) => ({ name, phone }));
 }
 export function deleteAffiche(id: string): void { write(AFFICHE_KEY, getAffiches().filter((item) => item.id !== id)); }
 

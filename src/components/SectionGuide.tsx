@@ -15,7 +15,8 @@ const GUIDE_ICONS: Record<string, React.ElementType> = {
   weather: Sparkles,
 };
 
-export const SectionGuide: React.FC<{ section: string; title: string; text: string; onDone?: () => void }> = ({ section, title, text }) => {
+/** اگر `details` داده شود، به‌جای متن توضیح پیش‌فرض، داخل بخش آکاردئونی نمایش داده می‌شود. */
+export const SectionGuide: React.FC<{ section: string; title: string; text: string; details?: React.ReactNode; detailsLabel?: string; onDone?: () => void }> = ({ section, title, text, details, detailsLabel = 'توضیحات' }) => {
   const Icon = GUIDE_ICONS[section] || Camera;
   return <section className="page-intro" aria-label={title}>
     <details className="page-intro-card">
@@ -24,12 +25,14 @@ export const SectionGuide: React.FC<{ section: string; title: string; text: stri
           <span className="page-intro-kicker"><span className="page-intro-icon"><Icon className="w-5 h-5" /></span>{title}</span>
           <strong>{text}</strong>
         </span>
-        <span className="page-intro-toggle" aria-hidden="true">
-          <span>توضیحات</span>
+        <span className={`page-intro-toggle ${detailsLabel !== 'توضیحات' ? 'page-intro-toggle-labeled' : ''}`} aria-hidden="true">
+          <span>{detailsLabel}</span>
           <ChevronDown className="page-intro-chevron w-5 h-5" />
         </span>
       </summary>
-      <div className="page-intro-details"><Heart className="w-4 h-4" /><p>{`در بخش «${title}» ${text.replace(/[.!؟]+$/, '')} می‌توانی جزئیات بیشتری را مرحله‌به‌مرحله مدیریت کنی.`}</p></div>
+      {details
+        ? <div className="page-intro-custom">{details}</div>
+        : <div className="page-intro-details"><Heart className="w-4 h-4" /><p>{`در بخش «${title}» ${text.replace(/[.!؟]+$/, '')} می‌توانی جزئیات بیشتری را مرحله‌به‌مرحله مدیریت کنی.`}</p></div>}
     </details>
   </section>;
 };

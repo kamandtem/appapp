@@ -6,9 +6,9 @@ export const FREE_OFFICE_PROJECTS = 3;
 export const FREE_DAILY_PROJECTS = 1;
 export const FREE_PROJECT_ITEMS = 5;
 export const FREE_POSE_TIPS = 20;
-export const FREE_AFFICHE_ENTRIES = 2;
-export const FREE_COLLEAGUES = 2;
-export const FREE_STUDIO_MEMBERS = 2;
+export const FREE_AFFICHE_ENTRIES = 3;
+export const FREE_COLLEAGUES = 3;
+export const FREE_STUDIO_MEMBERS = 3;
 
 export const canUsePremium = () => isPremiumUnlocked();
 export const limitReached = (count: number, limit: number) => !canUsePremium() && count >= limit;
