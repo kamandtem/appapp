@@ -6,7 +6,6 @@ import { InvoicesPanel } from '../components/InvoicesPanel';
 import { createPdfDocument, PdfDocument } from '../services/pdfGenerator';
 import { SectionGuide } from '../components/SectionGuide';
 import { PdfReader } from '../components/PdfReader';
-import { ContractEditor } from '../components/ContractEditor';
 
 interface Props {
   projects: OfficeProject[];
@@ -30,7 +29,6 @@ export const OfficeView: React.FC<Props> = ({ projects, profile, onAddProject, o
   const [pdfLoading, setPdfLoading] = useState<string | null>(null);
   const [pdf, setPdf] = useState<PdfDocument | null>(null);
   const [pdfError, setPdfError] = useState('');
-  const [contractFor, setContractFor] = useState<OfficeProject | null>(null);
 
   useEffect(() => () => { if (pdf?.url) URL.revokeObjectURL(pdf.url); }, [pdf]);
 
@@ -52,7 +50,6 @@ export const OfficeView: React.FC<Props> = ({ projects, profile, onAddProject, o
   };
 
   if (pdf) return <PdfReader document={pdf} onClose={() => setPdf(null)} />;
-  if (contractFor) return <ContractEditor project={contractFor} profile={profile} onConfirm={(doc) => { setPdf(current => { if (current?.url) URL.revokeObjectURL(current.url); return doc; }); setContractFor(null); }} onClose={() => setContractFor(null)} />;
 
   return <div className="space-y-4">
     <SectionGuide section="office" title="دفتر آتلیه" text="پروژه، قرارداد، خدمات و فاکتورها را یک‌جا مدیریت کن." />
@@ -79,7 +76,7 @@ export const OfficeView: React.FC<Props> = ({ projects, profile, onAddProject, o
             <div className="flex flex-wrap gap-2 mb-4">
               {p.ceremony && <button onClick={() => onSelectProject(p)} className="flex items-center gap-2 px-4 py-2 rounded-2xl border border-[var(--color-teal)] bg-[color-mix(in_srgb,var(--color-teal)_10%,transparent)] text-[var(--color-teal)]"><span className="text-[12px] font-bold">🎬 {formatDateShort(p.ceremony.date)}</span></button>}
               {p.formality && <button onClick={() => onSelectProject(p)} className="flex items-center gap-2 px-4 py-2 rounded-2xl border border-[var(--color-rose)] bg-[color-mix(in_srgb,var(--color-rose)_10%,transparent)] text-[var(--color-rose)]"><span className="text-[12px] font-bold">⏱ {formatDateShort(p.formality.recordDate)}</span></button>}
-              <button type="button" onClick={() => setContractFor(p)} disabled={pdfLoading === `${p.id}-contract`} className="flex items-center gap-2 px-4 py-2 rounded-2xl border border-line bg-surface text-[12px] font-bold text-[var(--color-olive)]">
+              <button type="button" onClick={() => openPdf(p, 'contract')} disabled={pdfLoading === `${p.id}-contract`} className="flex items-center gap-2 px-4 py-2 rounded-2xl border border-line bg-surface text-[12px] font-bold text-[var(--color-olive)]">
                 {pdfLoading === `${p.id}-contract` ? <Loader2 className="w-4 h-4 animate-spin" /> : <Eye className="w-4 h-4" />} نمایش قرارداد
               </button>
             </div>

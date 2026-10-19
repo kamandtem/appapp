@@ -20,7 +20,6 @@ class CanvasDocument {
     ctx.strokeStyle = '#66784c'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(M, this.page.y + 68); ctx.lineTo(W - M, this.page.y + 68); ctx.stroke();
     this.page.y += 112;
   }
-  space(height: number) { this.ensure(height); this.page.y += height; }
   ensure(height: number) { if (this.page.y + height > H - 100) this.addPage(); }
   heading(text: string) { this.ensure(64); const { ctx } = this.page; ctx.textAlign = 'right'; ctx.fillStyle = '#52633e'; ctx.font = '900 23px Vazirmatn, Tahoma, sans-serif'; ctx.fillText(text, W - M, this.page.y); this.page.y += 46; }
   paragraph(text: string, size = 19, bold = false, gap = 22) {
@@ -94,44 +93,6 @@ function invoicePages(project: OfficeProject, profile: StudioProfile | null) {
   doc.paragraph(`جمع کل: ${formatMoney(total)} تومن\nبیعانه / پرداختی: ${formatMoney(deposit)} تومن\nمانده قابل پرداخت: ${formatMoney(Math.max(0, total - deposit))} تومن`, 22, true);
   doc.paragraph('این فاکتور براساس خدمات و تجهیزات انتخاب‌شده در پروژه تولید شده است.', 17);
   return doc.images();
-}
-
-/** متن قابل ویرایش قرارداد؛ قبل از ساخت PDF کاربر می‌تواند آن را تغییر دهد. */
-export function buildContractText(project: OfficeProject, profile: StudioProfile | null): string {
-  const items = [...(project.ceremonyInvoice?.items || []), ...(project.formalityInvoice?.items || [])];
-  const rows = items.length ? items.map(x => `• ${x.name} | تعداد: ${formatMoney(x.count)} | فی: ${formatMoney(x.price)} تومن | جمع: ${formatMoney(x.count * x.price)} تومن`) : ['• خدمتی ثبت نشده'];
-  const parts = [
-    '## به نام خدا',
-    `با توجه به عقد قرار داد در تاریخ ${faDate(project.contractDate)} ما بین استدیو تخصصی عکس و فیلم ${safe(profile?.name)} و جناب آقای ${safe(project.groomName)} با کدملی ${safe(project.groomNationalId)} و سرکار خانم ${safe(project.brideName)} با کد ملی ${safe(project.brideNationalId)} به نشانی ${safe(project.customerAddress)} و شماره تماس ${safe(project.clientPhone)} و ${safe(project.secondaryPhone)} به منظور انجام خدمات جشن عقد/ عروسی در تاریخ ${faDate(project.ceremony?.date)} که در محل ${safe(project.ceremony?.location)} برگزار می گردد`,
-    'بدین وسیله رضایت کامل خود را نسبت به خدمات انجام شده توسط تیم اعزامی در رابطه با خدمات تصویر برداری و عکس برداری جشن عقد/ عروسی اعلام داشته و پس از تسویه حساب کامل خواهان تحویل سفارشات مطابق موارد زیر می باشم:',
-    '## خدمات انتخابی',
-    ...rows,
-    '## توضیحات',
-    'عروس و داماد نازنین ضمن تشکر از حسن انتخاب شما لطفا به موارد زیر توجه نموده تا بهترین خاطرات شما را با بالاترین کیفیت ثبت نماییم.',
-    ...CONTRACT_TERMS.map(t => `• ${t}`),
-  ];
-  if (project.contractNotes) parts.push('## سایر توضیحات', project.contractNotes);
-  parts.push(`این قرارداد در تاریخ ${faDate(project.contractDate)} از ساعت ${safe(project.startTime)} تا ساعت ${safe(project.endTime)} در مکان ${safe(project.ceremony?.location)} لازم الاجرا بوده و هر ساعت اضافه مبلغ ${formatMoney(project.extraHourPrice || 0)} تومن به قیمت پکیج اضافه می شود.`);
-  parts.push('امضای داماد                         امضای عروس                         مهر و امضای موسسه');
-  parts.push('## شرایط پرداخت', 'نقد: همراه با هدایای ویژه فوتوما', 'سه ماهه: 40 درصد مبلغ قرار داد، 30 درصد مبلغ قرار داد، 30 درصد مبلغ قرار داد', 'پنج ماهه: 40 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد');
-  return parts.join('\n');
-}
-
-/** PDF قرارداد از متنی که کاربر ویرایش کرده است. خطوط «## عنوان» به‌صورت تیتر و «• ...» به‌صورت بولت چاپ می‌شوند. */
-export async function createContractPdfFromText(text: string, project: OfficeProject, profile: StudioProfile | null): Promise<PdfDocument> {
-  if (document.fonts?.ready) await document.fonts.ready;
-  const doc = new CanvasDocument(profile?.name || 'استدیو تخصصی عکس و فیلم', 'فرم قرارداد');
-  text.split('\n').forEach(raw => {
-    const line = raw.trimEnd();
-    if (!line.trim()) { doc.space(14); return; }
-    if (line.startsWith('## ')) { doc.heading(line.slice(3).trim()); return; }
-    if (line.startsWith('• ')) { doc.paragraph(line, 18, false, 8); return; }
-    doc.paragraph(line.trim(), 19, false, 10);
-  });
-  const pages = doc.images();
-  const blob = pdfFromJpegs(pages);
-  if (!blob.size) throw new Error('ساخت PDF انجام نشد');
-  return { blob, url: URL.createObjectURL(blob), pages, fileName: `قرارداد-${project.name || 'پروژه'}.pdf` };
 }
 
 const ascii = (text: string) => new TextEncoder().encode(text);
