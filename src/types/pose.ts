@@ -452,6 +452,10 @@ export interface OfficeProject {
   extraHourPrice?: number;
   ceremonyType?: 'عقد' | 'عروسی' | 'عقد و عروسی';
   contractNotes?: string;
+  /** بندهای قابل ویرایش قرارداد؛ اگر تعریف نشده باشد، متن پیش‌فرض استفاده می‌شود. */
+  contractTerms?: string[];
+  /** شرایط پرداخت قابل ویرایش؛ اگر تعریف نشده باشد، متن پیش‌فرض استفاده می‌شود. */
+  paymentTerms?: string[];
   ceremony?: Ceremony;    /** اختیاری */
   formality?: Formality;  /** اختیاری */
   ceremonyInvoice?: ProjectInvoice;

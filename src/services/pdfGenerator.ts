@@ -50,7 +50,7 @@ class CanvasDocument {
   images() { return this.pages.map(p => p.canvas.toDataURL('image/jpeg', .9)); }
 }
 
-const CONTRACT_TERMS = [
+export const DEFAULT_CONTRACT_TERMS: string[] = [
   'در صورت هر گونه بی احترامی و دخالت اطرافیان به عوامل اجرایی پروژه، فرایند عکاسی و تصویر برداری متوقف و محل ترک می شود.',
   'تحویل نهایی کار صرفا بعد از تسویه حساب شما امکان پذیر است.',
   'پرداخت اقساطی صرفا با ارایه چک صیادی و تسویه کامل پیش پرداخت تا یک هفته قبل از مراسم امکان پذیر است.',
@@ -67,6 +67,12 @@ const CONTRACT_TERMS = [
   'در صورت عدم تسویه تا تاریخ تعیین شده،کلیه ی قیمت ها به نرخ روز محاسبه می گردد.'
 ];
 
+export const DEFAULT_PAYMENT_TERMS: string[] = [
+  'نقد: همراه با هدایای ویژه فوتوما',
+  'سه ماهه: 40 درصد مبلغ قرار داد، 30 درصد مبلغ قرار داد، 30 درصد مبلغ قرار داد',
+  'پنج ماهه: 40 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد'
+];
+
 function contractPages(project: OfficeProject, profile: StudioProfile | null) {
   const doc = new CanvasDocument(profile?.name || 'استدیو تخصصی عکس و فیلم', 'فرم قرارداد');
   doc.paragraph('به نام خدا', 22, true);
@@ -76,12 +82,12 @@ function contractPages(project: OfficeProject, profile: StudioProfile | null) {
   doc.rows(items);
   doc.heading('توضیحات:');
   doc.paragraph('عروس و داماد نازنین ضمن تشکر از حسن انتخاب شما لطفا به موارد زیر توجه نموده تا بهترین خاطرات شما را با بالاترین کیفیت ثبت نماییم.');
-  CONTRACT_TERMS.forEach(term => doc.bullet(term));
+  (project.contractTerms ?? DEFAULT_CONTRACT_TERMS).forEach(term => doc.bullet(term));
   if (project.contractNotes) { doc.heading('سایر توضیحات:'); doc.paragraph(project.contractNotes); }
   doc.paragraph(`این قرارداد در تاریخ ${faDate(project.contractDate)} از ساعت ${safe(project.startTime)} تا ساعت ${safe(project.endTime)} در مکان ${safe(project.ceremony?.location)} لازم الاجرا بوده و هر ساعت اضافه مبلغ ${formatMoney(project.extraHourPrice || 0)} تومن به قیمت پکیج اضافه می شود.`, 19, true);
   doc.paragraph('امضای داماد                         امضای عروس                         مهر و امضای موسسه', 18, true, 40);
   doc.heading('شرایط پرداخت');
-  doc.paragraph('نقد: همراه با هدایای ویژه فوتوما\nسه ماهه: 40 درصد مبلغ قرار داد، 30 درصد مبلغ قرار داد، 30 درصد مبلغ قرار داد\nپنج ماهه: 40 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد، 20 درصد مبلغ قرار داد');
+  (project.paymentTerms ?? DEFAULT_PAYMENT_TERMS).forEach(line => doc.paragraph(line, 19, false, 8));
   return doc.images();
 }
 
